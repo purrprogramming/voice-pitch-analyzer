@@ -15,10 +15,12 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import lilithwittmann.de.voicepitchanalyzer.dummy.DummyContent;
 import lilithwittmann.de.voicepitchanalyzer.models.PitchRange;
 import lilithwittmann.de.voicepitchanalyzer.models.Recording;
+import lilithwittmann.de.voicepitchanalyzer.models.database.RecordingDB;
 
 /**
  * A fragment representing a list of Items.
@@ -30,7 +32,7 @@ import lilithwittmann.de.voicepitchanalyzer.models.Recording;
  * interface.
  */
 public class RecordingListFragment extends Fragment implements AbsListView.OnItemClickListener {
-    private ArrayList<Recording> recordings = new ArrayList<Recording>();
+    private List<Recording> recordings = new ArrayList<Recording>();
 
     private OnFragmentInteractionListener mListener;
 
@@ -56,24 +58,18 @@ public class RecordingListFragment extends Fragment implements AbsListView.OnIte
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        for (int i = 0; i < 3; i++) {
-            Recording recording = new Recording(new Date());
-            PitchRange range = new PitchRange();
-            range.setMin(145);
-            range.setMax(285);
-            range.setAvg(225);
-            recording.setRange(range);
+        RecordingDB recordingDB = new RecordingDB(getActivity());
+        this.recordings = recordingDB.getRecordings();
 
-            this.recordings.add(recording);
-        }
-
-        this.mAdapter = new ArrayAdapter<Recording>(getActivity(), android.R.layout.simple_list_item_activated_2, android.R.id.text2, this.recordings) {
+        this.mAdapter = new ArrayAdapter<Recording>(getActivity(),
+                android.R.layout.simple_list_item_activated_2, android.R.id.text2, this.recordings) {
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
                 super.getView(position, convertView, parent);
 
                 if (convertView == null) {
-                    convertView = getActivity().getLayoutInflater().inflate(android.R.layout.simple_list_item_activated_2, parent, false);
+                    convertView = getActivity().getLayoutInflater().inflate(
+                            android.R.layout.simple_list_item_activated_2, parent, false);
                 }
 
                 TextView largeText = (TextView) convertView.findViewById(android.R.id.text1);
@@ -83,7 +79,9 @@ public class RecordingListFragment extends Fragment implements AbsListView.OnIte
                 PitchRange range = record.getRange();
 
                 largeText.setText(record.getDate().toString());
-                smallText.setText(String.format("Min: %sHz, Max: %sHz, Average: %sHz", range.getMin(), range.getMax(), range.getAvg()));
+                smallText.setText(String.format("Min: %sHz, Max: %sHz, Average: %sHz",
+                        Math.round(range.getMin()), Math.round(range.getMax()),
+                        Math.round(range.getAvg())));
 
                 return convertView;
             }
@@ -107,6 +105,16 @@ public class RecordingListFragment extends Fragment implements AbsListView.OnIte
         mListView.setOnItemClickListener(this);
 
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        RecordingDB recordingDB = new RecordingDB(getActivity());
+        this.recordings.clear();
+        this.recordings.addAll(recordingDB.getRecordings());
+        ((ArrayAdapter) mListView.getAdapter()).notifyDataSetChanged();
+
     }
 
     @Override

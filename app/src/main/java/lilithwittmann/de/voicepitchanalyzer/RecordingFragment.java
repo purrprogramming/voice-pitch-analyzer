@@ -25,6 +25,7 @@ import be.tarsos.dsp.pitch.PitchProcessor;
 import lilithwittmann.de.voicepitchanalyzer.models.PitchRange;
 import lilithwittmann.de.voicepitchanalyzer.models.Recording;
 import lilithwittmann.de.voicepitchanalyzer.models.Texts;
+import lilithwittmann.de.voicepitchanalyzer.models.database.RecordingDB;
 import lilithwittmann.de.voicepitchanalyzer.utils.PitchCalculator;
 
 /**
@@ -105,6 +106,9 @@ public class RecordingFragment extends Fragment {
 
                         Recording currentRecord = new Recording(new Date());
                         currentRecord.setRange(range);
+
+                        RecordingDB recordingDB = new RecordingDB(getActivity());
+                        recordingDB.saveRecording(currentRecord);
 
                         if (mListener != null) {
                             mListener.onRecordFinished(currentRecord);

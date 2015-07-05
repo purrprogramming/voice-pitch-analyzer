@@ -12,6 +12,7 @@ import java.util.Date;
 public class Recording implements Parcelable {
     public static final String KEY = Recording.class.getSimpleName();
     private File recording;
+    private long id = -1;
     private Date date;
     private PitchRange range;
     private String name;
@@ -20,10 +21,22 @@ public class Recording implements Parcelable {
         setDate(date);
     }
 
+    public Recording() {
+
+    }
+
     protected Recording(Parcel src) {
         this.setDate(new Date(src.readLong()));
         this.setName(src.readString());
         this.setRange((PitchRange) src.readParcelable(PitchRange.class.getClassLoader()));
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public Date getDate() {

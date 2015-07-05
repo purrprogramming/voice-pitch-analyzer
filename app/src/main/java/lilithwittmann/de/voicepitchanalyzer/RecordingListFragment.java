@@ -2,7 +2,7 @@ package lilithwittmann.de.voicepitchanalyzer;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,12 +12,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 
-
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-import lilithwittmann.de.voicepitchanalyzer.dummy.DummyContent;
 import lilithwittmann.de.voicepitchanalyzer.models.PitchRange;
 import lilithwittmann.de.voicepitchanalyzer.models.Recording;
 import lilithwittmann.de.voicepitchanalyzer.models.database.RecordingDB;
@@ -140,7 +137,7 @@ public class RecordingListFragment extends Fragment implements AbsListView.OnIte
         if (null != mListener) {
             // Notify the active callbacks interface (the activity, if the
             // fragment is attached to one) that an item has been selected.
-            mListener.onFragmentInteraction(DummyContent.ITEMS.get(position).id);
+            mListener.onFragmentInteraction(this.recordings.get(position));
         }
     }
 
@@ -169,7 +166,7 @@ public class RecordingListFragment extends Fragment implements AbsListView.OnIte
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        public void onFragmentInteraction(String id);
+        public void onFragmentInteraction(Recording record);
     }
 
 }

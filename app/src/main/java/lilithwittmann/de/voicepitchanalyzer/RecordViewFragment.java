@@ -10,6 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.data.ChartData;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
 
 import lilithwittmann.de.voicepitchanalyzer.models.Recording;
 
@@ -75,8 +78,11 @@ public class RecordViewFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         LineChart chart = (LineChart) view.findViewById(R.id.recording_chart);
-//        LineData data = new LineData(this.currentRecord.getRange().getStringPitches());
-//        LineDataSet dataset = new LineDataSet(this.currentRecord.getRange().getPitches());
+        LineDataSet dataSet = new LineDataSet(this.currentRecord.getRange().getGraphEntries(), getResources().getString(R.string.pitch_graph_single_recording));
+        LineData lineData = new LineData(ChartData.generateXVals(0, dataSet.getEntryCount()), dataSet);
+        chart.setData(lineData);
+        chart.getAxisLeft().setAxisMaxValue(dataSet.getYMax());
+        chart.getAxisLeft().setAxisMinValue(dataSet.getYMin());
         super.onViewCreated(view, savedInstanceState);
     }
 

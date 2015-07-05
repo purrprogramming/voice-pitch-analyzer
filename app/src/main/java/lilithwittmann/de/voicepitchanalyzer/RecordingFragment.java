@@ -1,10 +1,10 @@
 package lilithwittmann.de.voicepitchanalyzer;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -200,12 +200,12 @@ public class RecordingFragment extends Fragment {
             }
         }
 
-        Log.i(LOG_TAG, "thread alive? " + this.recordThread.isAlive());
-
         if (this.recordThread.isAlive()) {
+            Log.i(LOG_TAG, "still recording");
             return false;
         } else {
             this.isRecording = false;
+            Log.i(LOG_TAG, "not recording");
             return true;
         }
     }

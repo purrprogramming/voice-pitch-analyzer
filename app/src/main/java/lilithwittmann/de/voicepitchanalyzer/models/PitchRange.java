@@ -3,6 +3,8 @@ package lilithwittmann.de.voicepitchanalyzer.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.github.mikephil.charting.data.Entry;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +12,15 @@ import java.util.List;
  * Created by Yuri on 04/07/15.
  */
 public class PitchRange implements Parcelable {
+    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
+        public PitchRange createFromParcel(Parcel in) {
+            return new PitchRange(in);
+        }
+
+        public PitchRange[] newArray(int size) {
+            return new PitchRange[size];
+        }
+    };
     private double avg;
     private double min;
     private double max;
@@ -55,6 +66,16 @@ public class PitchRange implements Parcelable {
 
     public void setPitches(List<Double> pitches) {
         this.pitches = pitches;
+    }
+
+    public List<Entry> getGraphEntries() {
+        List<Entry> list = new ArrayList<Entry>();
+
+        for (int i = 0; i < this.getPitches().size(); i++) {
+            list.add(new Entry(this.getPitches().get(i).floatValue(), i));
+        }
+
+        return list;
     }
 
     @Override

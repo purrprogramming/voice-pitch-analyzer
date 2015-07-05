@@ -6,6 +6,8 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import lilithwittmann.de.voicepitchanalyzer.models.Recording;
+
 
 public class RecordingListActivity extends ActionBarActivity implements RecordingListFragment.OnFragmentInteractionListener {
     private static final String LOG_TAG = RecordingActivity.class.getSimpleName();
@@ -16,7 +18,7 @@ public class RecordingListActivity extends ActionBarActivity implements Recordin
         setContentView(R.layout.activity_recording_list);
 
         if (savedInstanceState == null) {
-            getFragmentManager().beginTransaction()
+            getSupportFragmentManager().beginTransaction()
                     .add(R.id.container, new RecordingListFragment())
                     .commit();
         }
@@ -53,7 +55,9 @@ public class RecordingListActivity extends ActionBarActivity implements Recordin
     }
 
     @Override
-    public void onFragmentInteraction(String id) {
-        System.out.println("test");
+    public void onFragmentInteraction(Recording record) {
+        Intent intent = new Intent(this, RecordViewActivity.class);
+        intent.putExtra(Recording.KEY, record);
+        startActivity(intent);
     }
 }

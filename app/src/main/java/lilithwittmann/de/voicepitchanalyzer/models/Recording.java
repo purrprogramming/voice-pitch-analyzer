@@ -11,6 +11,15 @@ import java.util.Date;
  */
 public class Recording implements Parcelable {
     public static final String KEY = Recording.class.getSimpleName();
+    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
+        public Recording createFromParcel(Parcel in) {
+            return new Recording(in);
+        }
+
+        public Recording[] newArray(int size) {
+            return new Recording[size];
+        }
+    };
     private File recording;
     private long id = -1;
     private Date date;
@@ -78,12 +87,8 @@ public class Recording implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this.getName());
         dest.writeLong(this.getDate().getTime());
+        dest.writeString(this.getName());
         dest.writeParcelable(this.range, flags);
-    }
-
-    private void readFromParcel(Parcel src) {
-        this.setDate(new Date(src.readLong()));
     }
 }

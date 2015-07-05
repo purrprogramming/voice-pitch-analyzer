@@ -21,6 +21,7 @@ android {
 
 repositories {
     mavenCentral()
+    maven { url "https://jitpack.io" }
 }
 
 
@@ -29,5 +30,5 @@ dependencies {
     compile 'com.android.support:appcompat-v7:22.0.0'
     compile files('libs/TarsosDSP-Android-2.2.jar')
     compile 'com.google.code.gson:gson:2.2.4'
-
+    compile 'com.github.PhilJay:MPAndroidChart:v2.1.0'
 }

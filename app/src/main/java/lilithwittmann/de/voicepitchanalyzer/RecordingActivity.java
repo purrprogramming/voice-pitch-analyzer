@@ -1,5 +1,6 @@
 package lilithwittmann.de.voicepitchanalyzer;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
@@ -9,7 +10,7 @@ import android.view.MenuItem;
 import lilithwittmann.de.voicepitchanalyzer.models.Recording;
 
 
-public class RecordingActivity extends ActionBarActivity implements RecordingFragment.OnFragmentInteractionListener, RecordingListFragment.OnFragmentInteractionListener {
+public class RecordingActivity extends ActionBarActivity implements RecordingFragment.OnFragmentInteractionListener, RecordingListFragment.OnFragmentInteractionListener, RecordViewFragment.OnFragmentInteractionListener {
     private static final String LOG_TAG = RecordingActivity.class.getSimpleName();
 
     @Override
@@ -65,6 +66,17 @@ public class RecordingActivity extends ActionBarActivity implements RecordingFra
             Log.i(LOG_TAG, "Avg Pitch: " + recording.getRange().getAvg() + "Hz");
             Log.i(LOG_TAG, "Max Pitch: " + recording.getRange().getMax() + "Hz");
             Log.i(LOG_TAG, "Min Pitch: " + recording.getRange().getMin() + "Hz");
+
+            Bundle bundle = new Bundle();
+            bundle.putParcelable(Recording.KEY, recording);
+            RecordViewFragment frgmnt = new RecordViewFragment();
+            frgmnt.setArguments(bundle);
+            getFragmentManager().beginTransaction().replace(R.id.container, frgmnt).commit();
         }
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+        // nothing
     }
 }

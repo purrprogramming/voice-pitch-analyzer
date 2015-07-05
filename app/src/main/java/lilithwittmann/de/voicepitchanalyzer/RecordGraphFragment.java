@@ -18,12 +18,12 @@ import com.github.mikephil.charting.data.LineDataSet;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link RecordDetailViewFragment.OnFragmentInteractionListener} interface
+ * {@link RecordGraphFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
  */
-public class RecordDetailViewFragment extends Fragment {
+public class RecordGraphFragment extends Fragment {
 
-    private static final String LOG_TAG = RecordDetailViewFragment.class.getSimpleName();
+    private static final String LOG_TAG = RecordGraphFragment.class.getSimpleName();
     /**
      * The fragment argument representing the section number for this
      * fragment.
@@ -31,7 +31,7 @@ public class RecordDetailViewFragment extends Fragment {
     private static final String ARG_SECTION_NUMBER = "section_number";
     private OnFragmentInteractionListener mListener;
 
-    public RecordDetailViewFragment() {
+    public RecordGraphFragment() {
         // Required empty public constructor
     }
 
@@ -39,12 +39,12 @@ public class RecordDetailViewFragment extends Fragment {
      * Returns a new instance of this fragment for the given section
      * number.
      */
-    public static RecordDetailViewFragment newInstance(int sectionNumber) {
+    public static RecordGraphFragment newInstance(int sectionNumber) {
         Bundle bundle = new Bundle();
 //        bundle.putParcelable(Recording.KEY, recording);
         bundle.putInt(ARG_SECTION_NUMBER, sectionNumber);
 
-        RecordDetailViewFragment recordFragment = new RecordDetailViewFragment();
+        RecordGraphFragment recordFragment = new RecordGraphFragment();
         recordFragment.setArguments(bundle);
 //        getSupportFragmentManager().beginTransaction().replace(R.id.container, recordFragment).commit();
 
@@ -69,7 +69,7 @@ public class RecordDetailViewFragment extends Fragment {
         }
 
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_record_view, container, false);
+        return inflater.inflate(R.layout.fragment_record_graph, container, false);
     }
 
     @Override
@@ -81,6 +81,8 @@ public class RecordDetailViewFragment extends Fragment {
         chart.getAxisLeft().setStartAtZero(false);
         chart.getAxisLeft().setAxisMaxValue(dataSet.getYMax());
         chart.getAxisLeft().setAxisMinValue(dataSet.getYMin());
+        chart.setDrawGridBackground(false);
+//        chart.animateX(3000);
         super.onViewCreated(view, savedInstanceState);
     }
 

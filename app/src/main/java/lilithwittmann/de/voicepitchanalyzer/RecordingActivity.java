@@ -10,7 +10,7 @@ import android.view.MenuItem;
 import lilithwittmann.de.voicepitchanalyzer.models.Recording;
 
 
-public class RecordingActivity extends ActionBarActivity implements RecordingFragment.OnFragmentInteractionListener, RecordingListFragment.OnFragmentInteractionListener, RecordDetailViewFragment.OnFragmentInteractionListener {
+public class RecordingActivity extends ActionBarActivity implements RecordingFragment.OnFragmentInteractionListener, RecordingListFragment.OnFragmentInteractionListener, RecordGraphFragment.OnFragmentInteractionListener {
     private static final String LOG_TAG = RecordingActivity.class.getSimpleName();
 
     @Override
@@ -72,7 +72,7 @@ public class RecordingActivity extends ActionBarActivity implements RecordingFra
 
 //            Bundle bundle = new Bundle();
 //            bundle.putParcelable(Recording.KEY, recording);
-//            RecordDetailViewFragment recordFragment = new RecordDetailViewFragment();
+//            RecordGraphFragment recordFragment = new RecordGraphFragment();
 //            recordFragment.setArguments(bundle);
 //            getSupportFragmentManager().beginTransaction().replace(R.id.container, recordFragment).commit();
     }

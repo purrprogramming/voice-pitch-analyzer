@@ -21,7 +21,7 @@ import lilithwittmann.de.voicepitchanalyzer.models.Recording;
 import lilithwittmann.de.voicepitchanalyzer.models.database.RecordingDB;
 
 
-public class RecordViewActivity extends ActionBarActivity implements ActionBar.TabListener, RecordDetailViewFragment.OnFragmentInteractionListener {
+public class RecordViewActivity extends ActionBarActivity implements ActionBar.TabListener, RecordGraphFragment.OnFragmentInteractionListener {
     private static final String LOG_TAG = RecordViewActivity.class.getSimpleName();
     protected static Recording currentRecord;
     /**
@@ -185,7 +185,7 @@ public class RecordViewActivity extends ActionBarActivity implements ActionBar.T
                     return RecordingOverviewFragment.newInstance(position + 1, currentRecord);
                 }
                 case 1: {
-                    return RecordDetailViewFragment.newInstance(position + 1);
+                    return RecordGraphFragment.newInstance(position + 1);
                 }
                 case 2: {
                     return PlaceholderFragment.newInstance(position + 1);

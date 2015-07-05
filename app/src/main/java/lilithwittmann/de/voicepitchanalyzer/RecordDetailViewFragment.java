@@ -14,27 +14,24 @@ import com.github.mikephil.charting.data.ChartData;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 
-import lilithwittmann.de.voicepitchanalyzer.models.Recording;
-
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link RecordViewFragment.OnFragmentInteractionListener} interface
+ * {@link RecordDetailViewFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
  */
-public class RecordViewFragment extends Fragment {
+public class RecordDetailViewFragment extends Fragment {
 
-    private static final String LOG_TAG = RecordViewFragment.class.getSimpleName();
+    private static final String LOG_TAG = RecordDetailViewFragment.class.getSimpleName();
     /**
      * The fragment argument representing the section number for this
      * fragment.
      */
     private static final String ARG_SECTION_NUMBER = "section_number";
     private OnFragmentInteractionListener mListener;
-    private Recording currentRecord;
 
-    public RecordViewFragment() {
+    public RecordDetailViewFragment() {
         // Required empty public constructor
     }
 
@@ -42,12 +39,12 @@ public class RecordViewFragment extends Fragment {
      * Returns a new instance of this fragment for the given section
      * number.
      */
-    public static RecordViewFragment newInstance(int sectionNumber, Recording recording) {
+    public static RecordDetailViewFragment newInstance(int sectionNumber) {
         Bundle bundle = new Bundle();
-        bundle.putParcelable(Recording.KEY, recording);
+//        bundle.putParcelable(Recording.KEY, recording);
         bundle.putInt(ARG_SECTION_NUMBER, sectionNumber);
 
-        RecordViewFragment recordFragment = new RecordViewFragment();
+        RecordDetailViewFragment recordFragment = new RecordDetailViewFragment();
         recordFragment.setArguments(bundle);
 //        getSupportFragmentManager().beginTransaction().replace(R.id.container, recordFragment).commit();
 
@@ -58,13 +55,13 @@ public class RecordViewFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         if (savedInstanceState != null) {
-            this.currentRecord = (Recording) savedInstanceState.getSerializable(Recording.KEY);
+//            this.currentRecord = (Recording) savedInstanceState.getSerializable(Recording.KEY);
 //            Log.i(LOG_TAG, String.format("%s", recording.getDate()));
 //            Log.i(LOG_TAG, String.format("Avg: %sHz", recording.getRange().getAvg()));
 //            Log.i(LOG_TAG, String.format("Min: %sHz", recording.getRange().getMin()));
 //            Log.i(LOG_TAG, String.format("Max: %sHz", recording.getRange().getMax()));
         } else if (this.getArguments() != null) {
-            this.currentRecord = this.getArguments().getParcelable(Recording.KEY);
+//            this.currentRecord = this.getArguments().getParcelable(Recording.KEY);
 //            Log.i(LOG_TAG, String.format("%s", recording.getDate()));
 //            Log.i(LOG_TAG, String.format("Avg: %sHz", recording.getRange().getAvg()));
 //            Log.i(LOG_TAG, String.format("Min: %sHz", recording.getRange().getMin()));
@@ -78,9 +75,10 @@ public class RecordViewFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         LineChart chart = (LineChart) view.findViewById(R.id.recording_chart);
-        LineDataSet dataSet = new LineDataSet(this.currentRecord.getRange().getGraphEntries(), getResources().getString(R.string.pitch_graph_single_recording));
+        LineDataSet dataSet = new LineDataSet(RecordViewActivity.currentRecord.getRange().getGraphEntries(), getResources().getString(R.string.pitch_graph_single_recording));
         LineData lineData = new LineData(ChartData.generateXVals(0, dataSet.getEntryCount()), dataSet);
         chart.setData(lineData);
+        chart.getAxisLeft().setStartAtZero(false);
         chart.getAxisLeft().setAxisMaxValue(dataSet.getYMax());
         chart.getAxisLeft().setAxisMinValue(dataSet.getYMin());
         super.onViewCreated(view, savedInstanceState);

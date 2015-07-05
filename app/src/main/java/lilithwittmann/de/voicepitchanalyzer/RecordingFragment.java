@@ -99,21 +99,26 @@ public class RecordingFragment extends Fragment {
                         ((Button) v).setText(getResources().getString(R.string.start_recording));
 
                         PitchRange range = new PitchRange();
+                        range.setPitches(calculator.getPitches());
                         range.setMin(calculator.calculateMinAverage());
                         range.setMax(calculator.calculateMaxAverage());
                         range.setAvg(calculator.calculatePitchAverage());
-                        range.setPitches(calculator.getPitches());
+
+
+                        for (double pitch : calculator.getPitches()) {
+                            Log.i(LOG_TAG, String.valueOf(pitch));
+                        }
 
                         Recording currentRecord = new Recording(new Date());
                         currentRecord.setRange(range);
 
                         RecordingDB recordingDB = new RecordingDB(getActivity());
-                        recordingDB.saveRecording(currentRecord);
+                        currentRecord = recordingDB.saveRecording(currentRecord);
 
                         v.setVisibility(View.INVISIBLE);
 
                         if (mListener != null) {
-                            mListener.onRecordFinished(currentRecord);
+                            mListener.onRecordFinished(currentRecord.getId());
                         }
                     }
                 } else {
@@ -126,11 +131,11 @@ public class RecordingFragment extends Fragment {
     }
 
     // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Recording recording) {
-        if (mListener != null) {
-            mListener.onRecordFinished(recording);
-        }
-    }
+//    public void onButtonPressed(Recording recording) {
+//        if (mListener != null) {
+//            mListener.onRecordFinished(recording);
+//        }
+//    }
 
     @Override
     public void onAttach(Activity activity) {
@@ -159,6 +164,7 @@ public class RecordingFragment extends Fragment {
                 @Override
                 public void handlePitch(PitchDetectionResult result, AudioEvent e) {
                     final float pitchInHz = result.getPitch();
+//                    result.
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -224,6 +230,6 @@ public class RecordingFragment extends Fragment {
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        public void onRecordFinished(Recording recording);
+        public void onRecordFinished(long recordID);
     }
 }

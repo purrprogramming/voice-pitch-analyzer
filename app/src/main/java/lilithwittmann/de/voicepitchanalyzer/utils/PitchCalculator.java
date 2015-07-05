@@ -13,6 +13,14 @@ public class PitchCalculator {
     private Double minPitch = 77.0;
     private Double maxPitch = 480.0;
 
+    public static <T> List<T> copyList(List<T> source) {
+        List<T> dest = new ArrayList<T>();
+        for (T item : source) {
+            dest.add(item);
+        }
+        return dest;
+    }
+
     public Boolean addPitch(Double pitch) {
         if (pitch > minPitch && pitch < maxPitch) {
             this.pitches.add(pitch);
@@ -31,14 +39,14 @@ public class PitchCalculator {
     }
 
     public Double calculateMaxAverage() {
-        List<Double> maxSorted = this.pitches;
+        List<Double> maxSorted = PitchCalculator.copyList(this.pitches);
         Collections.sort(maxSorted);
         Integer elements = maxSorted.size() / 3;
         return this.calculateAverage(maxSorted.subList(maxSorted.size() - elements, maxSorted.size()));
     }
 
     public Double calculateMinAverage() {
-        List<Double> minSorted = this.pitches;
+        List<Double> minSorted = PitchCalculator.copyList(this.pitches);
         Collections.reverse(minSorted);
         Integer elements = minSorted.size() / 3;
         return this.calculateAverage(minSorted.subList(minSorted.size() - elements, minSorted.size()));

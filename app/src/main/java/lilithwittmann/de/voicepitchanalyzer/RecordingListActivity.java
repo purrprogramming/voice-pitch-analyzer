@@ -55,9 +55,9 @@ public class RecordingListActivity extends ActionBarActivity implements Recordin
     }
 
     @Override
-    public void onFragmentInteraction(Recording record) {
+    public void onFragmentInteraction(long recordID) {
         Intent intent = new Intent(this, RecordViewActivity.class);
-        intent.putExtra(Recording.KEY, record);
+        intent.putExtra(Recording.KEY, recordID);
         startActivity(intent);
     }
 }

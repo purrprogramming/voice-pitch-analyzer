@@ -18,9 +18,12 @@ import android.view.ViewGroup;
 import java.util.Locale;
 
 import lilithwittmann.de.voicepitchanalyzer.models.Recording;
+import lilithwittmann.de.voicepitchanalyzer.models.database.RecordingDB;
 
 
-public class RecordViewActivity extends ActionBarActivity implements ActionBar.TabListener, RecordViewFragment.OnFragmentInteractionListener {
+public class RecordViewActivity extends ActionBarActivity implements ActionBar.TabListener, RecordDetailViewFragment.OnFragmentInteractionListener {
+    private static final String LOG_TAG = RecordViewActivity.class.getSimpleName();
+    protected static Recording currentRecord;
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
      * fragments for each of the sections. We use a
@@ -30,14 +33,10 @@ public class RecordViewActivity extends ActionBarActivity implements ActionBar.T
      * {@link android.support.v4.app.FragmentStatePagerAdapter}.
      */
     SectionsPagerAdapter mSectionsPagerAdapter;
-
     /**
      * The {@link ViewPager} that will host the section contents.
      */
     ViewPager mViewPager;
-
-    Recording currentRecord;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +46,10 @@ public class RecordViewActivity extends ActionBarActivity implements ActionBar.T
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
         // get current recording from intent
-        this.currentRecord = getIntent().getParcelableExtra(Recording.KEY);
+        if (getIntent() != null) {
+            RecordingDB db = new RecordingDB(this);
+            this.currentRecord = db.getRecording(getIntent().getLongExtra(Recording.KEY, 0));
+        }
 
         if (this.currentRecord.getName() != null) {
             setTitle(this.currentRecord.getName());
@@ -183,7 +185,7 @@ public class RecordViewActivity extends ActionBarActivity implements ActionBar.T
                     return RecordingOverviewFragment.newInstance(position + 1, currentRecord);
                 }
                 case 1: {
-                    return RecordViewFragment.newInstance(position + 1, currentRecord);
+                    return RecordDetailViewFragment.newInstance(position + 1);
                 }
                 case 2: {
                     return PlaceholderFragment.newInstance(position + 1);

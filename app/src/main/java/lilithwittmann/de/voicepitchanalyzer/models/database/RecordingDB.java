@@ -35,11 +35,11 @@ public class RecordingDB {
 
                     " );";
     private static final String SQL_CREATE_PITCH_TABLE =
-                    "CREATE TABLE " + PitchEntry.TABLE_NAME + " (" +
+            "CREATE TABLE " + PitchEntry.TABLE_NAME + " (" +
                     PitchEntry._ID + " INTEGER PRIMARY KEY," +
                     PitchEntry.COLUMN_NAME_PITCH + DOUBLE_TYPE + COMMA_SEP +
                     PitchEntry.COLUMN_NAME_OFFSET + DOUBLE_TYPE + COMMA_SEP +
-                            PitchEntry.COLUMN_NAME_RECORDING_ID + INTEGER_TYPE +
+                    PitchEntry.COLUMN_NAME_RECORDING_ID + INTEGER_TYPE +
                     " );";
     private static final String SQL_DELETE_RECORDING_TABLE =
             "DROP TABLE IF EXISTS " + RecordingEntry.TABLE_NAME + ";";
@@ -218,7 +218,7 @@ public class RecordingDB {
         Cursor c = db.query(
                 PitchEntry.TABLE_NAME,  // The table to query
                 projection,                 // The columns to return
-                PitchEntry._ID + "=?",         // The columns for the WHERE clause
+                PitchEntry.COLUMN_NAME_RECORDING_ID + "=?",         // The columns for the WHERE clause
                 new String[]{String.valueOf(id)}, // The values for the WHERE clause
                 null,                       // don't group the rows
                 null,                       // don't filter by row groups
@@ -228,6 +228,7 @@ public class RecordingDB {
 
         while (!c.isAfterLast()) {
             pitches.add(c.getDouble(1));
+            System.out.println("c.getDouble(): " + c.getDouble(1));
             c.moveToNext();
         }
 

@@ -137,7 +137,7 @@ public class RecordingListFragment extends Fragment implements AbsListView.OnIte
         if (null != mListener) {
             // Notify the active callbacks interface (the activity, if the
             // fragment is attached to one) that an item has been selected.
-            mListener.onFragmentInteraction(this.recordings.get(position));
+            mListener.onFragmentInteraction(this.recordings.get(position).getId());
         }
     }
 
@@ -166,7 +166,7 @@ public class RecordingListFragment extends Fragment implements AbsListView.OnIte
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        public void onFragmentInteraction(Recording record);
+        public void onFragmentInteraction(long recordID);
     }
 
 }

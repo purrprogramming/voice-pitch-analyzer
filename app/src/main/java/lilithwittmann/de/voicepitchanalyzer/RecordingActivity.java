@@ -4,14 +4,13 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import lilithwittmann.de.voicepitchanalyzer.models.Recording;
 
 
-public class RecordingActivity extends ActionBarActivity implements RecordingFragment.OnFragmentInteractionListener, RecordingListFragment.OnFragmentInteractionListener, RecordViewFragment.OnFragmentInteractionListener {
+public class RecordingActivity extends ActionBarActivity implements RecordingFragment.OnFragmentInteractionListener, RecordingListFragment.OnFragmentInteractionListener, RecordDetailViewFragment.OnFragmentInteractionListener {
     private static final String LOG_TAG = RecordingActivity.class.getSimpleName();
 
     @Override
@@ -54,30 +53,28 @@ public class RecordingActivity extends ActionBarActivity implements RecordingFra
     }
 
     @Override
-    public void onFragmentInteraction(Recording record) {
+    public void onFragmentInteraction(long recordID) {
 
     }
 
     @Override
-    public void onRecordFinished(Recording recording) {
+    public void onRecordFinished(long recordingID) {
         // TODO: open fragment w/ single recording
 
-        if (recording != null) {
-            Log.i(LOG_TAG, "Date: " + recording.getDate());
-            Log.i(LOG_TAG, "Avg Pitch: " + recording.getRange().getAvg() + "Hz");
-            Log.i(LOG_TAG, "Max Pitch: " + recording.getRange().getMax() + "Hz");
-            Log.i(LOG_TAG, "Min Pitch: " + recording.getRange().getMin() + "Hz");
+//            Log.i(LOG_TAG, "Date: " + recording.getDate());
+//            Log.i(LOG_TAG, "Avg Pitch: " + recording.getRange().getAvg() + "Hz");
+//            Log.i(LOG_TAG, "Max Pitch: " + recording.getRange().getMax() + "Hz");
+//            Log.i(LOG_TAG, "Min Pitch: " + recording.getRange().getMin() + "Hz");
 
             Intent intent = new Intent(this, RecordViewActivity.class);
-            intent.putExtra(Recording.KEY, recording);
+        intent.putExtra(Recording.KEY, recordingID);
             startActivity(intent);
 
 //            Bundle bundle = new Bundle();
 //            bundle.putParcelable(Recording.KEY, recording);
-//            RecordViewFragment recordFragment = new RecordViewFragment();
+//            RecordDetailViewFragment recordFragment = new RecordDetailViewFragment();
 //            recordFragment.setArguments(bundle);
 //            getSupportFragmentManager().beginTransaction().replace(R.id.container, recordFragment).commit();
-        }
     }
 
     @Override

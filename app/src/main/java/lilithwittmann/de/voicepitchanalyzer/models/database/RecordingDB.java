@@ -136,6 +136,104 @@ public class RecordingDB {
         return recordings;
     }
 
+    public Recording getRecording(long id) {
+        List<Recording> recordings = new ArrayList<Recording>();
+        RecordingDbHelper mDbHelper = new RecordingDbHelper(this.context);
+        SQLiteDatabase db = mDbHelper.getReadableDatabase();
+
+        // Define a projection that specifies which columns from the database
+        // you will actually use after this query.
+        String[] projection = {
+                RecordingEntry._ID,
+                RecordingEntry.COLUMN_NAME_FILE,
+                RecordingEntry.COLUMN_NAME_AVG_PITCH,
+                RecordingEntry.COLUMN_NAME_MAX_PITCH,
+                RecordingEntry.COLUMN_NAME_MIN_PITCH,
+                RecordingEntry.COLUMN_NAME_DATE,
+                RecordingEntry.COLUMN_NAME_NAME,
+        };
+
+        // How you want the results sorted in the resulting Cursor
+        String sortOrder = RecordingEntry.COLUMN_NAME_DATE + " DESC";
+
+        Cursor c = db.query(
+                RecordingEntry.TABLE_NAME,  // The table to query
+                projection,                 // The columns to return
+                RecordingEntry._ID + "=?",         // The columns for the WHERE clause
+                new String[]{String.valueOf(id)}, // The values for the WHERE clause
+                null,                       // don't group the rows
+                null,                       // don't filter by row groups
+                sortOrder                   // The sort order
+        );
+        c.moveToFirst();
+
+        Recording recording = new Recording();
+        recording.setId(c.getLong(0));
+        //TODO recording file
+        //recording.setRecording(c.getString(1));
+        recording.setDate(new Date(c.getLong(5)));
+        recording.setName(c.getString(6));
+        PitchRange pitch = new PitchRange();
+        pitch.setAvg(c.getDouble(2));
+        pitch.setMax(c.getDouble(3));
+        pitch.setMin(c.getDouble(4));
+        pitch.setPitches(this.getPitch(recording.getId()));
+        recording.setRange(pitch);
+
+        return recording;
+    }
+
+    public void deleteRecording(long id) {
+        RecordingDbHelper mDbHelper = new RecordingDbHelper(this.context);
+        SQLiteDatabase db = mDbHelper.getReadableDatabase();
+        // Define 'where' part of query.
+        String selection = RecordingEntry._ID + " LIKE ?";
+        // Specify arguments in placeholder order.
+        String[] selectionArgs = {String.valueOf(id)};
+        // Issue SQL statement.
+        db.delete(RecordingEntry.TABLE_NAME, selection, selectionArgs);
+
+        selection = PitchEntry._ID + " LIKE ?";
+        db.delete(RecordingEntry.TABLE_NAME, selection, selectionArgs);
+
+    }
+
+    private List<Double> getPitch(long id) {
+        List<Double> pitches = new ArrayList<Double>();
+        RecordingDbHelper mDbHelper = new RecordingDbHelper(this.context);
+        SQLiteDatabase db = mDbHelper.getReadableDatabase();
+
+        // Define a projection that specifies which columns from the database
+        // you will actually use after this query.
+        String[] projection = {
+                PitchEntry._ID,
+                PitchEntry.COLUMN_NAME_PITCH,
+                PitchEntry.COLUMN_NAME_OFFSET
+        };
+
+        // How you want the results sorted in the resulting Cursor
+        String sortOrder = PitchEntry._ID + " ASC";
+
+
+        Cursor c = db.query(
+                PitchEntry.TABLE_NAME,  // The table to query
+                projection,                 // The columns to return
+                PitchEntry._ID + "=?",         // The columns for the WHERE clause
+                new String[]{String.valueOf(id)}, // The values for the WHERE clause
+                null,                       // don't group the rows
+                null,                       // don't filter by row groups
+                sortOrder                   // The sort order
+        );
+        c.moveToFirst();
+
+        while (!c.isAfterLast()) {
+            pitches.add(c.getDouble(1));
+            c.moveToNext();
+        }
+
+        return pitches;
+    }
+
     public static abstract class RecordingEntry implements BaseColumns {
         public static final String TABLE_NAME = "recording";
         public static final String COLUMN_NAME_NAME = "name";

@@ -7,5 +7,9 @@
     <string name="title_activity_recording">RecordingActivity</string>
     <string name="record">Record</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="recording_text">The artist is the creator of beautiful things. To reveal art and conceal the artist is art\'s aim. The critic is they who can translate into another manner or a new material their impression of beautiful things.\n\nThe highest as the lowest form of criticism is a mode of autobiography. Those who find ugly meanings in beautiful things are corrupt without being charming. This is a fault.\n\nThose who find beautiful meanings in beautiful things are the cultivated. For these there is hope. They are the elect to whom beautiful things mean only beauty.\n\nThere is no such thing as a moral or an immoral book. Books are well written, or badly written. That is all.\n\nThe nineteenth century dislike of realism is the rage of Caliban seeing his own face in a glass.\n\nThe nineteenth century dislike of romanticism is the rage of Caliban not seeing his own face in a glass.</string>
+    <string name="recording_header">The Preface</string>
+    <string name="start_recording">record</string>
+    <string name="stop_recording">stop</string>
 
 </resources>

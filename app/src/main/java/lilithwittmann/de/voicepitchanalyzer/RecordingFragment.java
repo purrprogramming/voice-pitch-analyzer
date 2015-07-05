@@ -60,7 +60,7 @@ public class RecordingFragment extends Fragment {
         Texts texts = new Texts();
         Context context = getActivity();
         String lang = "en";
-        if(texts.supportsLocale(Locale.getDefault().getLanguage()) == Boolean.TRUE) {
+        if (texts.supportsLocale(Locale.getDefault().getLanguage()) == Boolean.TRUE) {
             lang = Locale.getDefault().getLanguage();
         }
 
@@ -72,9 +72,9 @@ public class RecordingFragment extends Fragment {
 
         // calculate next textNumber
         Integer nextText = 1;
-        if(textNumber + 1 < texts.countTexts(lang)) {
+        if (textNumber + 1 < texts.countTexts(lang)) {
             nextText = textNumber + 1;
-        } else if(textNumber > texts.countTexts(lang)) {
+        } else if (textNumber > texts.countTexts(lang)) {
             //really special case -if the user change the device language and in the new language are
             // less text samples available than in the previous set the text number back to one
             textNumber = 1;
@@ -109,6 +109,8 @@ public class RecordingFragment extends Fragment {
 
                         RecordingDB recordingDB = new RecordingDB(getActivity());
                         recordingDB.saveRecording(currentRecord);
+
+                        v.setVisibility(View.INVISIBLE);
 
                         if (mListener != null) {
                             mListener.onRecordFinished(currentRecord);

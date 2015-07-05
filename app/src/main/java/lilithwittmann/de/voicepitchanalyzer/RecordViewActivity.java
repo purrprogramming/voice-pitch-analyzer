@@ -178,10 +178,20 @@ public class RecordViewActivity extends ActionBarActivity implements ActionBar.T
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
-            if (position == 0) {
-                return PlaceholderFragment.newInstance(position + 1);
-            } else {
-                return RecordViewFragment.newInstance(position + 1, currentRecord);
+            switch (position) {
+                case 0: {
+                    return RecordingOverviewFragment.newInstance(position + 1, currentRecord);
+                }
+                case 1: {
+                    return RecordViewFragment.newInstance(position + 1, currentRecord);
+                }
+                case 2: {
+                    return PlaceholderFragment.newInstance(position + 1);
+                }
+
+                default: {
+                    return null;
+                }
             }
         }
 

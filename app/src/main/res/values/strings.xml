@@ -13,5 +13,6 @@
     <string name="preference_file_key" translatable="false">preferences.conf</string>
     <string name="saved_text_number" translatable="false">text-number</string>
     <string name="pitch_graph_single_recording">Pitch over Time</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

@@ -18,6 +18,8 @@ import java.io.Reader;
 import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
 import java.io.Writer;
+import java.util.ArrayList;
+import java.util.List;
 
 import lilithwittmann.de.voicepitchanalyzer.R;
 
@@ -48,6 +50,8 @@ public class Texts {
 
     private String jsonFile = "res/raw/texts.json";
     private String jsonData = null;
+
+    private List<String> supportedLanguages = new ArrayList<String>() {{add("de"); add("en");}};
 
     String getJsonData() {
         if (this.jsonData != null) {
@@ -86,4 +90,11 @@ public class Texts {
         return jsonString;
     }
 
+    public boolean supportsLocale(String language) {
+        if(this.supportedLanguages.contains(language))
+        {
+            return Boolean.TRUE;
+        }
+        return Boolean.FALSE;
+    }
 }

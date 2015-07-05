@@ -11,5 +11,7 @@
     <string name="recording_header">The Preface</string>
     <string name="start_recording">record</string>
     <string name="stop_recording">stop</string>
+    <string name="preference_file_key">preferences.conf</string>
+    <string name="saved_text_number">text-number</string>
 
 </resources>

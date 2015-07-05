@@ -14,8 +14,8 @@
         style="@android:style/TextAppearance.DeviceDefault.Large"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/recording_text" />
-
+        android:id="@+id/recording_text"
+        ></TextView>
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

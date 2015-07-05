@@ -1,5 +1,6 @@
 package lilithwittmann.de.voicepitchanalyzer;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -18,7 +19,7 @@ public class RecordingActivity extends ActionBarActivity implements RecordingFra
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recording);
         if (savedInstanceState == null) {
-            getFragmentManager().beginTransaction()
+            getSupportFragmentManager().beginTransaction()
                     .add(R.id.container, new RecordingFragment())
                     .commit();
         }
@@ -45,7 +46,7 @@ public class RecordingActivity extends ActionBarActivity implements RecordingFra
                 return true;
             }
             case (R.id.action_record): {
-                getFragmentManager().beginTransaction().replace(R.id.container, new RecordingListFragment()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.container, new RecordingListFragment()).commit();
             }
         }
 
@@ -53,7 +54,7 @@ public class RecordingActivity extends ActionBarActivity implements RecordingFra
     }
 
     @Override
-    public void onFragmentInteraction(String id) {
+    public void onFragmentInteraction(Recording record) {
 
     }
 
@@ -67,11 +68,15 @@ public class RecordingActivity extends ActionBarActivity implements RecordingFra
             Log.i(LOG_TAG, "Max Pitch: " + recording.getRange().getMax() + "Hz");
             Log.i(LOG_TAG, "Min Pitch: " + recording.getRange().getMin() + "Hz");
 
-            Bundle bundle = new Bundle();
-            bundle.putParcelable(Recording.KEY, recording);
-            RecordViewFragment frgmnt = new RecordViewFragment();
-            frgmnt.setArguments(bundle);
-            getFragmentManager().beginTransaction().replace(R.id.container, frgmnt).commit();
+            Intent intent = new Intent(this, RecordViewActivity.class);
+            intent.putExtra(Recording.KEY, recording);
+            startActivity(intent);
+
+//            Bundle bundle = new Bundle();
+//            bundle.putParcelable(Recording.KEY, recording);
+//            RecordViewFragment recordFragment = new RecordViewFragment();
+//            recordFragment.setArguments(bundle);
+//            getSupportFragmentManager().beginTransaction().replace(R.id.container, recordFragment).commit();
         }
     }
 

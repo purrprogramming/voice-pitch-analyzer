@@ -75,8 +75,8 @@ public class RecordingListFragment extends Fragment implements AbsListView.OnIte
                 Recording record = this.getItem(position);
                 PitchRange range = record.getRange();
 
-                largeText.setText(record.getDate().toString());
-                smallText.setText(String.format("Min: %sHz, Max: %sHz, Average: %sHz",
+                largeText.setText(record.getDisplayDate(getContext()));
+                smallText.setText(String.format(getResources().getString(R.string.min_max_avg),
                         Math.round(range.getMin()), Math.round(range.getMax()),
                         Math.round(range.getAvg())));
 
@@ -96,7 +96,7 @@ public class RecordingListFragment extends Fragment implements AbsListView.OnIte
 
         // Set the adapter
         mListView = (AbsListView) view.findViewById(android.R.id.list);
-        ((AdapterView<ListAdapter>) mListView).setAdapter(mAdapter);
+        mListView.setAdapter(mAdapter);
 
         // Set OnItemClickListener so we can be notified on item clicks
         mListView.setOnItemClickListener(this);

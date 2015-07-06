@@ -1,9 +1,10 @@
 package lilithwittmann.de.voicepitchanalyzer.models;
 
+import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.text.format.DateFormat;
 
-import java.io.File;
 import java.util.Date;
 
 /**
@@ -38,6 +39,16 @@ public class Recording implements Parcelable {
         this.setDate(new Date(src.readLong()));
         this.setName(src.readString());
         this.setRange((PitchRange) src.readParcelable(PitchRange.class.getClassLoader()));
+    }
+
+    /**
+     * formats recording's date & time to display anywhere in app
+     *
+     * @param context calling activity's context [to retrieve locale]
+     * @return recording's date/time formatted according to device's locale
+     */
+    public String getDisplayDate(Context context) {
+        return String.format("%s – %s", DateFormat.getDateFormat(context).format(this.getDate()), DateFormat.getTimeFormat(context).format(this.getDate()));
     }
 
     public long getId() {

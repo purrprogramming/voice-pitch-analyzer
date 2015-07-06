@@ -52,13 +52,13 @@ public class RecordViewActivity extends ActionBarActivity implements ActionBar.T
         // get current recording from intent
         if (getIntent() != null) {
             RecordingDB db = new RecordingDB(this);
-            this.currentRecord = db.getRecording(getIntent().getLongExtra(Recording.KEY, 0));
+            RecordViewActivity.currentRecord = db.getRecording(getIntent().getLongExtra(Recording.KEY, 0));
         }
 
-        if (this.currentRecord.getName() != null) {
-            setTitle(this.currentRecord.getName());
+        if (RecordViewActivity.currentRecord.getName() != null) {
+            setTitle(RecordViewActivity.currentRecord.getName());
         } else {
-            setTitle(this.currentRecord.getDate().toString());
+            setTitle(RecordViewActivity.currentRecord.getDisplayDate(this));
         }
 
         // Create the adapter that will return a fragment for each of the three
@@ -96,7 +96,7 @@ public class RecordViewActivity extends ActionBarActivity implements ActionBar.T
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_record_view, menu);
+        getMenuInflater().inflate(R.menu.menu, menu);
         return true;
     }
 
@@ -165,8 +165,7 @@ public class RecordViewActivity extends ActionBarActivity implements ActionBar.T
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_record_view2, container, false);
-            return rootView;
+            return inflater.inflate(R.layout.fragment_record_view2, container, false);
         }
     }
 

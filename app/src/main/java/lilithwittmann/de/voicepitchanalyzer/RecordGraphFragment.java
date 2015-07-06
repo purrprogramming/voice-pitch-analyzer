@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.ChartData;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
@@ -77,12 +78,14 @@ public class RecordGraphFragment extends Fragment {
         LineChart chart = (LineChart) view.findViewById(R.id.recording_chart);
         LineDataSet dataSet = new LineDataSet(RecordViewActivity.currentRecord.getRange().getGraphEntries(), getResources().getString(R.string.pitch_graph_single_recording));
         LineData lineData = new LineData(ChartData.generateXVals(0, dataSet.getEntryCount()), dataSet);
+        dataSet.setAxisDependency(YAxis.AxisDependency.LEFT);
         chart.setData(lineData);
         chart.getAxisLeft().setStartAtZero(false);
         chart.getAxisLeft().setAxisMaxValue(dataSet.getYMax());
         chart.getAxisLeft().setAxisMinValue(dataSet.getYMin());
+        chart.setTouchEnabled(false);
         chart.setDrawGridBackground(false);
-//        chart.animateX(3000);
+        chart.animateX(30000);
         super.onViewCreated(view, savedInstanceState);
     }
 

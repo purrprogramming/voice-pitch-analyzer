@@ -9,7 +9,6 @@
     <facet type="java-gradle" name="Java-Gradle">
       <configuration>
         <option name="BUILD_FOLDER_PATH" value="$MODULE_DIR$/build" />
-        <option name="BUILDABLE" value="false" />
       </configuration>
     </facet>
   </component>
@@ -24,3 +23,4 @@
     <orderEntry type="library" exported="" name="TarsosDSP-Android-2.2.TarsosDSP-Android-2.2" level="project" />
   </component>
 </module>
+

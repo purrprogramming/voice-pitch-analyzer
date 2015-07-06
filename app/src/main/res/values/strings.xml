@@ -8,12 +8,11 @@
     <string name="start_recording">record</string>
     <string name="stop_recording">stop</string>
     <string name="title_section1">Overview</string>
-    <string name="title_section2">Pitch over Time</string>
-    <string name="title_section3">Record</string>
+    <string name="title_section2">@string/pitch_graph_single_recording</string>
+    <string name="title_section3">@string/record</string>
     <string name="preference_file_key" translatable="false">preferences.conf</string>
     <string name="saved_text_number" translatable="false">text-number</string>
     <string name="pitch_graph_single_recording">Pitch over Time</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
+    <string name="min_max_avg">Min Avg: %1$sHz, Max Avg: %2$sHz, Average: %3$sHz</string>
 
 </resources>

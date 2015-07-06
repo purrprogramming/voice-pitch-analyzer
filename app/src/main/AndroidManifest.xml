@@ -30,6 +30,11 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="lilithwittmann.de.voicepitchanalyzer.RecordingListActivity" />
         </activity>
+
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="dbcbf34db2f0d3682f537b48c18e40dab98d3187" />
     </application>
 
+    <uses-permission android:name="android.permission.INTERNET" />
 </manifest>

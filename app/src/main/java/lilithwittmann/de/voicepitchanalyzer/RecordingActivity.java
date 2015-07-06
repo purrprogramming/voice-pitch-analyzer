@@ -7,6 +7,9 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.crashlytics.android.Crashlytics;
+
+import io.fabric.sdk.android.Fabric;
 import lilithwittmann.de.voicepitchanalyzer.models.Recording;
 
 
@@ -16,6 +19,7 @@ public class RecordingActivity extends ActionBarActivity implements RecordingFra
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Fabric.with(this, new Crashlytics());
         setContentView(R.layout.activity_recording);
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()

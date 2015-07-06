@@ -15,8 +15,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.crashlytics.android.Crashlytics;
+
 import java.util.Locale;
 
+import io.fabric.sdk.android.Fabric;
 import lilithwittmann.de.voicepitchanalyzer.models.Recording;
 import lilithwittmann.de.voicepitchanalyzer.models.database.RecordingDB;
 
@@ -41,6 +44,7 @@ public class RecordViewActivity extends ActionBarActivity implements ActionBar.T
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Fabric.with(this, new Crashlytics());
         setContentView(R.layout.activity_record_view);
         final ActionBar actionBar = getSupportActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);

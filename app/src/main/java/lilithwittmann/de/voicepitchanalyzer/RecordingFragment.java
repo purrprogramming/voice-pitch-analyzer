@@ -16,6 +16,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.crashlytics.android.Crashlytics;
+
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.util.Collections;
@@ -73,7 +75,7 @@ public class RecordingFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         this.sampleRate = SampleRateCalculator.getMaxSupportedSampleRate();
-        Toast.makeText(getActivity(), String.valueOf(this.sampleRate), Toast.LENGTH_SHORT).show();
+        Crashlytics.log(Log.DEBUG, "usedSampleRate", String.valueOf(this.sampleRate));
         Log.d("sample rate", String.valueOf(this.sampleRate));
         Texts texts = new Texts();
         Context context = getActivity();
@@ -219,11 +221,7 @@ public class RecordingFragment extends Fragment {
                 return false;
             }
         }
-        /*
-        } catch (Exception e) {
-            Toast.makeText(getActivity(), e.toString(), Toast.LENGTH_LONG).show();
 
-        }*/
         return false;
     }
 

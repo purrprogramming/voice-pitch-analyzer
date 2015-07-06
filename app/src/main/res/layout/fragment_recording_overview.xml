@@ -4,10 +4,8 @@
     android:layout_height="match_parent"
     tools:context="lilithwittmann.de.voicepitchanalyzer.RecordingOverviewFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <SurfaceView
+        android:id="@+id/gradient_canvas"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
-
+        android:layout_height="match_parent" />
 </FrameLayout>

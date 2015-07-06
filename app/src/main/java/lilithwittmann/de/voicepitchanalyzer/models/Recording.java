@@ -20,7 +20,7 @@ public class Recording implements Parcelable {
             return new Recording[size];
         }
     };
-    private File recording;
+    private String recording;
     private long id = -1;
     private Date date;
     private PitchRange range;
@@ -72,11 +72,11 @@ public class Recording implements Parcelable {
         this.name = name;
     }
 
-    public File getRecording() {
+    public String getRecording() {
         return recording;
     }
 
-    public void setRecording(File recording) {
+    public void setRecording(String recording) {
         this.recording = recording;
     }
 

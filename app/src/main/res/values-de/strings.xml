@@ -9,4 +9,6 @@
     <string name="title_section1">Übersicht</string>
     <string name="title_section2">Einzelne Tonhöhen</string>
     <string name="title_section3">Aufnahme</string>
+    <string name="hello_blank_fragment">Hallo leeres Fragment</string>
+    <string name="hello_world">Hallo Welt!</string>
 </resources>

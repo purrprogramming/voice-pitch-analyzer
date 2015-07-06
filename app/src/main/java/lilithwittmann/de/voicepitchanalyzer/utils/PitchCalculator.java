@@ -8,10 +8,14 @@ import java.util.List;
  * Created by Lilith on 04/07/15.
  */
 public class PitchCalculator {
-    private List<Double> pitches = new ArrayList<Double>();
     // Yes the range is very large - test it and maybe change to something like 85-255
-    private Double minPitch = 77.0;
-    private Double maxPitch = 480.0;
+    public static Double minPitch = 65.0;
+    public static Double maxPitch = 300.0;
+    public static Double minFemalePitch = 165.0;
+    public static Double maxFemalePitch = 255.0;
+    public static Double minMalePitch = 85.0;
+    public static Double maxMalePitch = 180.0;
+    private List<Double> pitches = new ArrayList<Double>();
 
     public static <T> List<T> copyList(List<T> source) {
         List<T> dest = new ArrayList<T>();

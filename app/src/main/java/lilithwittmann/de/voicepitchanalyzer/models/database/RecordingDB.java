@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.provider.BaseColumns;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -64,8 +65,7 @@ public class RecordingDB {
         values.put(RecordingEntry.COLUMN_NAME_AVG_PITCH, recording.getRange().getAvg());
         values.put(RecordingEntry.COLUMN_NAME_MAX_PITCH, recording.getRange().getMax());
         values.put(RecordingEntry.COLUMN_NAME_MIN_PITCH, recording.getRange().getMin());
-        // TODO: save file and use file path
-        values.put(RecordingEntry.COLUMN_NAME_FILE, "blaaaah");
+        values.put(RecordingEntry.COLUMN_NAME_FILE, recording.getRecording());
 
         // Insert the new row, returning the primary key value of the new row
         long newRowId;
@@ -121,8 +121,7 @@ public class RecordingDB {
         while (!c.isAfterLast()) {
             Recording recording = new Recording();
             recording.setId(c.getLong(0));
-            //TODO recording file
-            //recording.setRecording(c.getString(1));
+            recording.setRecording(c.getString(1));
             recording.setDate(new Date(c.getLong(5)));
             recording.setName(c.getString(6));
             PitchRange pitch = new PitchRange();
@@ -169,8 +168,7 @@ public class RecordingDB {
 
         Recording recording = new Recording();
         recording.setId(c.getLong(0));
-        //TODO recording file
-        //recording.setRecording(c.getString(1));
+        recording.setRecording(c.getString(1));
         recording.setDate(new Date(c.getLong(5)));
         recording.setName(c.getString(6));
         PitchRange pitch = new PitchRange();

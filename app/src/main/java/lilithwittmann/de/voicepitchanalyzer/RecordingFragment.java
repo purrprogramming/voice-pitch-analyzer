@@ -3,6 +3,9 @@ package lilithwittmann.de.voicepitchanalyzer;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.media.AudioFormat;
+import android.media.AudioRecord;
+import android.media.AudioTrack;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -11,9 +14,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.util.Collections;
 import java.util.Date;
 import java.util.Locale;
+import java.util.UUID;
 
 import be.tarsos.dsp.AudioDispatcher;
 import be.tarsos.dsp.AudioEvent;
@@ -26,7 +34,9 @@ import lilithwittmann.de.voicepitchanalyzer.models.PitchRange;
 import lilithwittmann.de.voicepitchanalyzer.models.Recording;
 import lilithwittmann.de.voicepitchanalyzer.models.Texts;
 import lilithwittmann.de.voicepitchanalyzer.models.database.RecordingDB;
+import lilithwittmann.de.voicepitchanalyzer.utils.AudioRecorder;
 import lilithwittmann.de.voicepitchanalyzer.utils.PitchCalculator;
+import lilithwittmann.de.voicepitchanalyzer.utils.SampleRateCalculator;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -41,6 +51,10 @@ public class RecordingFragment extends Fragment {
     private boolean isRecording = false;
     private Thread recordThread;
     private AudioDispatcher dispatcher;
+    private int sampleRate;
+    private int bufferRate = 4096;
+    private AudioRecorder recorder;
+    private String recordingFile;
 
     public RecordingFragment() {
         // Required empty public constructor
@@ -57,6 +71,10 @@ public class RecordingFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        this.sampleRate = SampleRateCalculator.getMaxSupportedSampleRate();
+        Toast.makeText(getActivity(), String.valueOf(this.sampleRate), Toast.LENGTH_SHORT).show();
+        Log.d("sample rate", String.valueOf(this.sampleRate));
         Texts texts = new Texts();
         Context context = getActivity();
         String lang = "en";
@@ -87,7 +105,7 @@ public class RecordingFragment extends Fragment {
         editor.commit();
 
         //render text
-        TextView recording_text = (TextView) view.findViewById(R.id.recording_text);
+        final TextView recording_text = (TextView) view.findViewById(R.id.recording_text);
         recording_text.setText(texts.getText(lang, textNumber));
 
         Button button = (Button) view.findViewById(R.id.record_button);
@@ -97,6 +115,8 @@ public class RecordingFragment extends Fragment {
                 if (isRecording) {
                     if (stopRecording()) {
                         ((Button) v).setText(getResources().getString(R.string.start_recording));
+
+                        //Log.d("stream state", String.valueOf(recorder.getRecording().getState()));
 
                         PitchRange range = new PitchRange();
                         range.setPitches(calculator.getPitches());
@@ -111,6 +131,7 @@ public class RecordingFragment extends Fragment {
 
                         Recording currentRecord = new Recording(new Date());
                         currentRecord.setRange(range);
+                        currentRecord.setRecording(recordingFile);
 
                         RecordingDB recordingDB = new RecordingDB(getActivity());
                         currentRecord = recordingDB.saveRecording(currentRecord);
@@ -155,16 +176,18 @@ public class RecordingFragment extends Fragment {
     }
 
     public boolean recordPitch() {
+
+
         if (!this.isRecording) {
             this.isRecording = true;
 
-            this.dispatcher = AudioDispatcherFactory.fromDefaultMicrophone(22050, 1024, 0);
+            this.dispatcher = AudioDispatcherFactory.fromDefaultMicrophone(this.sampleRate, this.bufferRate, 0);
 
             PitchDetectionHandler pdh = new PitchDetectionHandler() {
                 @Override
                 public void handlePitch(PitchDetectionResult result, AudioEvent e) {
                     final float pitchInHz = result.getPitch();
-//                    result.
+                    //                    result.
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -176,19 +199,34 @@ public class RecordingFragment extends Fragment {
                 }
             };
 
-            AudioProcessor p = new PitchProcessor(PitchProcessor.PitchEstimationAlgorithm.FFT_YIN, 22050, 1024, pdh);
-            dispatcher.addAudioProcessor(p);
+            AudioProcessor p = new PitchProcessor(PitchProcessor.PitchEstimationAlgorithm.FFT_YIN, this.sampleRate, this.bufferRate, pdh);
+            FileOutputStream fos = null;
+            this.recordingFile = UUID.randomUUID().toString() + ".pcm";
+            try {
+                fos = getActivity().openFileOutput(this.recordingFile, Context.MODE_PRIVATE);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
 
+            this.recorder = new AudioRecorder(this.sampleRate, this.bufferRate, fos);
+            dispatcher.addAudioProcessor(p);
+            dispatcher.addAudioProcessor(recorder);
             this.recordThread = new Thread(dispatcher, "Audio Dispatcher");
             this.recordThread.start();
+            if (this.recordThread.isAlive()) {
+                return true;
+            } else {
+                return false;
+            }
         }
+        /*
+        } catch (Exception e) {
+            Toast.makeText(getActivity(), e.toString(), Toast.LENGTH_LONG).show();
 
-        if (this.recordThread.isAlive()) {
-            return true;
-        } else {
-            return false;
-        }
+        }*/
+        return false;
     }
+
 
     private boolean stopRecording() {
         if (this.isRecording) {

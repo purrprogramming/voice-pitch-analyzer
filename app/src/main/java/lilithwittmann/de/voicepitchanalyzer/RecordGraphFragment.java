@@ -15,6 +15,8 @@ import com.github.mikephil.charting.data.ChartData;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 
+import lilithwittmann.de.voicepitchanalyzer.utils.GraphValueFormatter;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -81,11 +83,22 @@ public class RecordGraphFragment extends Fragment {
         dataSet.setAxisDependency(YAxis.AxisDependency.LEFT);
         chart.setData(lineData);
         chart.getAxisLeft().setStartAtZero(false);
+        chart.getAxisRight().setStartAtZero(false);
         chart.getAxisLeft().setAxisMaxValue(dataSet.getYMax());
+        chart.getAxisRight().setAxisMaxValue(dataSet.getYMax());
+        chart.getAxisRight().setAxisMinValue(dataSet.getYMin());
         chart.getAxisLeft().setAxisMinValue(dataSet.getYMin());
+        chart.getAxisLeft().setDrawGridLines(false);
+        chart.getAxisRight().setDrawGridLines(false);
+        chart.getXAxis().setDrawGridLines(false);
+        chart.getAxisLeft().setValueFormatter(new GraphValueFormatter());
+        chart.getAxisRight().setValueFormatter(new GraphValueFormatter());
+        chart.setDescription("");
+        chart.setDrawBorders(false);
         chart.setTouchEnabled(false);
         chart.setDrawGridBackground(false);
-        chart.animateX(30000);
+        chart.animateX(3000);
+        chart.getLegend().setEnabled(false);
         super.onViewCreated(view, savedInstanceState);
     }
 

@@ -3,9 +3,6 @@ package lilithwittmann.de.voicepitchanalyzer;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.media.AudioFormat;
-import android.media.AudioRecord;
-import android.media.AudioTrack;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -14,13 +11,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.crashlytics.android.Crashlytics;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.util.Collections;
 import java.util.Date;
 import java.util.Locale;
 import java.util.UUID;
@@ -71,7 +66,7 @@ public class RecordingFragment extends Fragment {
     }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
+    public void onViewCreated(final View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         this.sampleRate = SampleRateCalculator.getMaxSupportedSampleRate();
@@ -110,8 +105,24 @@ public class RecordingFragment extends Fragment {
         final TextView recording_text = (TextView) view.findViewById(R.id.recording_text);
         recording_text.setText(texts.getText(lang, textNumber));
 
-        Button button = (Button) view.findViewById(R.id.record_button);
-        button.setOnClickListener(new View.OnClickListener() {
+        Button cancelButton = (Button) view.findViewById(R.id.cancel_button);
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isRecording) {
+                    if (stopRecording()) {
+                        ((Button) view.findViewById(R.id.record_button)).setText(getResources().getString(R.string.start_recording));
+
+                        calculator.getPitches().clear();
+                        // TODO: delete file
+//                        new File(recordingFile).delete();
+                    }
+                }
+            }
+        });
+
+        Button recordButton = (Button) view.findViewById(R.id.record_button);
+        recordButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (isRecording) {
@@ -125,11 +136,6 @@ public class RecordingFragment extends Fragment {
                         range.setMin(calculator.calculateMinAverage());
                         range.setMax(calculator.calculateMaxAverage());
                         range.setAvg(calculator.calculatePitchAverage());
-
-
-                        for (double pitch : calculator.getPitches()) {
-                            Log.i(LOG_TAG, String.valueOf(pitch));
-                        }
 
                         Recording currentRecord = new Recording(new Date());
                         currentRecord.setRange(range);

@@ -2,7 +2,12 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
+        <item name="android:actionBarStyle">@style/ActionBar</item>
+
+        <!-- Support library compatibility -->
+        <item name="actionBarStyle">@style/ActionBar</item>
+
+        <!--<item name="android:imageButtonStyle">@style/image_button</item>-->
     </style>
 
     <style name="Theme.AppCompat.Light.NoActionBar" parent="@style/AppTheme">
@@ -11,4 +16,11 @@
         <!-- For 2.x version  -->
     </style>
 
+    <!-- ActionBar styles -->
+    <style name="ActionBar" parent="@style/Widget.AppCompat.Light.ActionBar">
+        <item name="android:background">@color/action_bar_bg</item>
+
+        <!-- Support library compatibility -->
+        <item name="background">@color/action_bar_bg</item>
+    </style>
 </resources>

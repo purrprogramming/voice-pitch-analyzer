@@ -1,5 +1,6 @@
 package lilithwittmann.de.voicepitchanalyzer;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -105,11 +106,14 @@ public class RecordViewActivity extends ActionBarActivity implements ActionBar.T
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+        switch (item.getItemId()) {
+            case R.id.action_settings: {
+                return true;
+            }
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+            case R.id.action_record: {
+                startActivity(new Intent(this, RecordingActivity.class));
+            }
         }
 
         return super.onOptionsItemSelected(item);

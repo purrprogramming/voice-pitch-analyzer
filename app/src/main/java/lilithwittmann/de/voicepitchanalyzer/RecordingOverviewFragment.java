@@ -3,10 +3,7 @@ package lilithwittmann.de.voicepitchanalyzer;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.LinearGradient;
 import android.graphics.Paint;
-import android.graphics.RectF;
-import android.graphics.Shader;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -17,7 +14,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import lilithwittmann.de.voicepitchanalyzer.models.Recording;
-import lilithwittmann.de.voicepitchanalyzer.utils.AudioPlayer;
 import lilithwittmann.de.voicepitchanalyzer.utils.PitchCalculator;
 
 
@@ -78,8 +74,8 @@ public class RecordingOverviewFragment extends Fragment implements SurfaceHolder
         this.gradientHolder = this.gradient.getHolder();
         this.gradientHolder.addCallback(this);
 
-        AudioPlayer player = new AudioPlayer(getActivity().getFileStreamPath(this.currentRecord.getRecording()));
-        player.play();
+//        AudioPlayer player = new AudioPlayer(getActivity().getFileStreamPath(this.currentRecord.getRecording()));
+//        player.play();
 
     }
 

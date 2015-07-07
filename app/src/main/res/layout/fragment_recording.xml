@@ -2,14 +2,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="15dp"
     tools:context="lilithwittmann.de.voicepitchanalyzer.RecordingFragment">
 
     <TextView
         android:id="@+id/recording_text"
         style="@android:style/TextAppearance.DeviceDefault.Large"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:padding="15dp" />
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -19,6 +19,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:background="@color/action_button"
             android:gravity="center_horizontal"
             android:orientation="horizontal">
@@ -26,20 +27,22 @@
             <Button
                 android:id="@+id/cancel_button"
                 style="?android:attr/borderlessButtonStyle"
-                android:layout_width=""
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="?android:attr/selectableItemBackground"
                 android:text="@android:string/cancel"
-                android:textColor="@android:color/primary_text_dark" />
-            <!--android:background="?android:attr/selectableItemBackground"-->
+                android:textColor="@color/button_text_color" />
 
             <Button
                 android:id="@+id/record_button"
                 style="?android:attr/borderlessButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="?android:attr/selectableItemBackground"
                 android:text="@string/start_recording"
-                android:textColor="@android:color/primary_text_dark" />
-            <!--android:background="?android:attr/selectableItemBackground"-->
+                android:textColor="@color/button_text_color" />
         </LinearLayout>
     </FrameLayout>
 

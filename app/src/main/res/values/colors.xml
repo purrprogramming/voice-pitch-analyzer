@@ -2,4 +2,5 @@
 <resources>
     <color name="action_bar_bg">#B39DDB</color>
     <color name="action_button">#7E57C2</color>
+    <color name="indicators">#673ab7</color>
 </resources>

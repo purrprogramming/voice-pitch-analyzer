@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,8 +13,11 @@ import android.view.ViewGroup;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.ChartData;
+import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
+import com.github.mikephil.charting.utils.Highlight;
 
 import lilithwittmann.de.voicepitchanalyzer.utils.GraphValueFormatter;
 
@@ -24,7 +28,7 @@ import lilithwittmann.de.voicepitchanalyzer.utils.GraphValueFormatter;
  * {@link RecordGraphFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
  */
-public class RecordGraphFragment extends Fragment {
+public class RecordGraphFragment extends Fragment implements OnChartValueSelectedListener {
 
     private static final String LOG_TAG = RecordGraphFragment.class.getSimpleName();
     /**
@@ -57,20 +61,6 @@ public class RecordGraphFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        if (savedInstanceState != null) {
-//            this.currentRecord = (Recording) savedInstanceState.getSerializable(Recording.KEY);
-//            Log.i(LOG_TAG, String.format("%s", recording.getDate()));
-//            Log.i(LOG_TAG, String.format("Avg: %sHz", recording.getRange().getAvg()));
-//            Log.i(LOG_TAG, String.format("Min: %sHz", recording.getRange().getMin()));
-//            Log.i(LOG_TAG, String.format("Max: %sHz", recording.getRange().getMax()));
-        } else if (this.getArguments() != null) {
-//            this.currentRecord = this.getArguments().getParcelable(Recording.KEY);
-//            Log.i(LOG_TAG, String.format("%s", recording.getDate()));
-//            Log.i(LOG_TAG, String.format("Avg: %sHz", recording.getRange().getAvg()));
-//            Log.i(LOG_TAG, String.format("Min: %sHz", recording.getRange().getMin()));
-//            Log.i(LOG_TAG, String.format("Max: %sHz", recording.getRange().getMax()));
-        }
-
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_record_graph, container, false);
     }
@@ -79,24 +69,43 @@ public class RecordGraphFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         LineChart chart = (LineChart) view.findViewById(R.id.recording_chart);
         LineDataSet dataSet = new LineDataSet(RecordViewActivity.currentRecord.getRange().getGraphEntries(), getResources().getString(R.string.pitch_graph_single_recording));
+
+        dataSet.setCircleColor(getResources().getColor(R.color.indicators));
+        dataSet.setColor(getResources().getColor(R.color.indicators));
+
         LineData lineData = new LineData(ChartData.generateXVals(0, dataSet.getEntryCount()), dataSet);
-        dataSet.setAxisDependency(YAxis.AxisDependency.LEFT);
         chart.setData(lineData);
+
+        // set min/max values etc. for axes
+        dataSet.setAxisDependency(YAxis.AxisDependency.LEFT);
         chart.getAxisLeft().setStartAtZero(false);
         chart.getAxisRight().setStartAtZero(false);
         chart.getAxisLeft().setAxisMaxValue(dataSet.getYMax());
         chart.getAxisRight().setAxisMaxValue(dataSet.getYMax());
         chart.getAxisRight().setAxisMinValue(dataSet.getYMin());
         chart.getAxisLeft().setAxisMinValue(dataSet.getYMin());
+
+        // hide grid lines & borders
         chart.getAxisLeft().setDrawGridLines(false);
         chart.getAxisRight().setDrawGridLines(false);
         chart.getXAxis().setDrawGridLines(false);
         chart.getAxisLeft().setValueFormatter(new GraphValueFormatter());
         chart.getAxisRight().setValueFormatter(new GraphValueFormatter());
-        chart.setDescription("");
         chart.setDrawBorders(false);
+
+        chart.setDescription("");
+
+        // disable all interactions except highlighting selection
+//        chart.setTouchEnabled(false);
         chart.setTouchEnabled(false);
+        chart.setScaleEnabled(false);
+        chart.setPinchZoom(false);
+        chart.setDoubleTapToZoomEnabled(false);
         chart.setDrawGridBackground(false);
+
+        chart.setHighlightEnabled(true);
+
+        chart.setHardwareAccelerationEnabled(true);
         chart.animateX(3000);
         chart.getLegend().setEnabled(false);
         super.onViewCreated(view, savedInstanceState);
@@ -124,6 +133,17 @@ public class RecordGraphFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    @Override
+    public void onValueSelected(Entry e, int dataSetIndex, Highlight h) {
+        e.getVal();
+        Log.i(LOG_TAG, String.format("highlight %s selected", h.toString()));
+    }
+
+    @Override
+    public void onNothingSelected() {
+
     }
 
     /**

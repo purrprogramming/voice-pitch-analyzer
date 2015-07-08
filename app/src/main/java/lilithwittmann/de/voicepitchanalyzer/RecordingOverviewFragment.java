@@ -13,7 +13,6 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
 
-import lilithwittmann.de.voicepitchanalyzer.models.Recording;
 import lilithwittmann.de.voicepitchanalyzer.utils.PitchCalculator;
 
 
@@ -28,7 +27,6 @@ public class RecordingOverviewFragment extends Fragment implements SurfaceHolder
     private static final String ARG_SECTION_NUMBER = "section_number";
     SurfaceView gradient;
     SurfaceHolder gradientHolder;
-    private Recording currentRecord;
 
     public RecordingOverviewFragment() {
         // Required empty public constructor
@@ -39,15 +37,13 @@ public class RecordingOverviewFragment extends Fragment implements SurfaceHolder
      * this fragment using the provided parameters.
      *
      * @param sectionNumber
-     * @param recording
      * @return A new instance of fragment RecordingOverviewFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static RecordingOverviewFragment newInstance(int sectionNumber, Recording recording) {
+    public static RecordingOverviewFragment newInstance(int sectionNumber) {
         RecordingOverviewFragment fragment = new RecordingOverviewFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-        args.putParcelable(Recording.KEY, recording);
         fragment.setArguments(args);
         return fragment;
     }
@@ -55,9 +51,9 @@ public class RecordingOverviewFragment extends Fragment implements SurfaceHolder
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            this.currentRecord = this.getArguments().getParcelable(Recording.KEY);
-        }
+//        if (getArguments() != null) {
+//            this.currentRecord = this.getArguments().getParcelable(Recording.KEY);
+//        }
     }
 
     @Override
@@ -91,10 +87,10 @@ public class RecordingOverviewFragment extends Fragment implements SurfaceHolder
         textPaint.setColor(Color.BLACK);
         textPaint.setTextSize(30);
 
-        p.setColor(Color.MAGENTA);
+        p.setColor(getResources().getColor(R.color.canvas_bg_dark));
         p.setAlpha(200);
-        textPaint.setColor(Color.MAGENTA);
-        textPaint.setAlpha(200);
+        textPaint.setColor(getResources().getColor(R.color.canvas_bg_dark));
+        textPaint.setAlpha(255);
         canvas.drawARGB(255, 255, 255, 255);
         canvas.drawRect(0,
                 this.gradient.getHeight() - (float) ((PitchCalculator.minFemalePitch - PitchCalculator.minPitch) * pxPerHz),
@@ -103,13 +99,13 @@ public class RecordingOverviewFragment extends Fragment implements SurfaceHolder
                 p
         );
 
-        canvas.drawText("female range", 10, this.gradient.getHeight() - (float)
+        canvas.drawText(getResources().getString(R.string.female_range), 10, this.gradient.getHeight() - (float)
                 ((PitchCalculator.maxFemalePitch - PitchCalculator.minPitch) * pxPerHz) - 25, textPaint);
 
-        p.setColor(Color.BLUE);
-        p.setAlpha(90);
-        textPaint.setColor(Color.BLUE);
-        textPaint.setAlpha(90);
+        p.setColor(getResources().getColor(R.color.canvas_bg_light));
+        p.setAlpha(128);
+        textPaint.setColor(getResources().getColor(R.color.canvas_bg_light));
+        textPaint.setAlpha(128);
         canvas.drawRect(0,
                 this.gradient.getHeight() - (float) ((PitchCalculator.minMalePitch - PitchCalculator.minPitch) * pxPerHz),
                 this.gradient.getWidth(),
@@ -117,27 +113,27 @@ public class RecordingOverviewFragment extends Fragment implements SurfaceHolder
                 p
         );
 
-        canvas.drawText("male range", 10, this.gradient.getHeight() - (float)
+        canvas.drawText(getResources().getString(R.string.male_range), 10, this.gradient.getHeight() - (float)
                 ((PitchCalculator.minMalePitch - PitchCalculator.minPitch) * pxPerHz) + 35, textPaint);
 
 
         Paint paint = new Paint();
         paint.setColor(Color.BLACK);
         //draw range
-        paint.setStrokeWidth((float) ((this.currentRecord.getRange().getMax() - this.currentRecord.getRange().getMin()) * pxPerHz));
+        paint.setStrokeWidth((float) ((RecordViewActivity.currentRecord.getRange().getMax() - RecordViewActivity.currentRecord.getRange().getMin()) * pxPerHz));
         paint.setAlpha(120);
-        canvas.drawLine(0, this.gradient.getHeight() - (float) ((this.currentRecord.getRange().getMin() - PitchCalculator.minPitch) * pxPerHz), this.gradient.getWidth(), this.gradient.getHeight() - (float) ((this.currentRecord.getRange().getMin() - PitchCalculator.minPitch) * pxPerHz), paint);
+        canvas.drawLine(0, this.gradient.getHeight() - (float) ((RecordViewActivity.currentRecord.getRange().getMin() - PitchCalculator.minPitch) * pxPerHz), this.gradient.getWidth(), this.gradient.getHeight() - (float) ((RecordViewActivity.currentRecord.getRange().getMin() - PitchCalculator.minPitch) * pxPerHz), paint);
         paint.setStrokeWidth(10);
         paint.setAlpha(255);
         paint.setColor(Color.BLACK);
-        canvas.drawLine(0, this.gradient.getHeight() - (float) ((this.currentRecord.getRange().getAvg() - PitchCalculator.minPitch) * pxPerHz), this.gradient.getWidth(), this.gradient.getHeight() - (float) ((this.currentRecord.getRange().getAvg() - PitchCalculator.minPitch) * pxPerHz), paint);
+        canvas.drawLine(0, this.gradient.getHeight() - (float) ((RecordViewActivity.currentRecord.getRange().getAvg() - PitchCalculator.minPitch) * pxPerHz), this.gradient.getWidth(), this.gradient.getHeight() - (float) ((RecordViewActivity.currentRecord.getRange().getAvg() - PitchCalculator.minPitch) * pxPerHz), paint);
 
         textPaint.setColor(Color.BLACK);
         textPaint.setAlpha(120);
-        canvas.drawText("your range", 10, this.gradient.getHeight() -
-                (float) ((this.currentRecord.getRange().getMin() -
-                        ((float) ((this.currentRecord.getRange().getMax() -
-                                this.currentRecord.getRange().getMin())) / 2) -
+        canvas.drawText(getResources().getString(R.string.your_range), 10, this.gradient.getHeight() -
+                (float) ((RecordViewActivity.currentRecord.getRange().getMin() -
+                        ((float) ((RecordViewActivity.currentRecord.getRange().getMax() -
+                                RecordViewActivity.currentRecord.getRange().getMin())) / 2) -
                         PitchCalculator.minPitch) * pxPerHz) + 35, textPaint);
 
         surfaceHolder.unlockCanvasAndPost(canvas);

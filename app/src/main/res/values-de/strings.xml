@@ -10,4 +10,14 @@
     <string name="title_section2">@string/pitch_graph_single_recording</string>
     <string name="title_section3">@string/record</string>
     <string name="min_max_avg">Min. Durchschn.: %1$sHz, Max. Durchschn.: %2$sHz, Durchschnitt: %3$sHz</string>
+    <string name="average">Gesamtdurchschnitt</string>
+    <string name="max_avg">Durchschnittliches Maximum</string>
+    <string name="min_avg">Durchschnittliches Minimum</string>
+    <string name="female_range">Weibliche Stimmlange</string>
+    <string name="male_range">Männliche Stimmlage</string>
+    <string name="your_range">Deine Stimmlage</string>
+    <string name="female">weiblich</string>
+    <string name="in_between">im Mittelfeld</string>
+    <string name="male">männlich</string>
+    <string name="personal_range">Deine Stimmlange ist überwiegend</string>
 </resources>

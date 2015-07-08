@@ -10,11 +10,8 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.crashlytics.android.Crashlytics;
 
@@ -142,38 +139,6 @@ public class RecordViewActivity extends ActionBarActivity implements ActionBar.T
     }
 
     /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class PlaceholderFragment extends Fragment {
-        /**
-         * The fragment argument representing the section number for this
-         * fragment.
-         */
-        private static final String ARG_SECTION_NUMBER = "section_number";
-
-        public PlaceholderFragment() {
-        }
-
-        /**
-         * Returns a new instance of this fragment for the given section
-         * number.
-         */
-        public static PlaceholderFragment newInstance(int sectionNumber) {
-            PlaceholderFragment fragment = new PlaceholderFragment();
-            Bundle args = new Bundle();
-            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-            fragment.setArguments(args);
-            return fragment;
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            return inflater.inflate(R.layout.fragment_record_view2, container, false);
-        }
-    }
-
-    /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
      * one of the sections/tabs/pages.
      */
@@ -189,13 +154,13 @@ public class RecordViewActivity extends ActionBarActivity implements ActionBar.T
             // Return a PlaceholderFragment (defined as a static inner class below).
             switch (position) {
                 case 0: {
-                    return RecordingOverviewFragment.newInstance(position + 1, currentRecord);
+                    return RecordingOverviewFragment.newInstance(position + 1);
                 }
                 case 1: {
                     return RecordGraphFragment.newInstance(position + 1);
                 }
                 case 2: {
-                    return PlaceholderFragment.newInstance(position + 1);
+                    return RecordingPlayFragment.newInstance(position + 1);
                 }
 
                 default: {

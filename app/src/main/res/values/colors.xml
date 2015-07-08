@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="canvas_bg_light">#D1C4E9</color>
+    <!-- lightest hue -->
     <color name="action_bar_bg">#B39DDB</color>
+    <!-- light hue -->
     <color name="action_button">#7E57C2</color>
+    <!-- medium hue -->
     <color name="indicators">#673ab7</color>
+    <!-- dark hue -->
+    <color name="canvas_bg_dark">#311B92</color>
+    <!-- darkest hue -->
 </resources>

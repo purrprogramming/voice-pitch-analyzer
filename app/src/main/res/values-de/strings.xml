@@ -8,7 +8,7 @@
     <string name="title_activity_recording">Neue Aufnahme</string>
     <string name="title_section1">Übersicht</string>
     <string name="title_section2">@string/pitch_graph_single_recording</string>
-    <string name="title_section3">@string/record</string>
+    <string name="title_section3">Anhören</string>
     <string name="min_max_avg">Min. Durchschn.: %1$sHz, Max. Durchschn.: %2$sHz, Durchschnitt: %3$sHz</string>
     <string name="average">Gesamtdurchschnitt</string>
     <string name="max_avg">Durchschnittliches Maximum</string>

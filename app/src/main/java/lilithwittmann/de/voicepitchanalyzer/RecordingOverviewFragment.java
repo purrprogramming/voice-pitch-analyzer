@@ -88,28 +88,30 @@ public class RecordingOverviewFragment extends Fragment implements SurfaceHolder
         Double pitchRange = PitchCalculator.maxPitch - PitchCalculator.minPitch;
         Double pxPerHz = this.gradient.getHeight() / pitchRange;
 
+        System.out.println(String.format("pitchRange: %s", pitchRange));
+        System.out.println(String.format("pxPerHz: %s", pxPerHz));
+
         Paint p = new Paint();
         Paint textPaint = new Paint();
 
         textPaint.setColor(Color.BLACK);
         textPaint.setTextSize(30);
 
-        System.out.println(String.format("Px per Hz: %s", pxPerHz));
-
         p.setColor(getResources().getColor(R.color.canvas_bg_dark));
         p.setAlpha(255);
         textPaint.setColor(getResources().getColor(R.color.canvas_bg_dark));
         textPaint.setAlpha(255);
         canvas.drawARGB(255, 255, 255, 255);
-        canvas.drawLine(0,
-//                (float) (PitchCalculator.maxFemalePitch * pxPerHz) * -1,
-//                this.gradient.getWidth(),
-//                (float)  (PitchCalculator.minFemalePitch * pxPerHz) * -1,
-                this.gradient.getTop(),
+        p.setStrokeWidth(10);
+        canvas.drawRect(0,
+                this.gradient.getBottom() - (float) ((PitchCalculator.minFemalePitch - PitchCalculator.minPitch) * pxPerHz),
                 this.gradient.getWidth(),
-                this.gradient.getTop(),
+                this.gradient.getBottom() - (float) ((PitchCalculator.maxFemalePitch - PitchCalculator.minPitch) * pxPerHz),
                 p
         );
+
+        System.out.println(String.format("bottom: %s", (float) ((PitchCalculator.minFemalePitch-PitchCalculator.minPitch) * pxPerHz)));
+        System.out.println(String.format("top: %s", (float) ((PitchCalculator.maxFemalePitch-PitchCalculator.minPitch) * pxPerHz)));
 
         canvas.drawText(getResources().getString(R.string.female_range), 10, this.gradient.getHeight() - (float)
                 ((PitchCalculator.maxFemalePitch - PitchCalculator.minPitch) * pxPerHz) - 25, textPaint);
@@ -125,6 +127,10 @@ public class RecordingOverviewFragment extends Fragment implements SurfaceHolder
                 p
         );
 
+        System.out.println(String.format("getHeight(): %s", this.gradient.getHeight()));
+        System.out.println(String.format("getTop(): %s", this.gradient.getTop()));
+        System.out.println(String.format("getBottom(): %s", this.gradient.getBottom()));
+
         canvas.drawText(getResources().getString(R.string.male_range), 10, this.gradient.getHeight() - (float)
                 ((PitchCalculator.minMalePitch - PitchCalculator.minPitch) * pxPerHz) + 35, textPaint);
 
@@ -132,29 +138,27 @@ public class RecordingOverviewFragment extends Fragment implements SurfaceHolder
         Paint paint = new Paint();
         paint.setColor(Color.BLACK);
         //draw range
-        paint.setStrokeWidth((float) ((RecordViewActivity.currentRecord.getRange().getMax() - RecordViewActivity.currentRecord.getRange().getMin()) * pxPerHz));
+//        paint.setStrokeWidth((float) ((RecordViewActivity.currentRecord.getRange().getMax() - RecordViewActivity.currentRecord.getRange().getMin()) * pxPerHz));
         paint.setAlpha(120);
-        canvas.drawLine(0,
-                this.gradient.getHeight() - (float) (((RecordViewActivity.currentRecord.getRange().getMin() + RecordViewActivity.currentRecord.getRange().getMax()) / 2) * pxPerHz),
+        canvas.drawRect(0,
+                this.gradient.getBottom() - (float) ((RecordViewActivity.currentRecord.getRange().getMin() - PitchCalculator.minPitch) * pxPerHz),
                 this.gradient.getWidth(),
-                this.gradient.getHeight() - (float) (((RecordViewActivity.currentRecord.getRange().getMin() + RecordViewActivity.currentRecord.getRange().getMax()) / 2) * pxPerHz),
+                this.gradient.getBottom() - (float) ((RecordViewActivity.currentRecord.getRange().getMax() - PitchCalculator.minPitch) * pxPerHz),
                 paint);
         paint.setStrokeWidth(10);
         paint.setAlpha(255);
         paint.setColor(Color.BLACK);
         canvas.drawLine(0,
-                this.gradient.getHeight() - (float) (RecordViewActivity.currentRecord.getRange().getAvg() * pxPerHz),
+                this.gradient.getHeight() - (float) ((RecordViewActivity.currentRecord.getRange().getAvg()-PitchCalculator.minPitch) * pxPerHz),
                 this.gradient.getWidth(),
-                this.gradient.getHeight() - (float) (RecordViewActivity.currentRecord.getRange().getAvg() * pxPerHz),
+                this.gradient.getHeight() - (float) ((RecordViewActivity.currentRecord.getRange().getAvg()-PitchCalculator.minPitch) * pxPerHz),
                 paint);
 
         textPaint.setColor(Color.BLACK);
         textPaint.setAlpha(120);
-        canvas.drawText(getResources().getString(R.string.your_range), 10, this.gradient.getHeight() -
-                (float) (this.gradient.getHeight() - (RecordViewActivity.currentRecord.getRange().getMin() -
-                        ((float) (this.gradient.getHeight() - (RecordViewActivity.currentRecord.getRange().getMax() -
-                                RecordViewActivity.currentRecord.getRange().getMin())) / 2) -
-                        PitchCalculator.minPitch) * pxPerHz) + 35, textPaint);
+        canvas.drawText(getResources().getString(R.string.your_range), 10,
+                this.gradient.getHeight() - (float) ((RecordViewActivity.currentRecord.getRange().getMin() - PitchCalculator.minPitch) * pxPerHz) + 35,
+                textPaint);
 
         surfaceHolder.unlockCanvasAndPost(canvas);
         Log.d("foo", String.valueOf(this.gradient.getHeight() - (float) (PitchCalculator.maxFemalePitch * pxPerHz)));

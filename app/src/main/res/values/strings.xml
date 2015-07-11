@@ -9,7 +9,7 @@
     <string name="stop_recording">stop</string>
     <string name="title_section1">Overview</string>
     <string name="title_section2">@string/pitch_graph_single_recording</string>
-    <string name="title_section3">@string/record</string>
+    <string name="title_section3">Listen</string>
     <string name="preference_file_key" translatable="false">preferences.conf</string>
     <string name="saved_text_number" translatable="false">text-number</string>
     <string name="pitch_graph_single_recording">Pitch over Time</string>

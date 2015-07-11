@@ -3,9 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/TarsosDSP-Android-2.2/TarsosDSP-Android-2.2.iml" filepath="$PROJECT_DIR$/TarsosDSP-Android-2.2/TarsosDSP-Android-2.2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Voice Pitch Analyzer.iml" filepath="$PROJECT_DIR$/Voice Pitch Analyzer.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/voicepitchanalyzer.iml" filepath="$PROJECT_DIR$/voicepitchanalyzer.iml" />
     </modules>
   </component>
 </project>
-

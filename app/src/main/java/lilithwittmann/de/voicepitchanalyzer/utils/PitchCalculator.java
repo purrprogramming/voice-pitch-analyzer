@@ -45,15 +45,16 @@ public class PitchCalculator {
     public Double calculateMaxAverage() {
         List<Double> maxSorted = PitchCalculator.copyList(this.pitches);
         Collections.sort(maxSorted);
+        Collections.reverse(maxSorted);
         Integer elements = maxSorted.size() / 3;
-        return this.calculateAverage(maxSorted.subList(maxSorted.size() - elements, maxSorted.size()));
+        return this.calculateAverage(maxSorted.subList(0, elements));
     }
 
     public Double calculateMinAverage() {
         List<Double> minSorted = PitchCalculator.copyList(this.pitches);
-        Collections.reverse(minSorted);
+        Collections.sort(minSorted);
         Integer elements = minSorted.size() / 3;
-        return this.calculateAverage(minSorted.subList(minSorted.size() - elements, minSorted.size()));
+        return this.calculateAverage(minSorted.subList(0, elements));
     }
 
     private Double calculateAverage(List<Double> pitches) {

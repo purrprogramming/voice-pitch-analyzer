@@ -1,7 +1,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+    android:layout_gravity="center">
 
     <TableLayout
         android:layout_width="match_parent"
@@ -14,13 +15,13 @@
             <TextView
                 style="@android:style/TextAppearance.DeviceDefault.Large"
                 android:padding="10dp"
-                android:text="@string/average" />
+                android:text="@string/average"/>
 
             <TextView
                 android:id="@+id/average"
                 style="@android:style/TextAppearance.DeviceDefault.Large"
                 android:gravity="right"
-                android:padding="10dp" />
+                android:padding="10dp"/>
         </TableRow>
 
         <TableRow>
@@ -28,13 +29,13 @@
             <TextView
                 style="@android:style/TextAppearance.DeviceDefault.Large"
                 android:padding="10dp"
-                android:text="@string/min_avg" />
+                android:text="@string/min_avg"/>
 
             <TextView
                 android:id="@+id/min_avg"
                 style="@android:style/TextAppearance.DeviceDefault.Large"
                 android:gravity="right"
-                android:padding="10dp" />
+                android:padding="10dp"/>
         </TableRow>
 
         <TableRow>
@@ -42,13 +43,13 @@
             <TextView
                 style="@android:style/TextAppearance.DeviceDefault.Large"
                 android:padding="10dp"
-                android:text="@string/max_avg" />
+                android:text="@string/max_avg"/>
 
             <TextView
                 android:id="@+id/max_avg"
                 style="@android:style/TextAppearance.DeviceDefault.Large"
                 android:gravity="right"
-                android:padding="10dp" />
+                android:padding="10dp"/>
         </TableRow>
 
         <TableRow android:paddingTop="20dp">
@@ -56,16 +57,21 @@
             <TextView
                 style="@android:style/TextAppearance.DeviceDefault.Large"
                 android:padding="10dp"
-                android:text="@string/personal_range" />
+                android:text="@string/personal_range"/>
 
             <TextView
                 android:id="@+id/personal_range"
                 style="@android:style/TextAppearance.DeviceDefault.Large"
                 android:gravity="right"
                 android:padding="10dp"
-                android:textStyle="bold" />
+                android:textStyle="bold"/>
         </TableRow>
     </TableLayout>
 
-
+    <ImageButton
+        android:id="@+id/play_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_play_circle_filled_black_24dp"
+        android:layout_gravity="center"/>
 </LinearLayout>

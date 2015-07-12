@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="lilithwittmann.de.voicepitchanalyzer">
+    package="lilithwittmann.de.voicepitchanalyzer" >
 
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme" >
         <activity
             android:name=".RecordingListActivity"
-            android:label="@string/app_name">
+            android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -23,12 +23,12 @@
             android:name=".RecordingActivity"
             android:label="@string/title_activity_recording"
             android:theme="@style/NoActionBarTheme" />
-        <!--android:uiOptions="splitActionBarWhenNarrow">-->
-        <!--<meta-data android:name="android.support.UI_OPTIONS"-->
-        <!--android:value="splitActionBarWhenNarrow" />-->
+        <!-- android:uiOptions="splitActionBarWhenNarrow"> -->
+        <!-- <meta-data android:name="android.support.UI_OPTIONS" -->
+        <!-- android:value="splitActionBarWhenNarrow" /> -->
         <activity
             android:name=".RecordViewActivity"
-            android:parentActivityName=".RecordingListActivity">
+            android:parentActivityName=".RecordingListActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="lilithwittmann.de.voicepitchanalyzer.RecordingListActivity" />
@@ -37,7 +37,11 @@
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="dbcbf34db2f0d3682f537b48c18e40dab98d3187" />
+
+        <activity
+            android:name=".AboutActivity"
+            android:label="@string/title_activity_about" >
+        </activity>
     </application>
 
-    <uses-permission android:name="android.permission.INTERNET" />
 </manifest>

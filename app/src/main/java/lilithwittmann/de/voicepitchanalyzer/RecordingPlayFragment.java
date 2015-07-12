@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import lilithwittmann.de.voicepitchanalyzer.utils.AudioPlayer;
 import lilithwittmann.de.voicepitchanalyzer.utils.PitchCalculator;
 
 
@@ -18,6 +19,8 @@ import lilithwittmann.de.voicepitchanalyzer.utils.PitchCalculator;
 public class RecordingPlayFragment extends Fragment
 {
     private static final String ARG_SECTION_NUMBER = "section_number";
+    private static final String LOG_TAG = RecordingPlayFragment.class.getSimpleName();
+    private AudioPlayer player;
 
     public RecordingPlayFragment()
     {
@@ -53,6 +56,7 @@ public class RecordingPlayFragment extends Fragment
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState)
     {
         super.onViewCreated(view, savedInstanceState);
+
         if (RecordViewActivity.currentRecord != null)
         {
             double average = RecordViewActivity.currentRecord.getRange().getAvg();
@@ -76,6 +80,35 @@ public class RecordingPlayFragment extends Fragment
                     ((TextView) view.findViewById(R.id.personal_range)).setText(getResources().getString(R.string.in_between));
                 }
             }
+
+            else
+            {
+                ((TextView) view.findViewById(R.id.personal_range)).setText(getResources().getString(R.string.unknown));
+            }
+
+//            ((ImageButton) view.findViewById(R.id.play_button)).setOnClickListener(new View.OnClickListener()
+//            {
+//                @Override
+//                public void onClick(View v)
+//                {
+//                    if (player == null)
+//                    {
+//                        player = new AudioPlayer(getActivity().getFileStreamPath(RecordViewActivity.currentRecord.getRecording()));
+//                    }
+//
+//                    if (player.isPlaying())
+//                    {
+//                        Log.i(LOG_TAG, "stop");
+//                        player.stop();
+//                    }
+//
+//                    else
+//                    {
+//                        Log.i(LOG_TAG, "play");
+//                        player.play();
+//                    }
+//                }
+//            });
         }
     }
 }

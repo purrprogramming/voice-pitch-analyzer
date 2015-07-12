@@ -5,10 +5,12 @@
     <item
         android:id="@+id/action_record"
         android:title="@string/record"
+        android:icon="@drawable/ic_settings_voice_white_48dp"
         app:showAsAction="always" />
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/action_about"
         android:orderInCategory="100"
-        android:title="@string/action_settings"
-        app:showAsAction="never" />
+        android:title="@string/action_about"
+        android:icon="@drawable/ic_info_outline_white_48dp"
+        app:showAsAction="ifRoom" />
 </menu>

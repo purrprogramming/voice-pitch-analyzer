@@ -30,19 +30,18 @@ import lilithwittmann.de.voicepitchanalyzer.models.database.RecordingDB;
  */
 public class RecordingListFragment extends Fragment implements AbsListView.OnItemClickListener {
     private List<Recording> recordings = new ArrayList<Recording>();
-
-    private OnFragmentInteractionListener mListener;
+    private OnFragmentInteractionListener listener;
 
     /**
      * The fragment's ListView/GridView.
      */
-    private AbsListView mListView;
+    private AbsListView listView;
 
     /**
      * The Adapter which will be used to populate the ListView/GridView with
      * Views.
      */
-    private ListAdapter mAdapter;
+    private ListAdapter adapter;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -58,7 +57,7 @@ public class RecordingListFragment extends Fragment implements AbsListView.OnIte
         RecordingDB recordingDB = new RecordingDB(getActivity());
         this.recordings = recordingDB.getRecordings();
 
-        this.mAdapter = new ArrayAdapter<Recording>(getActivity(),
+        this.adapter = new ArrayAdapter<Recording>(getActivity(),
                 android.R.layout.simple_list_item_activated_2, android.R.id.text2, this.recordings) {
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
@@ -83,10 +82,6 @@ public class RecordingListFragment extends Fragment implements AbsListView.OnIte
                 return convertView;
             }
         };
-
-        // TODO: Change Adapter to display your content
-//        mAdapter = new ArrayAdapter<DummyContent.DummyItem>(getActivity(),
-//                android.R.layout.simple_list_item_1, android.R.id.text1, DummyContent.ITEMS);
     }
 
     @Override
@@ -95,11 +90,11 @@ public class RecordingListFragment extends Fragment implements AbsListView.OnIte
         View view = inflater.inflate(R.layout.fragment_recording_list, container, false);
 
         // Set the adapter
-        mListView = (AbsListView) view.findViewById(android.R.id.list);
-        mListView.setAdapter(mAdapter);
+        listView = (AbsListView) view.findViewById(android.R.id.list);
+        listView.setAdapter(adapter);
 
         // Set OnItemClickListener so we can be notified on item clicks
-        mListView.setOnItemClickListener(this);
+        listView.setOnItemClickListener(this);
 
         return view;
     }
@@ -110,15 +105,15 @@ public class RecordingListFragment extends Fragment implements AbsListView.OnIte
         RecordingDB recordingDB = new RecordingDB(getActivity());
         this.recordings.clear();
         this.recordings.addAll(recordingDB.getRecordings());
-        ((ArrayAdapter) mListView.getAdapter()).notifyDataSetChanged();
-
+        ((ArrayAdapter) listView.getAdapter()).notifyDataSetChanged();
     }
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
+
         try {
-            mListener = (OnFragmentInteractionListener) activity;
+            listener = (OnFragmentInteractionListener) activity;
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
                     + " must implement OnFragmentInteractionListener");
@@ -128,16 +123,16 @@ public class RecordingListFragment extends Fragment implements AbsListView.OnIte
     @Override
     public void onDetach() {
         super.onDetach();
-        mListener = null;
+        listener = null;
     }
 
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        if (null != mListener) {
+        if (null != listener) {
             // Notify the active callbacks interface (the activity, if the
             // fragment is attached to one) that an item has been selected.
-            mListener.onFragmentInteraction(this.recordings.get(position).getId());
+            listener.onFragmentInteraction(this.recordings.get(position).getId());
         }
     }
 
@@ -147,7 +142,7 @@ public class RecordingListFragment extends Fragment implements AbsListView.OnIte
      * to supply the text it should use.
      */
     public void setEmptyText(CharSequence emptyText) {
-        View emptyView = mListView.getEmptyView();
+        View emptyView = listView.getEmptyView();
 
         if (emptyView instanceof TextView) {
             ((TextView) emptyView).setText(emptyText);
@@ -165,8 +160,6 @@ public class RecordingListFragment extends Fragment implements AbsListView.OnIte
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         public void onFragmentInteraction(long recordID);
     }
-
 }

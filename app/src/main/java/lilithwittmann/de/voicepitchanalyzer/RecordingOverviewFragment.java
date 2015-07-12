@@ -41,7 +41,6 @@ public class RecordingOverviewFragment extends Fragment implements SurfaceHolder
      * @param sectionNumber
      * @return A new instance of fragment RecordingOverviewFragment.
      */
-    // TODO: Rename and change types and number of parameters
     public static RecordingOverviewFragment newInstance(int sectionNumber)
     {
         RecordingOverviewFragment fragment = new RecordingOverviewFragment();
@@ -55,9 +54,6 @@ public class RecordingOverviewFragment extends Fragment implements SurfaceHolder
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        //        if (getArguments() != null) {
-        //            this.currentRecord = this.getArguments().getParcelable(Recording.KEY);
-        //        }
     }
 
     @Override
@@ -75,10 +71,6 @@ public class RecordingOverviewFragment extends Fragment implements SurfaceHolder
         this.gradient = (SurfaceView) view.findViewById(R.id.gradient_canvas);
         this.gradientHolder = this.gradient.getHolder();
         this.gradientHolder.addCallback(this);
-
-        //        AudioPlayer player = new AudioPlayer(getActivity().getFileStreamPath(this.currentRecord.getRecording()));
-        //        player.play();
-
     }
 
     @Override

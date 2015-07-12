@@ -33,7 +33,7 @@ public class RecordingListActivity extends ActionBarActivity implements Recordin
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu, menu);
-        return true;
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
@@ -42,13 +42,12 @@ public class RecordingListActivity extends ActionBarActivity implements Recordin
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         switch (item.getItemId()) {
-            case R.id.action_settings: {
-                return true;
+            case R.id.action_record: {
+                startActivity(new Intent(this, RecordingActivity.class));
             }
 
-            case R.id.action_record: {
-                //getFragmentManager().beginTransaction().replace(R.id.container, new RecordingFragment()).commit();
-                startActivity(new Intent(this, RecordingActivity.class));
+            case R.id.action_about: {
+                startActivity(new Intent(this, AboutActivity.class));
             }
         }
 

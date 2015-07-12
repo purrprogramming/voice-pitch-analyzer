@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="action_settings">Einstellungen</string>
     <string name="pitch_graph_single_recording">Einzelne Tonhöhen</string>
     <string name="record">Aufnahme</string>
     <string name="start_recording">aufnehmen</string>
@@ -20,4 +19,9 @@
     <string name="in_between">im Mittelfeld</string>
     <string name="male">männlich</string>
     <string name="personal_range">Deine Stimmlange ist überwiegend</string>
+    <string name="action_about">Über</string>
+    <string name="libraries">Verwendete Libraries:</string>
+    <string name="programming">Programmierung</string>
+    <string name="unknown">unbekannt</string>
+    <string name="title_activity_about">Über Voice Pitch Analyzer</string>
 </resources>

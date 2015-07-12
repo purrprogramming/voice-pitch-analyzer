@@ -104,12 +104,12 @@ public class RecordViewActivity extends ActionBarActivity implements ActionBar.T
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         switch (item.getItemId()) {
-            case R.id.action_settings: {
-                return true;
-            }
-
             case R.id.action_record: {
                 startActivity(new Intent(this, RecordingActivity.class));
+            }
+
+            case R.id.action_about: {
+                startActivity(new Intent(this, AboutActivity.class));
             }
         }
 
@@ -178,6 +178,7 @@ public class RecordViewActivity extends ActionBarActivity implements ActionBar.T
         @Override
         public CharSequence getPageTitle(int position) {
             Locale l = Locale.getDefault();
+
             switch (position) {
                 case 0:
                     return getString(R.string.title_section1).toUpperCase(l);

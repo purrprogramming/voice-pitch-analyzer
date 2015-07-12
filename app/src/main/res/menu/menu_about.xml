@@ -1,0 +1,10 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto"
+      xmlns:tools="http://schemas.android.com/tools"
+      tools:context="lilithwittmann.de.voicepitchanalyzer.AboutActivity">
+      <item
+          android:id="@+id/action_record"
+          android:title="@string/record"
+          android:icon="@drawable/ic_settings_voice_white_48dp"
+          app:showAsAction="always" />
+</menu>

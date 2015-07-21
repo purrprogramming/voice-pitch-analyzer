@@ -1,10 +1,13 @@
 package lilithwittmann.de.voicepitchanalyzer;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.crashlytics.android.Crashlytics;
 
@@ -22,12 +25,34 @@ public class RecordingListActivity extends ActionBarActivity implements Recordin
         setContentView(R.layout.activity_recording_list);
 
         if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, new RecordingListFragment())
-                    .commit();
+
+            SharedPreferences sharedPref = getSharedPreferences(
+                    getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+            if (sharedPref.getBoolean(getString(R.string.first_start), true))
+            {
+                // open welcome screen
+                getSupportFragmentManager().beginTransaction()
+                        .add(R.id.container, new WelcomeFragment())
+                        .commit();
+            }
+
+            else
+            {
+                // open list fragment
+                getSupportFragmentManager().beginTransaction()
+                        .add(R.id.container, new RecordingListFragment())
+                        .commit();
+            }
         }
     }
 
+    public void onNextClick(View view)
+    {
+//        getSupportFragmentManager().beginTransaction()
+//                .add(R.id.container, new RecordingFragment())
+//                .commit();
+        startActivity(new Intent(this, RecordingActivity.class));
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

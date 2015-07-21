@@ -3,8 +3,11 @@
 
     <!-- general -->
     <string name="app_name" translatable="false">Voice Pitch Analyzer</string>
+
+    <!-- settings -->
     <string name="preference_file_key" translatable="false">preferences.conf</string>
     <string name="saved_text_number" translatable="false">text-number</string>
+    <string name="first_start" translatable="false">first-start</string>
 
     <!-- new recording activity/fragment -->
     <string name="title_activity_recording">New Recording</string>
@@ -43,5 +46,12 @@
     <string name="apache_licence" translatable="false"><a href="http://www.apache.org/licenses/LICENSE-2.0">Apache 2.0</a></string>
     <string name="tarsos_dsp" translatable="false">TarsosDSP</string>
     <string name="gpl" translatable="false"><a href="http://www.gnu.org/licenses/gpl-3.0.en.html">GPL 3.0</a></string>
+
+<!-- start screen -->
+    <string name="welcome">Hey there!</string>
+    <string name="explanation">To properly analyse it, we need about one minute of audio recording of your voice. For this purpose, we\'ll provide you with a text of a length approximate to this time frame. Of course you\'re free to say anything else, too, as long as it\'s in your natural voice.</string>
+    <string name="microphone">To produce meaningful analysing results, it\'s best to use a headset or other external microphone.</string>
+    <string name="results">When you\'re finished, press \"@stop_recording\" to see your results. On the result page you\'ll find a graph showing the typical male and female pitch ranges (in violet), along with your own (in grey). You\'ll notice the male and female ranges are overlapping each other a bit.</string>
+    <string name="next">next</string>
 
 </resources>

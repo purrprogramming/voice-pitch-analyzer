@@ -24,4 +24,5 @@
     <string name="programming">Programmierung</string>
     <string name="unknown">unbekannt</string>
     <string name="title_activity_about">Über Voice Pitch Analyzer</string>
+    <string name="welcome">Hallo!</string>
 </resources>

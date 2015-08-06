@@ -34,6 +34,8 @@ public class RecordingListActivity extends ActionBarActivity implements Recordin
                 getSupportFragmentManager().beginTransaction()
                         .add(R.id.container, new WelcomeFragment())
                         .commit();
+
+                getSupportActionBar().hide();
             }
 
             else

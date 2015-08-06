@@ -71,11 +71,10 @@
                 android:text="@string/mpandroidchart"/>
 
             <TextView
+                android:id="@+id/apache"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="right"
-                android:autoLink="web"
-                android:linksClickable="true"
                 android:text="@string/apache_licence"/>
         </TableRow>
 
@@ -87,11 +86,10 @@
                 android:text="@string/tarsos_dsp"/>
 
             <TextView
+                android:id="@+id/gpl"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="right"
-                android:autoLink="web"
-                android:linksClickable="true"
                 android:text="@string/gpl"/>
         </TableRow>
     </TableLayout>

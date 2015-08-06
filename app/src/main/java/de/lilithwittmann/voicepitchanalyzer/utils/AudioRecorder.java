@@ -1,13 +1,10 @@
-package lilithwittmann.de.voicepitchanalyzer.utils;
+package de.lilithwittmann.voicepitchanalyzer.utils;
 
-import android.content.Context;
 import android.media.AudioFormat;
 import android.media.AudioManager;
 import android.media.AudioTrack;
-import android.os.*;
 import android.util.Log;
 
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 

@@ -1,4 +1,4 @@
-package lilithwittmann.de.voicepitchanalyzer.models.database;
+package de.lilithwittmann.voicepitchanalyzer.models.database;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -6,14 +6,13 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.provider.BaseColumns;
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import lilithwittmann.de.voicepitchanalyzer.models.PitchRange;
-import lilithwittmann.de.voicepitchanalyzer.models.Recording;
+import de.lilithwittmann.voicepitchanalyzer.models.PitchRange;
+import de.lilithwittmann.voicepitchanalyzer.models.Recording;
 
 /**
  * Created by Lilith on 05/07/15.

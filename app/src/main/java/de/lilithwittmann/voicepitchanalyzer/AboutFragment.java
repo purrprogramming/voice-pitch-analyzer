@@ -1,4 +1,4 @@
-package lilithwittmann.de.voicepitchanalyzer;
+package de.lilithwittmann.voicepitchanalyzer;
 
 
 import android.os.Bundle;
@@ -9,6 +9,8 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import lilithwittmann.de.voicepitchanalyzer.R;
 
 
 /**

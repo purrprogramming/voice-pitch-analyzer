@@ -1,4 +1,4 @@
-package lilithwittmann.de.voicepitchanalyzer;
+package de.lilithwittmann.voicepitchanalyzer;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -15,9 +15,10 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-import lilithwittmann.de.voicepitchanalyzer.models.PitchRange;
-import lilithwittmann.de.voicepitchanalyzer.models.Recording;
-import lilithwittmann.de.voicepitchanalyzer.models.database.RecordingDB;
+import lilithwittmann.de.voicepitchanalyzer.R;
+import de.lilithwittmann.voicepitchanalyzer.models.PitchRange;
+import de.lilithwittmann.voicepitchanalyzer.models.Recording;
+import de.lilithwittmann.voicepitchanalyzer.models.database.RecordingDB;
 
 /**
  * A fragment representing a list of Items.

@@ -1,4 +1,4 @@
-package lilithwittmann.de.voicepitchanalyzer;
+package de.lilithwittmann.voicepitchanalyzer;
 
 import android.app.Activity;
 import android.net.Uri;
@@ -19,7 +19,8 @@ import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.Highlight;
 
-import lilithwittmann.de.voicepitchanalyzer.utils.GraphValueFormatter;
+import lilithwittmann.de.voicepitchanalyzer.R;
+import de.lilithwittmann.voicepitchanalyzer.utils.GraphValueFormatter;
 
 
 /**

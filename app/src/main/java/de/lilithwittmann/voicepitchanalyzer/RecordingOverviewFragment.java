@@ -1,4 +1,4 @@
-package lilithwittmann.de.voicepitchanalyzer;
+package de.lilithwittmann.voicepitchanalyzer;
 
 
 import android.graphics.Canvas;
@@ -13,7 +13,8 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
 
-import lilithwittmann.de.voicepitchanalyzer.utils.PitchCalculator;
+import de.lilithwittmann.voicepitchanalyzer.utils.PitchCalculator;
+import lilithwittmann.de.voicepitchanalyzer.R;
 
 
 /**

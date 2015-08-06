@@ -1,4 +1,4 @@
-package lilithwittmann.de.voicepitchanalyzer;
+package de.lilithwittmann.voicepitchanalyzer;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,8 +11,9 @@ import android.view.View;
 
 import com.crashlytics.android.Crashlytics;
 
+import de.lilithwittmann.voicepitchanalyzer.models.Recording;
 import io.fabric.sdk.android.Fabric;
-import lilithwittmann.de.voicepitchanalyzer.models.Recording;
+import lilithwittmann.de.voicepitchanalyzer.R;
 
 
 public class RecordingListActivity extends ActionBarActivity implements RecordingListFragment.OnFragmentInteractionListener {
@@ -36,6 +37,10 @@ public class RecordingListActivity extends ActionBarActivity implements Recordin
                         .commit();
 
                 getSupportActionBar().hide();
+
+                // hide welcome fragment next time the app/this activity is opened
+//                SharedPreferences.Editor editor = sharedPref.edit();
+                sharedPref.edit().putBoolean(getString(R.string.first_start), false).apply();
             }
 
             else
@@ -71,10 +76,12 @@ public class RecordingListActivity extends ActionBarActivity implements Recordin
         switch (item.getItemId()) {
             case R.id.action_record: {
                 startActivity(new Intent(this, RecordingActivity.class));
+                return true;
             }
 
             case R.id.action_about: {
                 startActivity(new Intent(this, AboutActivity.class));
+                return true;
             }
         }
 

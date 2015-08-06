@@ -1,4 +1,4 @@
-package lilithwittmann.de.voicepitchanalyzer.models;
+package de.lilithwittmann.voicepitchanalyzer.models;
 
 import android.os.Parcel;
 import android.os.Parcelable;

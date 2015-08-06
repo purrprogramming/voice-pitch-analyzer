@@ -1,14 +1,10 @@
-package lilithwittmann.de.voicepitchanalyzer.models;
+package de.lilithwittmann.voicepitchanalyzer.models;
 
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
-
-import org.json.JSONArray;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -20,8 +16,6 @@ import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
-
-import lilithwittmann.de.voicepitchanalyzer.R;
 
 /**
  * Created by lilith on 7/5/15.

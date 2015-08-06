@@ -1,4 +1,4 @@
-package lilithwittmann.de.voicepitchanalyzer;
+package de.lilithwittmann.voicepitchanalyzer;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -7,8 +7,9 @@ import android.support.v7.app.ActionBarActivity;
 
 import com.crashlytics.android.Crashlytics;
 
+import de.lilithwittmann.voicepitchanalyzer.models.Recording;
 import io.fabric.sdk.android.Fabric;
-import lilithwittmann.de.voicepitchanalyzer.models.Recording;
+import lilithwittmann.de.voicepitchanalyzer.R;
 
 
 public class RecordingActivity extends ActionBarActivity implements RecordingFragment.OnFragmentInteractionListener, RecordingListFragment.OnFragmentInteractionListener, RecordGraphFragment.OnFragmentInteractionListener {

@@ -1,4 +1,4 @@
-package lilithwittmann.de.voicepitchanalyzer.utils;
+package de.lilithwittmann.voicepitchanalyzer.utils;
 
 import android.media.AudioFormat;
 import android.media.AudioManager;

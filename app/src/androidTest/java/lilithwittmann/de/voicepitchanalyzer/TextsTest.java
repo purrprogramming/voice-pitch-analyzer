@@ -1,11 +1,10 @@
 package lilithwittmann.de.voicepitchanalyzer;
 
-import android.app.Application;
 import android.test.ActivityUnitTestCase;
-import android.test.ApplicationTestCase;
 import android.test.suitebuilder.annotation.SmallTest;
 
-import lilithwittmann.de.voicepitchanalyzer.models.Texts;
+import de.lilithwittmann.voicepitchanalyzer.RecordingListActivity;
+import de.lilithwittmann.voicepitchanalyzer.models.Texts;
 
 /**
  * Created by lilith on 7/5/15.

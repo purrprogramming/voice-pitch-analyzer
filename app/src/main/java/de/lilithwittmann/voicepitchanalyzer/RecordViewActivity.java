@@ -1,4 +1,4 @@
-package lilithwittmann.de.voicepitchanalyzer;
+package de.lilithwittmann.voicepitchanalyzer;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -18,8 +18,9 @@ import com.crashlytics.android.Crashlytics;
 import java.util.Locale;
 
 import io.fabric.sdk.android.Fabric;
-import lilithwittmann.de.voicepitchanalyzer.models.Recording;
-import lilithwittmann.de.voicepitchanalyzer.models.database.RecordingDB;
+import lilithwittmann.de.voicepitchanalyzer.R;
+import de.lilithwittmann.voicepitchanalyzer.models.Recording;
+import de.lilithwittmann.voicepitchanalyzer.models.database.RecordingDB;
 
 
 public class RecordViewActivity extends ActionBarActivity implements ActionBar.TabListener, RecordGraphFragment.OnFragmentInteractionListener {

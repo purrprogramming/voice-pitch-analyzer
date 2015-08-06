@@ -1,4 +1,4 @@
-package lilithwittmann.de.voicepitchanalyzer;
+package de.lilithwittmann.voicepitchanalyzer;
 
 import android.app.Activity;
 import android.content.Context;
@@ -27,13 +27,14 @@ import be.tarsos.dsp.io.android.AudioDispatcherFactory;
 import be.tarsos.dsp.pitch.PitchDetectionHandler;
 import be.tarsos.dsp.pitch.PitchDetectionResult;
 import be.tarsos.dsp.pitch.PitchProcessor;
-import lilithwittmann.de.voicepitchanalyzer.models.PitchRange;
-import lilithwittmann.de.voicepitchanalyzer.models.Recording;
-import lilithwittmann.de.voicepitchanalyzer.models.Texts;
-import lilithwittmann.de.voicepitchanalyzer.models.database.RecordingDB;
-import lilithwittmann.de.voicepitchanalyzer.utils.AudioRecorder;
-import lilithwittmann.de.voicepitchanalyzer.utils.PitchCalculator;
-import lilithwittmann.de.voicepitchanalyzer.utils.SampleRateCalculator;
+import de.lilithwittmann.voicepitchanalyzer.models.Recording;
+import de.lilithwittmann.voicepitchanalyzer.models.Texts;
+import de.lilithwittmann.voicepitchanalyzer.utils.AudioRecorder;
+import de.lilithwittmann.voicepitchanalyzer.utils.PitchCalculator;
+import de.lilithwittmann.voicepitchanalyzer.utils.SampleRateCalculator;
+import lilithwittmann.de.voicepitchanalyzer.R;
+import de.lilithwittmann.voicepitchanalyzer.models.PitchRange;
+import de.lilithwittmann.voicepitchanalyzer.models.database.RecordingDB;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -57,6 +58,12 @@ public class RecordingFragment extends Fragment {
         // Required empty public constructor
     }
 
+    @Override
+    public void onCreate(Bundle savedInstanceState)
+    {
+        super.onCreate(savedInstanceState);
+        this.setRetainInstance(true);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -97,9 +104,7 @@ public class RecordingFragment extends Fragment {
         }
 
         //save next textNumber
-        SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putInt(getString(R.string.saved_text_number), nextText);
-        editor.commit();
+        sharedPref.edit().putInt(getString(R.string.saved_text_number), nextText).apply();
 
         //render text
         final TextView recording_text = (TextView) view.findViewById(R.id.recording_text);

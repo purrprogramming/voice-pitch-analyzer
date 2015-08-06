@@ -107,10 +107,12 @@ public class RecordViewActivity extends ActionBarActivity implements ActionBar.T
         switch (item.getItemId()) {
             case R.id.action_record: {
                 startActivity(new Intent(this, RecordingActivity.class));
+                return true;
             }
 
             case R.id.action_about: {
                 startActivity(new Intent(this, AboutActivity.class));
+                return true;
             }
         }
 

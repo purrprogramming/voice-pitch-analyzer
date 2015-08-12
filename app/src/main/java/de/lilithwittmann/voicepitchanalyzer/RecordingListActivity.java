@@ -13,7 +13,6 @@ import com.crashlytics.android.Crashlytics;
 
 import de.lilithwittmann.voicepitchanalyzer.models.Recording;
 import io.fabric.sdk.android.Fabric;
-import lilithwittmann.de.voicepitchanalyzer.R;
 
 
 public class RecordingListActivity extends ActionBarActivity implements RecordingListFragment.OnFragmentInteractionListener {

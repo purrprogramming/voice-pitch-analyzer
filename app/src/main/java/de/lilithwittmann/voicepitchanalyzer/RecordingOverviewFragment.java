@@ -14,7 +14,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import de.lilithwittmann.voicepitchanalyzer.utils.PitchCalculator;
-import lilithwittmann.de.voicepitchanalyzer.R;
 
 
 /**

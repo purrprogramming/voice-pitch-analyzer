@@ -9,7 +9,6 @@ import com.crashlytics.android.Crashlytics;
 
 import de.lilithwittmann.voicepitchanalyzer.models.Recording;
 import io.fabric.sdk.android.Fabric;
-import lilithwittmann.de.voicepitchanalyzer.R;
 
 
 public class RecordingActivity extends ActionBarActivity implements RecordingFragment.OnFragmentInteractionListener, RecordingListFragment.OnFragmentInteractionListener, RecordGraphFragment.OnFragmentInteractionListener {

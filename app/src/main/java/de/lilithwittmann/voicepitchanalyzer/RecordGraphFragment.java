@@ -19,9 +19,7 @@ import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.Highlight;
 
-import lilithwittmann.de.voicepitchanalyzer.R;
 import de.lilithwittmann.voicepitchanalyzer.utils.GraphValueFormatter;
-
 
 /**
  * A simple {@link Fragment} subclass.

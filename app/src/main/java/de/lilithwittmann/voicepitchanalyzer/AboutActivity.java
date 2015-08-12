@@ -7,8 +7,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import lilithwittmann.de.voicepitchanalyzer.R;
-
 public class AboutActivity extends ActionBarActivity
 {
 

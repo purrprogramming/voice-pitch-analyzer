@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="lilithwittmann.de.voicepitchanalyzer" >
+    package="de.lilithwittmann.voicepitchanalyzer" >
 
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
@@ -12,7 +12,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="lilithwittmann.de.de.lilithwittmann.voicepitchanalyzer.RecordingListActivity"
+            android:name="de.lilithwittmann.voicepitchanalyzer.RecordingListActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,18 +20,18 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="lilithwittmann.de.de.lilithwittmann.voicepitchanalyzer.RecordingActivity"
+            android:name="de.lilithwittmann.voicepitchanalyzer.RecordingActivity"
             android:label="@string/title_activity_recording"
             android:theme="@style/NoActionBarTheme" />
         <!-- android:uiOptions="splitActionBarWhenNarrow"> -->
         <!-- <meta-data android:name="android.support.UI_OPTIONS" -->
         <!-- android:value="splitActionBarWhenNarrow" /> -->
         <activity
-            android:name="lilithwittmann.de.de.lilithwittmann.voicepitchanalyzer.RecordViewActivity"
-            android:parentActivityName="lilithwittmann.de.de.lilithwittmann.voicepitchanalyzer.RecordingListActivity" >
+            android:name="de.lilithwittmann.voicepitchanalyzer.RecordViewActivity"
+            android:parentActivityName="de.lilithwittmann.voicepitchanalyzer.RecordingListActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="lilithwittmann.de.de.lilithwittmann.voicepitchanalyzer.RecordingListActivity" />
+                android:value="de.lilithwittmann.voicepitchanalyzer.RecordingListActivity" />
         </activity>
 
         <meta-data
@@ -39,12 +39,12 @@
             android:value="dbcbf34db2f0d3682f537b48c18e40dab98d3187" />
 
         <activity
-            android:name="lilithwittmann.de.de.lilithwittmann.voicepitchanalyzer.AboutActivity"
+            android:name="de.lilithwittmann.voicepitchanalyzer.AboutActivity"
             android:label="@string/title_activity_about"
-            android:parentActivityName="lilithwittmann.de.de.lilithwittmann.voicepitchanalyzer.RecordingListActivity" >
+            android:parentActivityName="de.lilithwittmann.voicepitchanalyzer.RecordingListActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="lilithwittmann.de.de.lilithwittmann.voicepitchanalyzer.RecordingListActivity" />
+                android:value="de.lilithwittmann.voicepitchanalyzer.RecordingListActivity" />
         </activity>
     </application>
 

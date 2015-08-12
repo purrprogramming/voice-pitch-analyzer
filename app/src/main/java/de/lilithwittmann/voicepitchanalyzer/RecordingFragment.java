@@ -27,14 +27,13 @@ import be.tarsos.dsp.io.android.AudioDispatcherFactory;
 import be.tarsos.dsp.pitch.PitchDetectionHandler;
 import be.tarsos.dsp.pitch.PitchDetectionResult;
 import be.tarsos.dsp.pitch.PitchProcessor;
+import de.lilithwittmann.voicepitchanalyzer.models.PitchRange;
 import de.lilithwittmann.voicepitchanalyzer.models.Recording;
 import de.lilithwittmann.voicepitchanalyzer.models.Texts;
+import de.lilithwittmann.voicepitchanalyzer.models.database.RecordingDB;
 import de.lilithwittmann.voicepitchanalyzer.utils.AudioRecorder;
 import de.lilithwittmann.voicepitchanalyzer.utils.PitchCalculator;
 import de.lilithwittmann.voicepitchanalyzer.utils.SampleRateCalculator;
-import lilithwittmann.de.voicepitchanalyzer.R;
-import de.lilithwittmann.voicepitchanalyzer.models.PitchRange;
-import de.lilithwittmann.voicepitchanalyzer.models.database.RecordingDB;
 
 /**
  * A simple {@link Fragment} subclass.

@@ -15,7 +15,6 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-import lilithwittmann.de.voicepitchanalyzer.R;
 import de.lilithwittmann.voicepitchanalyzer.models.PitchRange;
 import de.lilithwittmann.voicepitchanalyzer.models.Recording;
 import de.lilithwittmann.voicepitchanalyzer.models.database.RecordingDB;

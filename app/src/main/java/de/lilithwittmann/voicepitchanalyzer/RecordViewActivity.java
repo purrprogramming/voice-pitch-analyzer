@@ -17,10 +17,9 @@ import com.crashlytics.android.Crashlytics;
 
 import java.util.Locale;
 
-import io.fabric.sdk.android.Fabric;
-import lilithwittmann.de.voicepitchanalyzer.R;
 import de.lilithwittmann.voicepitchanalyzer.models.Recording;
 import de.lilithwittmann.voicepitchanalyzer.models.database.RecordingDB;
+import io.fabric.sdk.android.Fabric;
 
 
 public class RecordViewActivity extends ActionBarActivity implements ActionBar.TabListener, RecordGraphFragment.OnFragmentInteractionListener {

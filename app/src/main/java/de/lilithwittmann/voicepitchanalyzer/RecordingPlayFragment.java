@@ -9,9 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import de.lilithwittmann.voicepitchanalyzer.utils.PitchCalculator;
-import lilithwittmann.de.voicepitchanalyzer.R;
 import de.lilithwittmann.voicepitchanalyzer.utils.AudioPlayer;
+import de.lilithwittmann.voicepitchanalyzer.utils.PitchCalculator;
 
 
 /**

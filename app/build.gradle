@@ -15,7 +15,7 @@ android {
     buildToolsVersion "21.1.2"
 
     defaultConfig {
-        applicationId "lilithwittmann.de.voicepitchanalyzer"
+        applicationId "de.lilithwittmann.voicepitchanalyzer"
         minSdkVersion 15
         targetSdkVersion 21
         versionCode 1

@@ -2,7 +2,7 @@
 <resources>
 
     <!-- general -->
-    <string name="app_name" translatable="false">Voice Pitch Analyzer</string>
+    <string name="app_name">Voice Pitch Analyzer</string>
 
     <!-- settings -->
     <string name="preference_file_key" translatable="false">preferences.conf</string>

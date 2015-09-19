@@ -12,8 +12,8 @@
     <!-- new recording activity/fragment -->
     <string name="title_activity_recording">New Recording</string>
     <string name="record">Record</string>
-    <string name="start_recording">record</string>
-    <string name="stop_recording">stop</string>
+    <string name="start_recording">Record</string>
+    <string name="stop_recording">Stop</string>
 
     <!-- recording analysis -->
     <string name="title_section1">Overview</string>
@@ -52,6 +52,6 @@
     <string name="explanation">To properly analyse it, we need about one minute of audio recording of your voice. For this purpose, we’ll provide you with a text of a length approximate to this time frame. Of course you’re free to say anything else, too, as long as it’s in your natural voice.</string>
     <string name="microphone">To produce meaningful analysing results, it’s best to use a headset or other external microphone.</string>
     <string name="results">When you’re finished, press »stop« to see your results. On the result page you’ll find a graph showing the typical ‘male’ and ‘female’ pitch ranges (in violet), along with your own (in grey). You’ll notice the ‘male’ and ‘female’ ranges are overlapping each other a bit, denoting a range that can be perceived as either gender.</string>
-    <string name="next">next</string>
+    <string name="next">Next</string>
 
 </resources>

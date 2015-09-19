@@ -1,6 +1,7 @@
 package de.lilithwittmann.voicepitchanalyzer;
 
 import android.app.Activity;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -28,7 +29,8 @@ import de.lilithwittmann.voicepitchanalyzer.models.database.RecordingDB;
  * Activities containing this fragment MUST implement the {@link OnFragmentInteractionListener}
  * interface.
  */
-public class RecordingListFragment extends Fragment implements AbsListView.OnItemClickListener {
+public class RecordingListFragment extends Fragment implements AbsListView.OnItemClickListener
+{
     private List<Recording> recordings = new ArrayList<Recording>();
     private OnFragmentInteractionListener listener;
 
@@ -47,23 +49,28 @@ public class RecordingListFragment extends Fragment implements AbsListView.OnIte
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public RecordingListFragment() {
+    public RecordingListFragment()
+    {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
 
         RecordingDB recordingDB = new RecordingDB(getActivity());
         this.recordings = recordingDB.getRecordings();
 
         this.adapter = new ArrayAdapter<Recording>(getActivity(),
-                android.R.layout.simple_list_item_activated_2, android.R.id.text2, this.recordings) {
+                android.R.layout.simple_list_item_activated_2, android.R.id.text2, this.recordings)
+        {
             @Override
-            public View getView(int position, View convertView, ViewGroup parent) {
+            public View getView(int position, View convertView, ViewGroup parent)
+            {
                 super.getView(position, convertView, parent);
 
-                if (convertView == null) {
+                if (convertView == null)
+                {
                     convertView = getActivity().getLayoutInflater().inflate(
                             android.R.layout.simple_list_item_activated_2, parent, false);
                 }
@@ -75,6 +82,7 @@ public class RecordingListFragment extends Fragment implements AbsListView.OnIte
                 PitchRange range = record.getRange();
 
                 largeText.setText(record.getDisplayDate(getContext()));
+                largeText.setTypeface(Typeface.DEFAULT_BOLD);
                 smallText.setText(String.format(getResources().getString(R.string.min_max_avg),
                         Math.round(range.getMin()), Math.round(range.getMax()),
                         Math.round(range.getAvg())));
@@ -86,7 +94,8 @@ public class RecordingListFragment extends Fragment implements AbsListView.OnIte
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+                             Bundle savedInstanceState)
+    {
         View view = inflater.inflate(R.layout.fragment_recording_list, container, false);
 
         // Set the adapter
@@ -100,7 +109,8 @@ public class RecordingListFragment extends Fragment implements AbsListView.OnIte
     }
 
     @Override
-    public void onResume() {
+    public void onResume()
+    {
         super.onResume();
         RecordingDB recordingDB = new RecordingDB(getActivity());
         this.recordings.clear();
@@ -109,27 +119,33 @@ public class RecordingListFragment extends Fragment implements AbsListView.OnIte
     }
 
     @Override
-    public void onAttach(Activity activity) {
+    public void onAttach(Activity activity)
+    {
         super.onAttach(activity);
 
-        try {
+        try
+        {
             listener = (OnFragmentInteractionListener) activity;
-        } catch (ClassCastException e) {
+        } catch (ClassCastException e)
+        {
             throw new ClassCastException(activity.toString()
                     + " must implement OnFragmentInteractionListener");
         }
     }
 
     @Override
-    public void onDetach() {
+    public void onDetach()
+    {
         super.onDetach();
         listener = null;
     }
 
 
     @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        if (null != listener) {
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+    {
+        if (null != listener)
+        {
             // Notify the active callbacks interface (the activity, if the
             // fragment is attached to one) that an item has been selected.
             listener.onFragmentInteraction(this.recordings.get(position).getId());
@@ -141,10 +157,12 @@ public class RecordingListFragment extends Fragment implements AbsListView.OnIte
      * the list is empty. If you would like to change the text, call this method
      * to supply the text it should use.
      */
-    public void setEmptyText(CharSequence emptyText) {
+    public void setEmptyText(CharSequence emptyText)
+    {
         View emptyView = listView.getEmptyView();
 
-        if (emptyView instanceof TextView) {
+        if (emptyView instanceof TextView)
+        {
             ((TextView) emptyView).setText(emptyText);
         }
     }
@@ -159,7 +177,8 @@ public class RecordingListFragment extends Fragment implements AbsListView.OnIte
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
-    public interface OnFragmentInteractionListener {
+    public interface OnFragmentInteractionListener
+    {
         public void onFragmentInteraction(long recordID);
     }
 }

@@ -22,10 +22,8 @@
         <activity
             android:name="de.lilithwittmann.voicepitchanalyzer.RecordingActivity"
             android:label="@string/title_activity_recording"
-            android:theme="@style/NoActionBarTheme" />
-        <!-- android:uiOptions="splitActionBarWhenNarrow"> -->
-        <!-- <meta-data android:name="android.support.UI_OPTIONS" -->
-        <!-- android:value="splitActionBarWhenNarrow" /> -->
+            android:theme="@style/NoActionBarTheme"
+            android:screenOrientation="portrait" />
         <activity
             android:name="de.lilithwittmann.voicepitchanalyzer.RecordViewActivity"
             android:parentActivityName="de.lilithwittmann.voicepitchanalyzer.RecordingListActivity" >
@@ -34,10 +32,6 @@
                 android:value="de.lilithwittmann.voicepitchanalyzer.RecordingListActivity" />
         </activity>
 
-        <meta-data
-            android:name="io.fabric.ApiKey"
-            android:value="dbcbf34db2f0d3682f537b48c18e40dab98d3187" />
-
         <activity
             android:name="de.lilithwittmann.voicepitchanalyzer.AboutActivity"
             android:label="@string/title_activity_about"
@@ -45,6 +39,10 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="de.lilithwittmann.voicepitchanalyzer.RecordingListActivity" />
+
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="dbcbf34db2f0d3682f537b48c18e40dab98d3187" />
         </activity>
     </application>
 

@@ -122,6 +122,10 @@ public class RecordingFragment extends Fragment {
 //                        new File(recordingFile).delete();
                     }
                 }
+
+                else {
+                    mListener.onCancel();
+                }
             }
         });
 
@@ -162,13 +166,6 @@ public class RecordingFragment extends Fragment {
             }
         });
     }
-
-    // TODO: Rename method, update argument and hook method into UI event
-//    public void onButtonPressed(Recording recording) {
-//        if (mListener != null) {
-//            mListener.onRecordFinished(recording);
-//        }
-//    }
 
     @Override
     public void onAttach(Activity activity) {
@@ -220,9 +217,9 @@ public class RecordingFragment extends Fragment {
                 e.printStackTrace();
             }
 
-            this.recorder = new AudioRecorder(this.sampleRate, this.bufferRate, fos);
+            //this.recorder = new AudioRecorder(this.sampleRate, this.bufferRate, fos);
             dispatcher.addAudioProcessor(p);
-            dispatcher.addAudioProcessor(recorder);
+            //dispatcher.addAudioProcessor(recorder);
             this.recordThread = new Thread(dispatcher, "Audio Dispatcher");
             this.recordThread.start();
             if (this.recordThread.isAlive()) {
@@ -269,13 +266,9 @@ public class RecordingFragment extends Fragment {
      * fragment to allow an interaction in this fragment to be communicated
      * to the activity and potentially other fragments contained in that
      * activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         public void onRecordFinished(long recordID);
+        public void onCancel();
     }
 }

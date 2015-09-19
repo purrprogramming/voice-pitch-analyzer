@@ -2,8 +2,8 @@
 <resources>
     <string name="pitch_graph_single_recording">Einzelne Tonhöhen</string>
     <string name="record">Aufnahme</string>
-    <string name="start_recording">aufnehmen</string>
-    <string name="stop_recording">anhalten</string>
+    <string name="start_recording">Aufnehmen</string>
+    <string name="stop_recording">Anhalten</string>
     <string name="title_activity_recording">Neue Aufnahme</string>
     <string name="title_section1">Übersicht</string>
     <string name="title_section2">@string/pitch_graph_single_recording</string>
@@ -26,7 +26,7 @@
     <string name="title_activity_about">Über Voice Pitch Analyzer</string>
     <string name="welcome">Hallo!</string>
     <string name="microphone">Um ein aussagekräftiges Ergebnis zu erhalten, ist es am besten, für die Aufnahme ein Headseit oder externes Mikrophon zu benutzen.</string>
-    <string name="next">weiter</string>
+    <string name="next">Weiter</string>
     <string name="results">Wenn Du fertig bist, drücke »stop« um Deine Ergebnisse zu sehen. Der Graph zeigt Dir (in Lila) die typischen ‘männlichen’ und ‘weiblichen’ Stimmlagenbereiche sowie Deinen eigenen an (in Grau). Der Teil, der sich überlagert, kann sowohl als ‘männlich’ als auch als ‘weiblich’ wahrgenommen werden.</string>
     <string name="explanation">Um Deine Stimme zu analysieren, wird eine ca. einminütige Aufnahme benötigt. Du kannst dafür den angezeigten Text vorlesen, die Analyse funktioniert aber mit mit allem, sofern Du es in Deiner natürlichen Stimmlage eingesprochen hast.</string>
 </resources>

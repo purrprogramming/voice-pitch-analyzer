@@ -20,6 +20,7 @@ import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.Highlight;
 
 import de.lilithwittmann.voicepitchanalyzer.utils.GraphValueFormatter;
+import de.lilithwittmann.voicepitchanalyzer.utils.PitchCalculator;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -27,7 +28,8 @@ import de.lilithwittmann.voicepitchanalyzer.utils.GraphValueFormatter;
  * {@link RecordGraphFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
  */
-public class RecordGraphFragment extends Fragment implements OnChartValueSelectedListener {
+public class RecordGraphFragment extends Fragment implements OnChartValueSelectedListener
+{
 
     private static final String LOG_TAG = RecordGraphFragment.class.getSimpleName();
     /**
@@ -37,7 +39,8 @@ public class RecordGraphFragment extends Fragment implements OnChartValueSelecte
     private static final String ARG_SECTION_NUMBER = "section_number";
     private OnFragmentInteractionListener mListener;
 
-    public RecordGraphFragment() {
+    public RecordGraphFragment()
+    {
         // Required empty public constructor
     }
 
@@ -45,27 +48,30 @@ public class RecordGraphFragment extends Fragment implements OnChartValueSelecte
      * Returns a new instance of this fragment for the given section
      * number.
      */
-    public static RecordGraphFragment newInstance(int sectionNumber) {
+    public static RecordGraphFragment newInstance(int sectionNumber)
+    {
         Bundle bundle = new Bundle();
-//        bundle.putParcelable(Recording.KEY, recording);
+        //        bundle.putParcelable(Recording.KEY, recording);
         bundle.putInt(ARG_SECTION_NUMBER, sectionNumber);
 
         RecordGraphFragment recordFragment = new RecordGraphFragment();
         recordFragment.setArguments(bundle);
-//        getSupportFragmentManager().beginTransaction().replace(R.id.container, recordFragment).commit();
+        //        getSupportFragmentManager().beginTransaction().replace(R.id.container, recordFragment).commit();
 
         return recordFragment;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+                             Bundle savedInstanceState)
+    {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_record_graph, container, false);
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState)
+    {
         LineChart chart = (LineChart) view.findViewById(R.id.recording_chart);
         LineDataSet dataSet = new LineDataSet(RecordViewActivity.currentRecord.getRange().getGraphEntries(), getResources().getString(R.string.pitch_graph_single_recording));
 
@@ -75,14 +81,22 @@ public class RecordGraphFragment extends Fragment implements OnChartValueSelecte
         LineData lineData = new LineData(ChartData.generateXVals(0, dataSet.getEntryCount()), dataSet);
         chart.setData(lineData);
 
+        long minPitch = Math.round(PitchCalculator.minPitch);
+        long maxPitch = Math.round(PitchCalculator.maxPitch);
+
         // set min/max values etc. for axes
         dataSet.setAxisDependency(YAxis.AxisDependency.LEFT);
         chart.getAxisLeft().setStartAtZero(false);
         chart.getAxisRight().setStartAtZero(false);
-        chart.getAxisLeft().setAxisMaxValue(dataSet.getYMax());
-        chart.getAxisRight().setAxisMaxValue(dataSet.getYMax());
-        chart.getAxisRight().setAxisMinValue(dataSet.getYMin());
-        chart.getAxisLeft().setAxisMinValue(dataSet.getYMin());
+        chart.getAxisLeft().setAxisMaxValue(maxPitch);
+        chart.getAxisRight().setAxisMaxValue(maxPitch);
+        chart.getAxisRight().setAxisMinValue(minPitch);
+        chart.getAxisLeft().setAxisMinValue(minPitch);
+
+        //        chart.getAxisLeft().setAxisMaxValue(dataSet.getYMax());
+        //        chart.getAxisRight().setAxisMaxValue(dataSet.getYMax());
+        //        chart.getAxisRight().setAxisMinValue(dataSet.getYMin());
+        //        chart.getAxisLeft().setAxisMinValue(dataSet.getYMin());
 
         // hide grid lines & borders
         chart.getAxisLeft().setDrawGridLines(false);
@@ -95,7 +109,7 @@ public class RecordGraphFragment extends Fragment implements OnChartValueSelecte
         chart.setDescription("");
 
         // disable all interactions except highlighting selection
-//        chart.setTouchEnabled(false);
+        //        chart.setTouchEnabled(false);
         chart.setTouchEnabled(false);
         chart.setScaleEnabled(false);
         chart.setPinchZoom(false);
@@ -105,43 +119,51 @@ public class RecordGraphFragment extends Fragment implements OnChartValueSelecte
         chart.setHighlightEnabled(true);
 
         chart.setHardwareAccelerationEnabled(true);
-        chart.animateX(3000);
+//        chart.animateX(3000);
         chart.getLegend().setEnabled(false);
         super.onViewCreated(view, savedInstanceState);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
+    public void onButtonPressed(Uri uri)
+    {
+        if (mListener != null)
+        {
             mListener.onFragmentInteraction(uri);
         }
     }
 
     @Override
-    public void onAttach(Activity activity) {
+    public void onAttach(Activity activity)
+    {
         super.onAttach(activity);
-        try {
+        try
+        {
             mListener = (OnFragmentInteractionListener) activity;
-        } catch (ClassCastException e) {
+        } catch (ClassCastException e)
+        {
             throw new ClassCastException(activity.toString()
                     + " must implement OnFragmentInteractionListener");
         }
     }
 
     @Override
-    public void onDetach() {
+    public void onDetach()
+    {
         super.onDetach();
         mListener = null;
     }
 
     @Override
-    public void onValueSelected(Entry e, int dataSetIndex, Highlight h) {
+    public void onValueSelected(Entry e, int dataSetIndex, Highlight h)
+    {
         e.getVal();
         Log.i(LOG_TAG, String.format("highlight %s selected", h.toString()));
     }
 
     @Override
-    public void onNothingSelected() {
+    public void onNothingSelected()
+    {
 
     }
 
@@ -155,7 +177,8 @@ public class RecordGraphFragment extends Fragment implements OnChartValueSelecte
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
-    public interface OnFragmentInteractionListener {
+    public interface OnFragmentInteractionListener
+    {
         // TODO: Update argument type and name
         public void onFragmentInteraction(Uri uri);
     }

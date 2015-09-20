@@ -1,6 +1,7 @@
 package de.lilithwittmann.voicepitchanalyzer;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -16,7 +18,9 @@ import com.crashlytics.android.Crashlytics;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.IllegalFormatCodePointException;
 import java.util.Locale;
 import java.util.UUID;
 
@@ -119,7 +123,7 @@ public class RecordingFragment extends Fragment {
 
                         calculator.getPitches().clear();
                         // TODO: delete file
-//                        new File(recordingFile).delete();
+                        // new File(recordingFile).delete();
                     }
                 }
 
@@ -189,8 +193,34 @@ public class RecordingFragment extends Fragment {
 
         if (!this.isRecording) {
             this.isRecording = true;
+            while (this.dispatcher == null)
+            try {
+                this.dispatcher = AudioDispatcherFactory.fromDefaultMicrophone(this.sampleRate, this.bufferRate, 0);
+            } catch (IllegalStateException exception) {
+                Integer usedSampleRate = 0;
+                ArrayList<Integer> testSampleRates = SampleRateCalculator.getAllSupportedSampleRates();
+                for( Integer testSampleRate: testSampleRates) {
+                    try {
+                        this.dispatcher = AudioDispatcherFactory.fromDefaultMicrophone(testSampleRate, this.bufferRate, 0);
+                    } catch (IllegalStateException exception_) {
+                        Crashlytics.log(Log.DEBUG,"samplerate !supported", String.valueOf(testSampleRate));
+                    }
 
-            this.dispatcher = AudioDispatcherFactory.fromDefaultMicrophone(this.sampleRate, this.bufferRate, 0);
+                    if(this.dispatcher != null) {
+                        Crashlytics.log(Log.DEBUG, "support only samplerate", String.valueOf(testSampleRate));
+                        break;
+                    }
+                }
+
+            }
+
+            if(this.dispatcher == null) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setMessage(R.string.device_sample_rate_not_supported)
+                        .setTitle(R.string.device_sample_rate_not_supported_title);
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }
 
             PitchDetectionHandler pdh = new PitchDetectionHandler() {
                 @Override

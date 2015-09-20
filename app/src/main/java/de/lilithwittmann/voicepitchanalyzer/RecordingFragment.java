@@ -196,13 +196,13 @@ public class RecordingFragment extends Fragment {
             while (this.dispatcher == null)
             try {
                 this.dispatcher = AudioDispatcherFactory.fromDefaultMicrophone(this.sampleRate, this.bufferRate, 0);
-            } catch (IllegalStateException exception) {
+            } catch (Exception exception) {
                 Integer usedSampleRate = 0;
                 ArrayList<Integer> testSampleRates = SampleRateCalculator.getAllSupportedSampleRates();
                 for( Integer testSampleRate: testSampleRates) {
                     try {
                         this.dispatcher = AudioDispatcherFactory.fromDefaultMicrophone(testSampleRate, this.bufferRate, 0);
-                    } catch (IllegalStateException exception_) {
+                    } catch (Exception exception_) {
                         Crashlytics.log(Log.DEBUG,"samplerate !supported", String.valueOf(testSampleRate));
                     }
 

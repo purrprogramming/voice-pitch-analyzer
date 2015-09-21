@@ -38,6 +38,10 @@ public class PitchCalculator {
         return this.pitches;
     }
 
+    public void setPitches(List<Double> pitches) {
+        this.pitches = pitches;
+    }
+
     public Double calculatePitchAverage() {
         return this.calculateAverage(this.pitches);
     }
@@ -57,6 +61,30 @@ public class PitchCalculator {
         return this.calculateAverage(minSorted.subList(0, elements));
     }
 
+    public Double getMax() {
+
+        Double max_pitch = null;
+        for (Double pitch: this.pitches) {
+            if(max_pitch == null || max_pitch < pitch) {
+                max_pitch = pitch;
+            }
+        }
+
+        return max_pitch;
+    }
+
+    public Double getMin() {
+
+        Double min_pitch = null;
+        for (Double pitch: this.pitches) {
+            if(min_pitch == null || min_pitch > pitch) {
+                min_pitch = pitch;
+            }
+        }
+
+        return min_pitch;
+    }
+
     private Double calculateAverage(List<Double> pitches) {
         Double sum = 0.0;
         if (!pitches.isEmpty()) {
@@ -67,4 +95,6 @@ public class PitchCalculator {
         }
         return sum;
     }
+
+
 }

@@ -60,10 +60,13 @@ public class RecordingPlayFragment extends Fragment
         if (RecordViewActivity.currentRecord != null)
         {
             double average = RecordViewActivity.currentRecord.getRange().getAvg();
-
+            PitchCalculator pitchCalculator = new PitchCalculator();
+            pitchCalculator.setPitches(RecordViewActivity.currentRecord.getRange().getPitches());
             ((TextView) view.findViewById(R.id.average)).setText(String.format("%sHz", Math.round(average)));
-            ((TextView) view.findViewById(R.id.min_avg)).setText(String.format("%sHz", Math.round(RecordViewActivity.currentRecord.getRange().getMin())));
-            ((TextView) view.findViewById(R.id.max_avg)).setText(String.format("%sHz", Math.round(RecordViewActivity.currentRecord.getRange().getMax())));
+            ((TextView) view.findViewById(R.id.pitch_min_avg)).setText(String.format("%sHz", Math.round(RecordViewActivity.currentRecord.getRange().getMin())));
+            ((TextView) view.findViewById(R.id.pitch_max_avg)).setText(String.format("%sHz", Math.round(RecordViewActivity.currentRecord.getRange().getMax())));
+            ((TextView) view.findViewById(R.id.pitch_min)).setText(String.format("%sHz", Math.round(pitchCalculator.getMin())));
+            ((TextView) view.findViewById(R.id.pitch_max)).setText(String.format("%sHz", Math.round(pitchCalculator.getMax())));
 
             if (average > 0)
             {

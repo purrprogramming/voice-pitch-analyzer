@@ -32,6 +32,10 @@
     <string name="female">female</string>
     <string name="in_between">in between</string>
     <string name="unknown">unknown</string>
+    <string name="pitch_max">Maximum</string>
+    <string name="pitch_min">Minimum</string>
+    <string name="pitch_max_avg">Maximum Average</string>
+    <string name="pitch_min_avg">Minimum Average</string>
 
     <!-- about fragment -->
     <string name="action_about">About</string>
@@ -56,5 +60,6 @@
     <string name="device_sample_rate_not_supported">Microphone not supported yet. The developers have been informed.</string>
     <string name="device_sample_rate_not_supported_title">Microphone not supported</string>
     <string name="empty">Please record something by pressing the microphone icon in the upper right corner.</string>
+
 
 </resources>

@@ -29,10 +29,10 @@
             <TextView
                 style="@style/TextAppearance.Standard"
                 android:padding="10dp"
-                android:text="@string/min_avg"/>
+                android:text="@string/pitch_min"/>
 
             <TextView
-                android:id="@+id/min_avg"
+                android:id="@+id/pitch_min"
                 style="@style/TextAppearance.Standard"
                 android:gravity="right"
                 android:padding="10dp"/>
@@ -43,10 +43,39 @@
             <TextView
                 style="@style/TextAppearance.Standard"
                 android:padding="10dp"
-                android:text="@string/max_avg"/>
+                android:text="@string/pitch_max"/>
 
             <TextView
-                android:id="@+id/max_avg"
+                android:id="@+id/pitch_max"
+                style="@style/TextAppearance.Standard"
+                android:gravity="right"
+                android:padding="10dp"/>
+        </TableRow>
+
+
+        <TableRow>
+
+            <TextView
+                style="@style/TextAppearance.Standard"
+                android:padding="10dp"
+                android:text="@string/pitch_min_avg"/>
+
+            <TextView
+                android:id="@+id/pitch_min_avg"
+                style="@style/TextAppearance.Standard"
+                android:gravity="right"
+                android:padding="10dp"/>
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                style="@style/TextAppearance.Standard"
+                android:padding="10dp"
+                android:text="@string/pitch_max_avg"/>
+
+            <TextView
+                android:id="@+id/pitch_max_avg"
                 style="@style/TextAppearance.Standard"
                 android:gravity="right"
                 android:padding="10dp"/>
@@ -55,7 +84,7 @@
         <TableRow android:paddingTop="20dp">
 
             <TextView
-                style="@style/TextAppearance.Standard"
+                style=@style/TextAppearance.Standard"
                 android:padding="10dp"
                 android:text="@string/personal_range"/>
 

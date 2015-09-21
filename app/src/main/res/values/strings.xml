@@ -55,5 +55,6 @@
     <string name="next">Next</string>
     <string name="device_sample_rate_not_supported">Microphone not supported yet. The developers have been informed.</string>
     <string name="device_sample_rate_not_supported_title">Microphone not supported</string>
+    <string name="empty">Please record something by pressing the microphone icon in the upper right corner.</string>
 
 </resources>

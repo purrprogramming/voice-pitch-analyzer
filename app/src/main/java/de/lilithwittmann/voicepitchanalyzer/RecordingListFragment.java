@@ -100,10 +100,22 @@ public class RecordingListFragment extends Fragment implements AbsListView.OnIte
 
         // Set the adapter
         listView = (AbsListView) view.findViewById(android.R.id.list);
-        listView.setAdapter(adapter);
+        listView.setAdapter(this.adapter);
+
+        if (this.adapter.isEmpty())
+        {
+            System.out.println("visibility set to visible");
+            view.findViewById(android.R.id.empty).setVisibility(View.VISIBLE);
+        }
+
+        else
+        {
+            System.out.println("visibility set to invisible");
+            view.findViewById(android.R.id.empty).setVisibility(View.GONE);
+        }
 
         // Set OnItemClickListener so we can be notified on item clicks
-        listView.setOnItemClickListener(this);
+        this.listView.setOnItemClickListener(this);
 
         return view;
     }

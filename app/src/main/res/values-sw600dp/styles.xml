@@ -1,0 +1,11 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:textAppearance">@style/TextAppearance.Standard</item>
+    </style>
+
+    <style name="TextAppearance.Standard" parent="@android:style/TextAppearance.DeviceDefault.Large">
+        <!--<item name="android:textColor">#00FF00</item>-->
+    </style>
+</resources>

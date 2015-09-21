@@ -13,13 +13,13 @@
         <TableRow>
 
             <TextView
-                style="@android:style/TextAppearance.DeviceDefault"
+                style="@style/TextAppearance.Standard"
                 android:padding="10dp"
                 android:text="@string/average"/>
 
             <TextView
                 android:id="@+id/average"
-                style="@android:style/TextAppearance.DeviceDefault"
+                style="@style/TextAppearance.Standard"
                 android:gravity="right"
                 android:padding="10dp"/>
         </TableRow>
@@ -27,13 +27,13 @@
         <TableRow>
 
             <TextView
-                style="@android:style/TextAppearance.DeviceDefault"
+                style="@style/TextAppearance.Standard"
                 android:padding="10dp"
                 android:text="@string/min_avg"/>
 
             <TextView
                 android:id="@+id/min_avg"
-                style="@android:style/TextAppearance.DeviceDefault"
+                style="@style/TextAppearance.Standard"
                 android:gravity="right"
                 android:padding="10dp"/>
         </TableRow>
@@ -41,13 +41,13 @@
         <TableRow>
 
             <TextView
-                style="@android:style/TextAppearance.DeviceDefault"
+                style="@style/TextAppearance.Standard"
                 android:padding="10dp"
                 android:text="@string/max_avg"/>
 
             <TextView
                 android:id="@+id/max_avg"
-                style="@android:style/TextAppearance.DeviceDefault"
+                style="@style/TextAppearance.Standard"
                 android:gravity="right"
                 android:padding="10dp"/>
         </TableRow>
@@ -55,13 +55,13 @@
         <TableRow android:paddingTop="20dp">
 
             <TextView
-                style="@android:style/TextAppearance.DeviceDefault"
+                style="@style/TextAppearance.Standard"
                 android:padding="10dp"
                 android:text="@string/personal_range"/>
 
             <TextView
                 android:id="@+id/personal_range"
-                style="@android:style/TextAppearance.DeviceDefault"
+                style="@style/TextAppearance.Standard"
                 android:gravity="right"
                 android:padding="10dp"
                 android:textStyle="bold"/>

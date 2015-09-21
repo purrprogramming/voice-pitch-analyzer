@@ -87,4 +87,8 @@
         <item name="popupMenuStyle">@style/PopupMenu.Example</item>
         <item name="dropDownListViewStyle">@style/DropDownListView.Example</item>
     </style>
+
+    <style name="TextAppearance.Standard" parent="@android:style/TextAppearance.DeviceDefault">
+        <!--<item name="android:textColor">#FF00FF</item>-->
+    </style>
 </resources>

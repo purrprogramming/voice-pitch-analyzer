@@ -10,4 +10,5 @@
     <color name="indicators">#673ab7</color>
     <!-- darkest hue -->
     <color name="canvas_bg_dark">#311B92</color>
+    <color name="black">#000000</color>
 </resources>

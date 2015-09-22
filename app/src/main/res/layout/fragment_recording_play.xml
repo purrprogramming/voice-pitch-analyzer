@@ -84,7 +84,7 @@
         <TableRow android:paddingTop="20dp">
 
             <TextView
-                style=@style/TextAppearance.Standard"
+                style="@style/TextAppearance.Standard"
                 android:padding="10dp"
                 android:text="@string/personal_range"/>
 

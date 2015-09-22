@@ -32,5 +32,9 @@
     <string name="app_name">Stimmanalyse</string>
     <string name="device_sample_rate_not_supported">Leider wird dein Mikrofon momentan noch nicht unterstützt. Die Entwickelnden wurden über dieses Problem informiert.</string>
     <string name="device_sample_rate_not_supported_title">Dein Mikrofon wird nicht unterstützt.</string>
-    <string name="empty">Bitte nimm zunächst etwas auf, indem Du auf das Mikrofon-Icon in der Leiste oben rechts drückst.</string>
+    <string name="pitch_max">Maximum</string>
+    <string name="pitch_max_avg">Durchschnittliches Maximum</string>
+    <string name="pitch_min">Minimum</string>
+    <string name="pitch_min_avg">Durchschnittliches Minimum</string>
+    <string name="empty">Bitte füge eine Aufzeichnung hinzu, indem Du auf das Aufnahmesymbol oben rechts klickst.</string>
 </resources>

@@ -14,6 +14,12 @@ import java.util.List;
 import de.lilithwittmann.voicepitchanalyzer.models.PitchRange;
 import de.lilithwittmann.voicepitchanalyzer.models.Recording;
 
+
+import com.crashlytics.android.Crashlytics;
+import com.crashlytics.android.answers.Answers;
+import com.crashlytics.android.answers.CustomEvent;
+
+
 /**
  * Created by Lilith on 05/07/15.
  */
@@ -53,6 +59,13 @@ public class RecordingDB {
     }
 
     public Recording saveRecording(Recording recording) {
+
+        //log recordings for statistics
+        Answers.getInstance().logCustom(new CustomEvent("RecordingSaved")
+                .putCustomAttribute("average", recording.getRange().getAvg())
+                .putCustomAttribute("max", recording.getRange().getMax())
+                .putCustomAttribute("min", recording.getRange().getMin()));
+
         // Gets the data repository in write mode
         RecordingDbHelper mDbHelper = new RecordingDbHelper(this.context);
         SQLiteDatabase db = mDbHelper.getWritableDatabase();

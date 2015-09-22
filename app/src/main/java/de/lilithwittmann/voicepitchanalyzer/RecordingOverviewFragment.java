@@ -178,8 +178,8 @@ public class RecordingOverviewFragment extends Fragment implements SurfaceHolder
 
         textPaint.setColor(Color.BLACK);
         textPaint.setAlpha(120);
-        canvas.drawText(getResources().getString(R.string.your_range), 10,
-                this.gradient.getHeight() - (float) ((RecordViewActivity.currentRecord.getRange().getMin() - PitchCalculator.minPitch) * pxPerHz) + 35,
+        canvas.drawText(getResources().getString(R.string.your_range), this.gradient.getWidth() - 115,
+                this.gradient.getHeight() - (float) ((RecordViewActivity.currentRecord.getRange().getMin() - PitchCalculator.minPitch) * pxPerHz) + 20,
                 textPaint);
 
         surfaceHolder.unlockCanvasAndPost(canvas);

@@ -42,6 +42,7 @@ dependencies {
     compile files('libs/TarsosDSP-Android-2.2.jar')
     compile 'com.google.code.gson:gson:2.3'
     compile 'com.github.PhilJay:MPAndroidChart:v2.1.0'
+    compile 'com.wdullaer:swipeactionadapter:1.4.4'
     compile('com.crashlytics.sdk.android:crashlytics:2.5.2@aar') {
         transitive = true;
     }

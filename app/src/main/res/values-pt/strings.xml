@@ -1,0 +1,59 @@
+<resources>
+<!-- general -->
+<string name="app_name">Analisador do tom de voz</string>
+<!-- settings -->
+<!-- new recording activity/fragment -->
+<string name="title_activity_recording">Nova gravação</string>
+<string name="record">Gravação</string>
+<string name="start_recording">Gravação</string>
+<string name="stop_recording">Parar</string>
+<!-- recording analysis -->
+<string name="title_section1">Visão geral</string>
+<string name="title_section2">@string/pitch_graph_single_recording</string>
+<string name="title_section3">Detalhes</string>
+<string name="pitch_graph_single_recording">Tom ao longo do Tempo</string>
+<string name="min_max_avg">
+Média Mínima: %1$sHz, Média Máxima: %2$sHz, Média: %3$sHz
+</string>
+<string name="average">Média Geral</string>
+<string name="min_avg">Média mínima</string>
+<string name="max_avg">Média máxima</string>
+<string name="male_range">Extensão masculina</string>
+<string name="female_range">Extensão feminina</string>
+<string name="your_range">Sua Extensão</string>
+<string name="personal_range">Sua Extensão é principalmente</string>
+<string name="male">masculina</string>
+<string name="female">feminina</string>
+<string name="in_between">no meio</string>
+<string name="unknown">desconhecida</string>
+<string name="pitch_max">Máximo</string>
+<string name="pitch_min">Mínimo</string>
+<string name="pitch_max_avg">Média máxima</string>
+<string name="pitch_min_avg">Média mínima</string>
+<!-- about fragment -->
+<string name="action_about">Sobre</string>
+<string name="title_activity_about">Sobre o Analisador de Tom de Voz</string>
+<string name="programming">Programando</string>
+<string name="libraries">
+Analisador de Tom de Voz usa as seguintes bibliotecas:
+</string>
+<!-- start screen -->
+<string name="welcome">Ei, você aí!</string>
+<string name="explanation">
+Para analisar propriamente, nós precisamos de cerca de um minuto de áudio de sua voz. Por esta razão, nós vamos te dar um texto com uma duração aproximada do tempo que precisamos. Obviamente você é livre para dizer qualquer outra coisa, também, desde que seja com sua voz natural.
+</string>
+<string name="microphone">
+Para produzir bom resultados para analisarmos, é recomendado o uso de um headset ou outro microfone externo.
+</string>
+<string name="results">
+Quando você acabar, aperte »parar« para ver seus resultados. Na página de resultados você encontrará um gráfico mostrando as extensões de tom (em violeta) típicas \'masculinas\' e \'femininas\', junto com a sua própria extensão (em cinza).
+</string>
+<string name="next">Próximo</string>
+<string name="device_sample_rate_not_supported">
+Microfone não é suportado ainda. Os desenvolvedores foram informados.
+</string>
+<string name="device_sample_rate_not_supported_title">Microfone não suportado</string>
+<string name="empty">
+Por favor grave algo pressionando o ícone de microfone no canto superior direito.
+</string>
+</resources>

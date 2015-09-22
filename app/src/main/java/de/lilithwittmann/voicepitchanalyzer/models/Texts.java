@@ -27,7 +27,7 @@ public class Texts {
     }
 
     public String getText(String lang, Integer id) {
-        JsonElement jelement = new JsonParser().parse(getJsonData());
+        JsonElement jelement = new JsonParser().parse(getJsonData(lang));
         JsonObject jobject = jelement.getAsJsonObject();
         JsonObject langs = jobject.getAsJsonObject("texts");
         JsonArray texts = langs.getAsJsonArray(lang);
@@ -35,24 +35,24 @@ public class Texts {
     }
 
     public Integer countTexts(String lang) {
-        JsonElement jelement = new JsonParser().parse(getJsonData());
+        JsonElement jelement = new JsonParser().parse(getJsonData(lang));
         JsonObject jobject = jelement.getAsJsonObject();
         JsonObject langs = jobject.getAsJsonObject("texts");
         JsonArray texts = langs.getAsJsonArray(lang);
         return texts.getAsJsonArray().size();
     }
 
-    private String jsonFile = "res/raw/texts.json";
+    private String jsonFolder = "res/raw/";
     private String jsonData = null;
 
-    private List<String> supportedLanguages = new ArrayList<String>() {{add("de"); add("en");}};
+    private List<String> supportedLanguages = new ArrayList<String>() {{add("de"); add("en"); add("it"); add("pt");}};
 
-    String getJsonData() {
+    String getJsonData(String country) {
         if (this.jsonData != null) {
             return jsonData;
         } else {
             try {
-                this.jsonData = this.readJsonNFile(this.jsonFile);
+                this.jsonData = this.readJsonNFile(this.jsonFolder+country+".json");
             } catch (IOException e) {
                 e.printStackTrace();
             }

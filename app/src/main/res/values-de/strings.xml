@@ -38,4 +38,5 @@
     <string name="pitch_min_avg">Durchschnittliches Minimum</string>
     <string name="empty">Bitte füge eine Aufzeichnung hinzu, indem Du auf das Aufnahmesymbol oben rechts klickst.</string>
     <string name="androgynous_range">Neutraler Bereich</string>
+    <string name="translation">Übersetzung</string>
 </resources>

@@ -1,0 +1,59 @@
+<resources>
+<!-- general -->
+<string name="app_name">Analizzatore del tono della voce</string>
+<!-- settings -->
+<!-- new recording activity/fragment -->
+<string name="title_activity_recording">Nuova registrazione</string>
+<string name="record">Registrazione</string>
+<string name="start_recording">Registrazione</string>
+<string name="stop_recording">Stop</string>
+<!-- recording analysis -->
+<string name="title_section1">Visione generale</string>
+<string name="title_section2">@string/pitch_graph_single_recording</string>
+<string name="title_section3">Dettagli</string>
+<string name="pitch_graph_single_recording">Tono lungo il tempo</string>
+<string name="min_max_avg">
+Min media: %1$sHz, Max media: %2$sHz, Media: %3$sHz
+</string>
+<string name="average">Media generale</string>
+<string name="min_avg">Media minima</string>
+<string name="max_avg">Media massima</string>
+<string name="male_range">Intervallo maschile</string>
+<string name="female_range">Intervallo femminile</string>
+<string name="your_range">Il tuo intervallo</string>
+<string name="personal_range">Il tuo intervallo è piuttosto</string>
+<string name="male">maschile</string>
+<string name="female">femminile</string>
+<string name="in_between">tra</string>
+<string name="unknown">sconosciuto</string>
+<string name="pitch_max">massimo</string>
+<string name="pitch_min">minimo</string>
+<string name="pitch_max_avg">Media massima</string>
+<string name="pitch_min_avg">Media minima</string>
+<!-- about fragment -->
+<string name="action_about">Su</string>
+<string name="title_activity_about">Su Analizzatore del tone di voce</string>
+<string name="programming">Programmando</string>
+<string name="libraries">
+L\'Analizzatore del tono di voce utilizza le seguenti biblioteche:
+</string>
+<!-- start screen -->
+<string name="welcome">Ciao!</string>
+<string name="explanation">
+Per fare un\'analisi corretta dobbiamo avere un minuto della registrazione della tua voce. In questo senso, ti daremo un testo con una durata pari al tempo di cui ne abbiamo bisogno. Certamente tu sei libero/a di dire qualsiasi altra cosa, anche, purché sia detto nel tuo tono naturale di voce.
+</string>
+<string name="microphone">
+Al fine di produrre risultati che si possano analizzare, si consiglia di usare un headset oppure un microfono esterno.
+</string>
+<string name="results">
+Nel momento in cui avrai finito, basta premere il tasto \'stop\' per vedere i tuoi risultati. Sul foglio dei risultati troverai un grafico su cui risulteranno gli intervalli tipici del tono di voce (in viola) sia maschili che femminili, insieme al tuo intervallo (in grigio). Noterai che gli intervalli \'maschili\' e \'femminili\' si sovrappongono leggermente, che vuol dire che il tono può essere presente nei due generi.
+</string>
+<string name="next">Vai alla prossima</string>
+<string name="device_sample_rate_not_supported">
+Microfono non supportato ancora. Gli sviluppatori già sono stati informati.
+</string>
+<string name="device_sample_rate_not_supported_title">Microfono non supportato</string>
+<string name="empty">
+Sei pregato di registrare qualcosa premendo l\'icona del microfono sull\'angolo superiore destro.
+</string>
+</resources>

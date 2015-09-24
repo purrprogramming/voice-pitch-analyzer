@@ -1,4 +1,4 @@
-package de.lilithwittmann.voicepitchanalyzer;
+package de.lilithwittmann.voicepitchanalyzer.fragments;
 
 
 import android.os.Bundle;
@@ -9,6 +9,8 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import de.lilithwittmann.voicepitchanalyzer.R;
 
 
 /**
@@ -45,8 +47,12 @@ public class AboutFragment extends Fragment
         // enable text links for licences
         TextView apacheLicence = (TextView) view.findViewById(R.id.apache);
         TextView gpl = (TextView) view.findViewById(R.id.gpl);
+        TextView programming = (TextView) view.findViewById(R.id.programming);
+        TextView design = (TextView) view.findViewById(R.id.design);
 
         apacheLicence.setMovementMethod(android.text.method.LinkMovementMethod.getInstance());
         gpl.setMovementMethod(android.text.method.LinkMovementMethod.getInstance());
+        programming.setMovementMethod(android.text.method.LinkMovementMethod.getInstance());
+        design.setMovementMethod(android.text.method.LinkMovementMethod.getInstance());
     }
 }

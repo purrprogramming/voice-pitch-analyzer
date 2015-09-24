@@ -1,4 +1,4 @@
-package de.lilithwittmann.voicepitchanalyzer;
+package de.lilithwittmann.voicepitchanalyzer.fragments;
 
 import android.app.Activity;
 import android.os.Bundle;

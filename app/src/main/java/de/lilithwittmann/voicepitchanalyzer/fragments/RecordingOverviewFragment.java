@@ -1,8 +1,7 @@
-package de.lilithwittmann.voicepitchanalyzer;
+package de.lilithwittmann.voicepitchanalyzer.fragments;
 
 
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -13,6 +12,8 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
 
+import de.lilithwittmann.voicepitchanalyzer.R;
+import de.lilithwittmann.voicepitchanalyzer.activities.RecordViewActivity;
 import de.lilithwittmann.voicepitchanalyzer.utils.PitchCalculator;
 
 
@@ -83,12 +84,12 @@ public class RecordingOverviewFragment extends Fragment implements SurfaceHolder
         Paint p = new Paint();
         Paint textPaint = new Paint();
 
-        textPaint.setColor(Color.BLACK);
+        textPaint.setColor(getResources().getColor(android.R.color.black));
         textPaint.setTextSize(20);
 
-        p.setColor(getResources().getColor(R.color.canvas_bg_dark));
+        p.setColor(getResources().getColor(R.color.canvas_dark));
         p.setAlpha(128);
-        textPaint.setColor(getResources().getColor(R.color.black));
+        textPaint.setColor(getResources().getColor(android.R.color.black));
         textPaint.setAlpha(255);
         canvas.drawARGB(255, 255, 255, 255);
         p.setStrokeWidth(10);
@@ -103,9 +104,9 @@ public class RecordingOverviewFragment extends Fragment implements SurfaceHolder
         canvas.drawText(getResources().getString(R.string.female_range), this.gradient.getWidth() - 150, this.gradient.getHeight() - (float)
                 ((PitchCalculator.maxFemalePitch - PitchCalculator.minPitch) * pxPerHz) + 20, textPaint);
         //draw male pitch
-        p.setColor(getResources().getColor(R.color.canvas_bg_light));
+        p.setColor(getResources().getColor(R.color.canvas_light));
         p.setAlpha(128);
-        textPaint.setColor(getResources().getColor(R.color.black));
+        textPaint.setColor(getResources().getColor(android.R.color.black));
         textPaint.setAlpha(255);
         canvas.drawRect(0,
                 this.gradient.getHeight() - (float) ((PitchCalculator.minMalePitch - PitchCalculator.minPitch) * pxPerHz),
@@ -158,7 +159,7 @@ public class RecordingOverviewFragment extends Fragment implements SurfaceHolder
                                 (PitchCalculator.maxMalePitch - PitchCalculator.minFemalePitch)/2) * pxPerHz) +10 , textPaint);
 
         Paint paint = new Paint();
-        paint.setColor(Color.BLACK);
+        paint.setColor(getResources().getColor(android.R.color.black));
         //draw range
 //        paint.setStrokeWidth((float) ((RecordViewActivity.currentRecord.getRange().getMax() - RecordViewActivity.currentRecord.getRange().getMin()) * pxPerHz));
         paint.setAlpha(120);
@@ -169,14 +170,14 @@ public class RecordingOverviewFragment extends Fragment implements SurfaceHolder
                 paint);
         paint.setStrokeWidth(10);
         paint.setAlpha(255);
-        paint.setColor(Color.BLACK);
+        paint.setColor(getResources().getColor(android.R.color.black));
         canvas.drawLine(0,
                 this.gradient.getHeight() - (float) ((RecordViewActivity.currentRecord.getRange().getAvg()-PitchCalculator.minPitch) * pxPerHz),
                 this.gradient.getWidth(),
                 this.gradient.getHeight() - (float) ((RecordViewActivity.currentRecord.getRange().getAvg()-PitchCalculator.minPitch) * pxPerHz),
                 paint);
 
-        textPaint.setColor(Color.BLACK);
+        textPaint.setColor(getResources().getColor(android.R.color.black));
         textPaint.setAlpha(120);
         canvas.drawText(getResources().getString(R.string.your_range), this.gradient.getWidth() - 115,
                 this.gradient.getHeight() - (float) ((RecordViewActivity.currentRecord.getRange().getMin() - PitchCalculator.minPitch) * pxPerHz) + 20,

@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
@@ -13,6 +13,10 @@
         <item name="actionModeSplitBackground">@drawable/cab_background_bottom_example</item>
         <item name="actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Example</item>
         <item name="android:listViewStyle">@style/ListView</item>
+        <!--<item name="android:"-->
+        <item name="android:colorPrimaryDark" tools:targetApi="21">@color/status_bar</item>
+        <item name="android:colorPrimary" tools:targetApi="21">@color/action_bar</item>
+        <item name="android:colorAccent" tools:targetApi="21">@color/indicators</item>
 
         <!-- Light.DarkActionBar specific -->
         <item name="actionBarWidgetTheme">@style/Theme.Example.Widget</item>
@@ -27,17 +31,18 @@
         <item name="android:windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
         <!-- For 2.x version  -->
+        <item name="windowNoTitle">true</item>
     </style>
 
     <!-- ActionBar styles -->
     <style name="ActionBar" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
-        <item name="android:background">@color/action_bar_bg</item>
+        <item name="android:background">@color/action_bar</item>
         <item name="backgroundStacked">@drawable/ab_stacked_solid_example</item>
         <item name="backgroundSplit">@drawable/ab_bottom_solid_example</item>
         <item name="progressBarStyle">@style/ProgressBar.Example</item>
 
         <!-- Support library compatibility -->
-        <item name="background">@color/action_bar_bg</item>
+        <item name="background">@color/action_bar</item>
     </style>
     <!--<item name="background">@drawable/ab_solid_example</item>-->
 
@@ -47,8 +52,8 @@
     </style>
 
     <style name="ActionTabBar" parent="@style/Widget.AppCompat.Light.ActionBar.TabBar">
-        <item name="android:background">@color/action_bar_bg</item>
-        <item name="background">@color/action_bar_bg</item>
+        <item name="android:background">@color/action_bar</item>
+        <item name="background">@color/action_bar</item>
     </style>
 
     <style name="ActionBarTabStyle.Example" parent="@style/Widget.AppCompat.ActionBar.TabView">
@@ -61,6 +66,7 @@
 
     <style name="DropDownListView.Example" parent="@style/Widget.AppCompat.ListView.DropDown">
         <item name="android:listSelector">@drawable/selectable_background_example</item>
+        <item name="android:background">@drawable/selectable_background_example</item>
     </style>
 
     <style name="DropDownNav.Example" parent="@style/Widget.AppCompat.Spinner.DropDown.ActionBar">
@@ -79,7 +85,8 @@
 
     <style name="ListView" parent="@android:style/Widget.ListView">
         <item name="android:cacheColorHint">@android:color/black</item>
-        <item name="android:listSelector">@color/action_bar_bg</item>
+        <item name="android:listSelector">@color/action_bar</item>
+        <item name="android:background">@drawable/selectable_background_example</item>
     </style>
 
     <!-- this style is only referenced in a Light.DarkActionBar based theme -->
@@ -87,6 +94,10 @@
         <item name="popupMenuStyle">@style/PopupMenu.Example</item>
         <item name="dropDownListViewStyle">@style/DropDownListView.Example</item>
     </style>
+
+    <!--<style name="SnackbarAction" parent="TextAppearance.Design.Snackbar.Action">-->
+        <!--<item name="android:color">@color/action_bar</item>-->
+    <!--</style>-->
 
     <style name="TextAppearance.Standard" parent="@android:style/TextAppearance.DeviceDefault">
         <!--<item name="android:textColor">#FF00FF</item>-->

@@ -4,7 +4,7 @@
               android:layout_height="match_parent"
               android:orientation="vertical"
               android:padding="10dp"
-              tools:context="de.lilithwittmann.voicepitchanalyzer.AboutFragment">
+              tools:context="de.lilithwittmann.voicepitchanalyzer.fragments.AboutFragment">
 
     <TextView
         style="@android:style/TextAppearance.DeviceDefault.Large"
@@ -27,6 +27,7 @@
                 android:textStyle="bold"/>
 
             <TextView
+                android:id="@+id/programming"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="right"
@@ -36,6 +37,7 @@
         <TableRow>
 
             <TextView
+                android:id="@+id/design"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="@string/design"
@@ -46,6 +48,51 @@
                 android:layout_height="match_parent"
                 android:gravity="right"
                 android:text="@string/design_persons"/>
+        </TableRow>
+    </TableLayout>
+
+
+    <TextView
+        style="@android:style/TextAppearance.DeviceDefault.Large"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/translation"/>
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:stretchColumns="1">
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/portuguese"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="right"
+                android:text="@string/aurora_viana"/>
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/italian"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="right"
+                android:text="@string/aurora_viana"/>
         </TableRow>
     </TableLayout>
 
@@ -93,4 +140,11 @@
                 android:text="@string/gpl"/>
         </TableRow>
     </TableLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/text_origin"
+        android:gravity="center"/>
 </LinearLayout>

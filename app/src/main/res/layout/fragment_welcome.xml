@@ -4,7 +4,7 @@
               android:layout_height="match_parent"
               android:orientation="vertical"
               android:padding="10dp"
-              tools:context="de.lilithwittmann.voicepitchanalyzer.WelcomeFragment">
+              tools:context="de.lilithwittmann.voicepitchanalyzer.fragments.WelcomeFragment">
 
     <TextView
         style="@android:style/TextAppearance.DeviceDefault.Large"

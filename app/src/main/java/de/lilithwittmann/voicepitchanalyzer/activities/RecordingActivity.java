@@ -1,4 +1,4 @@
-package de.lilithwittmann.voicepitchanalyzer;
+package de.lilithwittmann.voicepitchanalyzer.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,6 +6,8 @@ import android.support.v7.app.ActionBarActivity;
 
 import com.crashlytics.android.Crashlytics;
 
+import de.lilithwittmann.voicepitchanalyzer.R;
+import de.lilithwittmann.voicepitchanalyzer.fragments.RecordingFragment;
 import de.lilithwittmann.voicepitchanalyzer.models.Recording;
 import io.fabric.sdk.android.Fabric;
 

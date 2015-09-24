@@ -3,7 +3,7 @@ package de.lilithwittmann.voicepitchanalyzer;
 import android.test.ActivityUnitTestCase;
 import android.test.suitebuilder.annotation.SmallTest;
 
-import de.lilithwittmann.voicepitchanalyzer.RecordingListActivity;
+import de.lilithwittmann.voicepitchanalyzer.activities.RecordingListActivity;
 import de.lilithwittmann.voicepitchanalyzer.models.Texts;
 
 /**

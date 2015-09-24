@@ -1,4 +1,4 @@
-package de.lilithwittmann.voicepitchanalyzer;
+package de.lilithwittmann.voicepitchanalyzer.activities;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -17,6 +17,10 @@ import com.crashlytics.android.Crashlytics;
 
 import java.util.Locale;
 
+import de.lilithwittmann.voicepitchanalyzer.R;
+import de.lilithwittmann.voicepitchanalyzer.fragments.RecordGraphFragment;
+import de.lilithwittmann.voicepitchanalyzer.fragments.RecordingOverviewFragment;
+import de.lilithwittmann.voicepitchanalyzer.fragments.RecordingPlayFragment;
 import de.lilithwittmann.voicepitchanalyzer.models.Recording;
 import de.lilithwittmann.voicepitchanalyzer.models.database.RecordingDB;
 import io.fabric.sdk.android.Fabric;
@@ -24,7 +28,7 @@ import io.fabric.sdk.android.Fabric;
 
 public class RecordViewActivity extends ActionBarActivity implements ActionBar.TabListener, RecordGraphFragment.OnFragmentInteractionListener {
     private static final String LOG_TAG = RecordViewActivity.class.getSimpleName();
-    protected static Recording currentRecord;
+    public static Recording currentRecord;
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
      * fragments for each of the sections. We use a

@@ -3,12 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="de.lilithwittmann.voicepitchanalyzer.RecordingListFragment">
+    tools:context="de.lilithwittmann.voicepitchanalyzer.fragments.RecordingListFragment">
 
-    <ListView
-        android:id="@android:id/list"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:scrollbars="vertical"
+        tools:listitem="@layout/listview"/>
 
     <TextView
         android:id="@android:id/empty"

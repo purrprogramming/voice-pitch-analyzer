@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="de.lilithwittmann.voicepitchanalyzer.RecordingListFragment">
+    tools:context="de.lilithwittmann.voicepitchanalyzer.fragments.RecordingListFragment">
 
     <GridView
         android:id="@android:id/list"

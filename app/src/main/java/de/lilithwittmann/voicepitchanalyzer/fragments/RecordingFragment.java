@@ -1,4 +1,4 @@
-package de.lilithwittmann.voicepitchanalyzer;
+package de.lilithwittmann.voicepitchanalyzer.fragments;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -10,7 +10,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -20,7 +19,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.IllegalFormatCodePointException;
 import java.util.Locale;
 import java.util.UUID;
 
@@ -31,6 +29,7 @@ import be.tarsos.dsp.io.android.AudioDispatcherFactory;
 import be.tarsos.dsp.pitch.PitchDetectionHandler;
 import be.tarsos.dsp.pitch.PitchDetectionResult;
 import be.tarsos.dsp.pitch.PitchProcessor;
+import de.lilithwittmann.voicepitchanalyzer.R;
 import de.lilithwittmann.voicepitchanalyzer.models.PitchRange;
 import de.lilithwittmann.voicepitchanalyzer.models.Recording;
 import de.lilithwittmann.voicepitchanalyzer.models.Texts;
@@ -100,8 +99,8 @@ public class RecordingFragment extends Fragment {
         if (textNumber + 1 < texts.countTexts(lang)) {
             nextText = textNumber + 1;
         } else if (textNumber > texts.countTexts(lang)) {
-            //really special case -if the user change the device language and in the new language are
-            // less text samples available than in the previous set the text number back to one
+            //really special case - if the user changes the device language and in the new language there are
+            // less text samples available than in the previous one, set the text number back to one
             textNumber = 1;
             nextText = 2;
         }

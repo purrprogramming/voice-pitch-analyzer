@@ -2,9 +2,9 @@
                 xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                tools:context="de.lilithwittmann.voicepitchanalyzer.AboutActivity">
+                tools:context="de.lilithwittmann.voicepitchanalyzer.activities.AboutActivity">
 
-    <fragment android:name="de.lilithwittmann.voicepitchanalyzer.AboutFragment"
+    <fragment android:name="de.lilithwittmann.voicepitchanalyzer.fragments.AboutFragment"
               android:id="@+id/about_fragment"
               android:layout_weight="1"
               android:layout_width="match_parent"

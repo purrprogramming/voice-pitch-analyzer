@@ -62,7 +62,6 @@ public class PitchCalculator {
     }
 
     public Double getMax() {
-
         Double max_pitch = null;
         for (Double pitch: this.pitches) {
             if(max_pitch == null || max_pitch < pitch) {
@@ -74,7 +73,6 @@ public class PitchCalculator {
     }
 
     public Double getMin() {
-
         Double min_pitch = null;
         for (Double pitch: this.pitches) {
             if(min_pitch == null || min_pitch > pitch) {

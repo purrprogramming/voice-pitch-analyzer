@@ -1,4 +1,4 @@
-package de.lilithwittmann.voicepitchanalyzer;
+package de.lilithwittmann.voicepitchanalyzer.fragments;
 
 
 import android.os.Bundle;
@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import de.lilithwittmann.voicepitchanalyzer.R;
+import de.lilithwittmann.voicepitchanalyzer.activities.RecordViewActivity;
 import de.lilithwittmann.voicepitchanalyzer.utils.AudioPlayer;
 import de.lilithwittmann.voicepitchanalyzer.utils.PitchCalculator;
 
@@ -65,8 +67,12 @@ public class RecordingPlayFragment extends Fragment
             ((TextView) view.findViewById(R.id.average)).setText(String.format("%sHz", Math.round(average)));
             ((TextView) view.findViewById(R.id.pitch_min_avg)).setText(String.format("%sHz", Math.round(RecordViewActivity.currentRecord.getRange().getMin())));
             ((TextView) view.findViewById(R.id.pitch_max_avg)).setText(String.format("%sHz", Math.round(RecordViewActivity.currentRecord.getRange().getMax())));
-            ((TextView) view.findViewById(R.id.pitch_min)).setText(String.format("%sHz", Math.round(pitchCalculator.getMin())));
-            ((TextView) view.findViewById(R.id.pitch_max)).setText(String.format("%sHz", Math.round(pitchCalculator.getMax())));
+
+            Double minPitch = pitchCalculator.getMin();
+            Double maxPitch = pitchCalculator.getMax();
+
+            ((TextView) view.findViewById(R.id.pitch_min)).setText(String.format("%sHz", minPitch != null ? Math.round(minPitch) : "n/a"));
+            ((TextView) view.findViewById(R.id.pitch_max)).setText(String.format("%sHz", maxPitch != null ? Math.round(maxPitch) : "n/a"));
 
             if (average > 0)
             {
@@ -89,29 +95,29 @@ public class RecordingPlayFragment extends Fragment
                 ((TextView) view.findViewById(R.id.personal_range)).setText(getResources().getString(R.string.unknown));
             }
 
-//            ((ImageButton) view.findViewById(R.id.play_button)).setOnClickListener(new View.OnClickListener()
-//            {
-//                @Override
-//                public void onClick(View v)
-//                {
-//                    if (player == null)
-//                    {
-//                        player = new AudioPlayer(getActivity().getFileStreamPath(RecordViewActivity.currentRecord.getRecording()));
-//                    }
-//
-//                    if (player.isPlaying())
-//                    {
-//                        Log.i(LOG_TAG, "stop");
-//                        player.stop();
-//                    }
-//
-//                    else
-//                    {
-//                        Log.i(LOG_TAG, "play");
-//                        player.play();
-//                    }
-//                }
-//            });
+            //            ((ImageButton) view.findViewById(R.id.play_button)).setOnClickListener(new View.OnClickListener()
+            //            {
+            //                @Override
+            //                public void onClick(View v)
+            //                {
+            //                    if (player == null)
+            //                    {
+            //                        player = new AudioPlayer(getActivity().getFileStreamPath(RecordViewActivity.currentRecord.getRecording()));
+            //                    }
+            //
+            //                    if (player.isPlaying())
+            //                    {
+            //                        Log.i(LOG_TAG, "stop");
+            //                        player.stop();
+            //                    }
+            //
+            //                    else
+            //                    {
+            //                        Log.i(LOG_TAG, "play");
+            //                        player.play();
+            //                    }
+            //                }
+            //            });
         }
     }
 }

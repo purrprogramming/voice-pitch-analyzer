@@ -9,6 +9,11 @@
     <string name="saved_text_number" translatable="false">text-number</string>
     <string name="first_start" translatable="false">first-start</string>
 
+    <!-- recording overview -->
+    <string name="undo">Undo</string>
+    <string name="record_deleted">Record deleted</string>
+    <string name="empty">Please record something by pressing the microphone icon in the upper right corner.</string>
+
     <!-- new recording activity/fragment -->
     <string name="title_activity_recording">New Recording</string>
     <string name="record">Record</string>
@@ -26,6 +31,7 @@
     <string name="max_avg">Maximum Average</string>
     <string name="male_range">Male Range</string>
     <string name="female_range">Female Range</string>
+    <string name="androgynous_range">Androgynous Range</string>
     <string name="your_range">Your Range</string>
     <string name="personal_range">Your Range is mostly</string>
     <string name="male">male</string>
@@ -43,28 +49,30 @@
     <string name="about" translatable="false">Purr Programming</string>
     <string name="programming">Programming</string>
     <string name="design" translatable="false">Design</string>
-    <string name="programming_persons" translatable="false">Lilith Wittmann, Yuri Ichijo</string>
-    <string name="design_persons" translatable="false">Yuri Ichijo</string>
+    <string name="programming_persons" translatable="false"><a href="http://twitter.com/LilithWittmann">Lilith Wittmann</a> &amp; <a href="https://github.com/puerile">Yuri Ichijō</a></string>
+    <string name="design_persons" translatable="false"><a href="https://github.com/puerile">Yuri Ichijō</a></string>
     <string name="libraries">Voice Pitch Analyzer uses the following libraries:</string>
     <string name="mpandroidchart" translatable="false">MPAndroidChart</string>
     <string name="apache_licence" translatable="false"><a href="http://www.apache.org/licenses/LICENSE-2.0">Apache 2.0</a></string>
     <string name="tarsos_dsp" translatable="false">TarsosDSP</string>
     <string name="gpl" translatable="false"><a href="http://www.gnu.org/licenses/gpl-3.0.en.html">GPL 3.0</a></string>
+    <string name="translation">Translation</string>
+    <string name="english">English</string>
+    <string name="german">German</string>
+    <string name="portuguese">Portuguese</string>
+    <string name="italian">Italian</string>
+    <string name="aurora_viana" translatable="false">Aurora Viana</string>
 
-<!-- start screen -->
+    <!-- start screen -->
     <string name="welcome">Hey there!</string>
     <string name="explanation">To properly analyse it, we need about one minute of audio recording of your voice. For this purpose, we’ll provide you with a text of a length approximate to this time frame. Of course you’re free to say anything else, too, as long as it’s in your natural voice.</string>
     <string name="microphone">To produce meaningful analysing results, it’s best to use a headset or other external microphone.</string>
     <string name="results">When you’re finished, press »stop« to see your results. On the result page you’ll find a graph showing the typical ›male‹ and ›female‹ pitch ranges (in violet), along with your own (in grey). You’ll notice the ›male‹ and ›female‹ ranges are overlapping each other a bit, denoting a range that can be perceived as either gender.</string>
     <string name="next">Next</string>
+
+    <!-- error messages -->
     <string name="device_sample_rate_not_supported">Microphone not supported yet. The developers have been informed.</string>
     <string name="device_sample_rate_not_supported_title">Microphone not supported</string>
-    <string name="empty">Please record something by pressing the microphone icon in the upper right corner.</string>
-    <string name="androgynous_range">Androgynous Range</string>
-    <string name="translation">Translation</string>
-    <string name="english">English:</string>
-    <string name="german">German:</string>
-    <string name="portuguese">Portuguese:</string>
-
+    <string name="text_origin">All texts from »The Picture of Dorian Gray« by Oscar Wilde</string>
 
 </resources>

@@ -33,7 +33,7 @@
     <string name="female_range">Female Range</string>
     <string name="androgynous_range">Androgynous Range</string>
     <string name="your_range">Your Range</string>
-    <string name="personal_range">Your Range is mostly</string>
+    <string name="personal_range">Your Range sounds mostly</string>
     <string name="male">male</string>
     <string name="female">female</string>
     <string name="in_between">in between</string>
@@ -62,6 +62,7 @@
     <string name="portuguese">Portuguese</string>
     <string name="italian">Italian</string>
     <string name="aurora_viana" translatable="false">Aurora Viana</string>
+    <string name="text_origin">All texts from »The Picture of Dorian Gray« by Oscar Wilde</string>
 
     <!-- start screen -->
     <string name="welcome">Hey there!</string>
@@ -73,6 +74,9 @@
     <!-- error messages -->
     <string name="device_sample_rate_not_supported">Microphone not supported yet. The developers have been informed.</string>
     <string name="device_sample_rate_not_supported_title">Microphone not supported</string>
-    <string name="text_origin">All texts from »The Picture of Dorian Gray« by Oscar Wilde</string>
+
+    <!-- permission request -->
+    <string name="mic_permission_explanation">In order to record your voice, you need to give Voice Pitch Analyzer permission to access this device\'s microphone.</string>
+    <string name="settings">Settings</string>
 
 </resources>

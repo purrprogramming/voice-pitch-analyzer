@@ -18,7 +18,7 @@
     <string name="female">weiblich</string>
     <string name="in_between">im Mittelfeld</string>
     <string name="male">männlich</string>
-    <string name="personal_range">Deine Stimmlange ist überwiegend</string>
+    <string name="personal_range">Deine Stimmlange klingt überwiegend</string>
     <string name="action_about">Über</string>
     <string name="libraries">Verwendete Libraries:</string>
     <string name="programming">Programmierung</string>
@@ -30,7 +30,7 @@
     <string name="results">Wenn Du fertig bist, drücke »stop« um Deine Ergebnisse zu sehen. Der Graph zeigt Dir (in Lila) die typischen ›männlichen‹ und ›weiblichen‹ Stimmlagenbereiche sowie Deinen eigenen (in Grau) an. Der Teil, der sich überlagert, kann sowohl als ›männlich‹ als auch als ›weiblich‹ wahrgenommen werden.</string>
     <string name="explanation">Um Deine Stimme zu analysieren, wird eine ca. einminütige Aufnahme benötigt. Du kannst dafür den angezeigten Text vorlesen, die Analyse funktioniert aber mit mit allem, sofern Du es in Deiner natürlichen Stimmlage eingesprochen hast.</string>
     <string name="app_name">Stimmanalyse</string>
-    <string name="device_sample_rate_not_supported">Leider wird dein Mikrofon momentan noch nicht unterstützt. Die Entwickelnden wurden über dieses Problem informiert.</string>
+    <string name="device_sample_rate_not_supported">Leider wird Dein Mikrofon momentan noch nicht unterstützt. Die Entwickelnden wurden über dieses Problem informiert.</string>
     <string name="device_sample_rate_not_supported_title">Dein Mikrofon wird nicht unterstützt.</string>
     <string name="pitch_max">Maximum</string>
     <string name="pitch_max_avg">Durchschnittliches Maximum</string>
@@ -46,4 +46,6 @@
     <string name="record_deleted">Aufnahme gelöscht</string>
     <string name="undo">Rückgängig</string>
     <string name="text_origin">Alle Texte stammen aus »Das Bildnis des Dorian Gray« von Oscar Wilde</string>
+    <string name="settings">Einstellungen</string>
+    <string name="mic_permission_explanation">Ohne die Erlaubnis, aufs Mikrophon zuzugreifen, kann Voice Pitch Analyzer Deine Stimme nicht aufnehmen.</string>
 </resources>

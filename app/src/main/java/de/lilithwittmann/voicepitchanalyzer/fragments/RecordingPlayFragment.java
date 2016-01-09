@@ -71,8 +71,8 @@ public class RecordingPlayFragment extends Fragment
             Double minPitch = pitchCalculator.getMin();
             Double maxPitch = pitchCalculator.getMax();
 
-            ((TextView) view.findViewById(R.id.pitch_min)).setText(String.format("%sHz", minPitch != null ? Math.round(minPitch) : "n/a"));
-            ((TextView) view.findViewById(R.id.pitch_max)).setText(String.format("%sHz", maxPitch != null ? Math.round(maxPitch) : "n/a"));
+            ((TextView) view.findViewById(R.id.pitch_min)).setText(String.format("%sHz", minPitch != null ? Math.round(minPitch) : "0"));
+            ((TextView) view.findViewById(R.id.pitch_max)).setText(String.format("%sHz", maxPitch != null ? Math.round(maxPitch) : "0"));
 
             if (average > 0)
             {

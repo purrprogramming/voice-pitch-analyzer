@@ -56,4 +56,13 @@ Microfone não é suportado ainda. Os desenvolvedores foram informados.
 <string name="empty">
 Por favor grave algo pressionando o ícone de microfone no canto superior direito.
 </string>
+    <string name="portuguese">Português</string>
+    <string name="italian">Italiano</string>
+    <string name="german">Alemão</string>
+    <string name="translation">Tradução</string>
+    <string name="undo">Desfazer</string>
+    <string name="english">Inglês</string>
+    <string name="androgynous_range">Extensão andrógina</string>
+    <string name="text_origin">Texto: Oscar Wilde - O Retrato de Dorian Gray</string>
+    <string name="settings">Definições</string>
 </resources>

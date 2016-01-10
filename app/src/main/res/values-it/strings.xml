@@ -66,5 +66,5 @@ Sei pregato di registrare qualcosa premendo l\'icona del microfono sull\'angolo 
     <string name="text_origin">Testo: Oscar Wilde - Il Ritratto di Dorian Gray</string>
     <string name="record_deleted">Registrazione cancellato</string>
     <string name="settings">Impostazioni</string>
-    <string name="mic_permission_explanation"></string>
+    <string name="mic_permission_explanation">L\'autorizzazione per accedere al microfono è necessaria per registrare la tua voce.</string>
 </resources>

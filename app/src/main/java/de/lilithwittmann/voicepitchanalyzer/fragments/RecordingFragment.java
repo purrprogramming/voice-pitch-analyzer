@@ -186,6 +186,7 @@ public class RecordingFragment extends Fragment
                         }
                     }
                 }
+
                 else
                 {
                     if (recordPitch())
@@ -264,8 +265,8 @@ public class RecordingFragment extends Fragment
 
         if (permissionCheck == PackageManager.PERMISSION_GRANTED)
         {
+            this.setSampleRate();
             this.enableRecordButton();
-
         }
 
         else
@@ -318,6 +319,7 @@ public class RecordingFragment extends Fragment
                     // show explanation why mic permission is needed
                     AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                     builder.setMessage(R.string.mic_permission_explanation)
+                            .setTitle(R.string.mic_permission_title)
                             .setPositiveButton(R.string.settings, new DialogInterface.OnClickListener()
                             {
                                 @Override

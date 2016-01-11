@@ -78,5 +78,6 @@
     <!-- permission request -->
     <string name="mic_permission_explanation">In order to record your voice, you need to give Voice Pitch Analyzer permission to access this device\'s microphone.</string>
     <string name="settings">Settings</string>
+    <string name="mic_permission_title">Microphone Access required</string>
 
 </resources>

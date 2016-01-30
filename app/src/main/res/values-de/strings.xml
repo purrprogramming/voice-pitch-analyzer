@@ -48,4 +48,7 @@
     <string name="text_origin">Alle Texte stammen aus »Das Bildnis des Dorian Gray« von Oscar Wilde</string>
     <string name="settings">Einstellungen</string>
     <string name="mic_permission_explanation">Ohne die Erlaubnis, aufs Mikrophon zuzugreifen, kann Voice Pitch Analyzer Deine Stimme nicht aufnehmen.</string>
+    <string name="mic_permission_title">Mikrophonzugang benötigt</string>
+    <string name="progress">Fortschritt</string>
+    <string name="title_activity_progress">Gesamtfortschritt</string>
 </resources>

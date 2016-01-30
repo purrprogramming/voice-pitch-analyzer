@@ -67,4 +67,7 @@ Por favor grave algo pressionando o ícone de microfone no canto superior direit
     <string name="settings">Definições</string>
     <string name="mic_permission_explanation">In order to record your voice, you need to give Voice Pitch Analyzer permission to access this device\'s microphone.</string>
     <string name="record_deleted">Gravação excluído</string>
+    <string name="mic_permission_title">Acesso ao microfone necessário</string>
+    <string name="progress">Progresso </string>
+    <string name="title_activity_progress">Progresso total</string>
 </resources>

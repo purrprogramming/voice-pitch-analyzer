@@ -5,6 +5,8 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.format.DateFormat;
 
+import com.github.mikephil.charting.data.Entry;
+
 import java.util.Date;
 
 /**
@@ -89,6 +91,11 @@ public class Recording implements Parcelable {
 
     public void setRecording(String recording) {
         this.recording = recording;
+    }
+
+    public Entry getGraphEntry()
+    {
+        return new Entry((float) this.getRange().getAvg(), (int) this.getDate().getTime());
     }
 
     @Override

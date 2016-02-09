@@ -11,7 +11,6 @@ import de.lilithwittmann.voicepitchanalyzer.R;
 
 public class AboutActivity extends ActionBarActivity
 {
-
     private static final String LOG_TAG = AboutActivity.class.getSimpleName();
 
     @Override

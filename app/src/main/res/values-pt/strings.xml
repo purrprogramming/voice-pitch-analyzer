@@ -21,7 +21,7 @@ Média Mínima: %1$sHz, Média Máxima: %2$sHz, Média: %3$sHz
 <string name="male_range">Extensão masculina</string>
 <string name="female_range">Extensão feminina</string>
 <string name="your_range">Sua Extensão</string>
-<string name="personal_range">Sua Extensão é principalmente</string>
+<string name="personal_range">Sua extensão é principalmente</string>
 <string name="male">masculina</string>
 <string name="female">feminina</string>
 <string name="in_between">no meio</string>

@@ -111,7 +111,6 @@
         android:stretchColumns="1">
 
         <TableRow>
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -126,7 +125,6 @@
         </TableRow>
 
         <TableRow>
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -138,6 +136,20 @@
                 android:layout_height="match_parent"
                 android:gravity="right"
                 android:text="@string/gpl"/>
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/jodatime"/>
+
+            <TextView
+                android:id="@+id/apache2"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="right"
+                android:text="@string/apache_licence"/>
         </TableRow>
     </TableLayout>
 

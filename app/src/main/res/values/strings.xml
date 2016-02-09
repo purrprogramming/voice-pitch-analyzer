@@ -56,6 +56,7 @@
     <string name="apache_licence" translatable="false"><a href="http://www.apache.org/licenses/LICENSE-2.0">Apache 2.0</a></string>
     <string name="tarsos_dsp" translatable="false">TarsosDSP</string>
     <string name="gpl" translatable="false"><a href="http://www.gnu.org/licenses/gpl-3.0.en.html">GPL 3.0</a></string>
+    <string name="jodatime" translatable="false">Joda Time</string>
     <string name="translation">Translation</string>
     <string name="english">English</string>
     <string name="german">German</string>

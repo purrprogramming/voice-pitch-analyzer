@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.YAxis;
-import com.github.mikephil.charting.data.ChartData;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 
@@ -47,9 +46,10 @@ public class ProgressFragment extends Fragment
         if (this.recordings != null)
         {
             LineDataSet dataSet = new LineDataSet(this.recordings.getGraphEntries(), getResources().getString(R.string.progress));
-            LineData lineData = new LineData(ChartData.generateXVals(0, dataSet.getEntryCount()), dataSet);
+            LineData lineData = new LineData(this.recordings.getDates(), dataSet);
 
             dataSet.setDrawCubic(true);
+            dataSet.enableDashedLine(10, 10, 0);
 
             dataSet.setCircleColor(getResources().getColor(R.color.indicators));
             dataSet.setColor(getResources().getColor(R.color.indicators));

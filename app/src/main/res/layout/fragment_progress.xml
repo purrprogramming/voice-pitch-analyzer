@@ -4,7 +4,7 @@
              android:layout_height="match_parent"
              tools:context="de.lilithwittmann.voicepitchanalyzer.fragments.ProgressFragment">
 
-    <com.github.mikephil.charting.charts.LineChart
+    <com.github.mikephil.charting.charts.CombinedChart
         android:id="@+id/progress_chart"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

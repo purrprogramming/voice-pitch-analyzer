@@ -10,19 +10,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.charts.CombinedChart;
 import com.github.mikephil.charting.components.YAxis;
+import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.ChartData;
+import com.github.mikephil.charting.data.CombinedData;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.Highlight;
 
+import java.util.List;
+
 import de.lilithwittmann.voicepitchanalyzer.R;
 import de.lilithwittmann.voicepitchanalyzer.activities.RecordViewActivity;
-import de.lilithwittmann.voicepitchanalyzer.utils.GraphValueFormatter;
-import de.lilithwittmann.voicepitchanalyzer.utils.PitchCalculator;
+import de.lilithwittmann.voicepitchanalyzer.utils.GraphLayout;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -74,55 +77,39 @@ public class RecordGraphFragment extends Fragment implements OnChartValueSelecte
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState)
     {
-        LineChart chart = (LineChart) view.findViewById(R.id.recording_chart);
+        CombinedChart chart = (CombinedChart) view.findViewById(R.id.recording_chart);
         LineDataSet dataSet = new LineDataSet(RecordViewActivity.currentRecord.getRange().getGraphEntries(), getResources().getString(R.string.pitch_graph_single_recording));
 
-        dataSet.setCircleColor(getResources().getColor(R.color.indicators));
-        dataSet.setColor(getResources().getColor(R.color.indicators));
+        // generate x value strings
+        // [1, 2, 3,... basically random numbers as the recorded pitch is based on processor speed]
+        List<String> xVals = ChartData.generateXVals(0, dataSet.getEntryCount());
+        CombinedData data = new CombinedData(xVals);
+        BarData barData = new BarData(xVals, GraphLayout.getOverallRange(this.getContext(), xVals.size()));
 
-        LineData lineData = new LineData(ChartData.generateXVals(0, dataSet.getEntryCount()), dataSet);
-        chart.setData(lineData);
+        dataSet.setColor(getResources().getColor(R.color.canvas_dark));
+        dataSet.setDrawCircles(false);
+        dataSet.setLineWidth(2f);
+        dataSet.setDrawValues(false);
 
-        long minPitch = Math.round(PitchCalculator.minPitch);
-        long maxPitch = Math.round(PitchCalculator.maxPitch);
-
-        // set min/max values etc. for axes
         dataSet.setAxisDependency(YAxis.AxisDependency.LEFT);
-        chart.getAxisLeft().setStartAtZero(false);
-        chart.getAxisRight().setStartAtZero(false);
-        chart.getAxisLeft().setAxisMaxValue(maxPitch);
-        chart.getAxisRight().setAxisMaxValue(maxPitch);
-        chart.getAxisRight().setAxisMinValue(minPitch);
-        chart.getAxisLeft().setAxisMinValue(minPitch);
 
-        //        chart.getAxisLeft().setAxisMaxValue(dataSet.getYMax());
-        //        chart.getAxisRight().setAxisMaxValue(dataSet.getYMax());
-        //        chart.getAxisRight().setAxisMinValue(dataSet.getYMin());
-        //        chart.getAxisLeft().setAxisMinValue(dataSet.getYMin());
+        LineData lineData = new LineData(xVals, dataSet);
+        data.setData(lineData);
+        data.setData(barData);
+        chart.setData(data);
 
-        // hide grid lines & borders
-        chart.getAxisLeft().setDrawGridLines(false);
-        chart.getAxisRight().setDrawGridLines(false);
-        chart.getXAxis().setDrawGridLines(false);
-        chart.getAxisLeft().setValueFormatter(new GraphValueFormatter());
-        chart.getAxisRight().setValueFormatter(new GraphValueFormatter());
-        chart.setDrawBorders(false);
+        chart.setDrawValueAboveBar(false);
+        chart.setDrawOrder(new CombinedChart.DrawOrder[]{
+                CombinedChart.DrawOrder.BAR,
+                CombinedChart.DrawOrder.BUBBLE,
+                CombinedChart.DrawOrder.CANDLE,
+                CombinedChart.DrawOrder.LINE,
+                CombinedChart.DrawOrder.SCATTER
+        });
 
-        chart.setDescription("");
+        GraphLayout.FormatChart(chart);
 
-        // disable all interactions except highlighting selection
-        //        chart.setTouchEnabled(false);
-        chart.setTouchEnabled(false);
-        chart.setScaleEnabled(false);
-        chart.setPinchZoom(false);
-        chart.setDoubleTapToZoomEnabled(false);
-        chart.setDrawGridBackground(false);
-
-        chart.setHighlightEnabled(true);
-
-        chart.setHardwareAccelerationEnabled(true);
-//        chart.animateX(3000);
-        chart.getLegend().setEnabled(false);
+        //        chart.animateX(3000);
         super.onViewCreated(view, savedInstanceState);
     }
 

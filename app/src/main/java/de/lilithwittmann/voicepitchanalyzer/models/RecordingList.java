@@ -51,7 +51,6 @@ public class RecordingList
     public List<Entry> getGraphEntries()
     {
         List<Entry> result = new ArrayList<Entry>();
-        //        int i = -1;
         Date lastDate = new Date(0);
 
         Log.i("test", String.format("duration: %s", (int) new Duration(new DateTime(this.getBeginning()), new DateTime(this.getEnd())).getStandardDays()));

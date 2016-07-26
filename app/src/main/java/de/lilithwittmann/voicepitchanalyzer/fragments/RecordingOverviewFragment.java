@@ -85,7 +85,9 @@ public class RecordingOverviewFragment extends Fragment implements SurfaceHolder
         Paint textPaint = new Paint();
 
         textPaint.setColor(getResources().getColor(android.R.color.black));
-        textPaint.setTextSize(20);
+
+        int labelPxSize = getResources().getDimensionPixelSize(R.dimen.medium_font_size);
+        textPaint.setTextSize(labelPxSize);
 
         p.setColor(getResources().getColor(R.color.canvas_dark));
         p.setAlpha(128);
@@ -125,7 +127,7 @@ public class RecordingOverviewFragment extends Fragment implements SurfaceHolder
         canvas.drawText(getResources().getString(R.string.androgynous_range), this.gradient.getWidth() - 10, this.gradient.getHeight() - (float)
                 ((PitchCalculator.maxMalePitch - PitchCalculator.minPitch) * pxPerHz) + 20, textPaint);
         //draw pitch labels
-        textPaint.setTextSize(20);
+        textPaint.setTextSize(labelPxSize);
         textPaint.setTextAlign(Paint.Align.LEFT);
         //min_male
         canvas.drawText(String.valueOf(PitchCalculator.minMalePitch), 10, this.gradient.getHeight() - (float)

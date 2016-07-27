@@ -97,33 +97,65 @@ public class RecordingPlayFragment extends Fragment
                 ((TextView) view.findViewById(R.id.personal_range)).setText(getResources().getString(R.string.unknown));
             }
 
-            final ImageButton playButton = ((ImageButton) view.findViewById(R.id.play_button));
-
-            playButton.setOnClickListener(new View.OnClickListener()
-            {
-                @Override
-                public void onClick(View v)
-                {
-                    if (player == null)
-                    {
-                        player = new AudioPlayer(getActivity().getFileStreamPath(RecordViewActivity.currentRecord.getRecording()));
-                    }
-
-                    if (player.isPlaying())
-                    {
-                        Log.i(LOG_TAG, "stop");
-                        player.stop();
-                        playButton.setImageResource(R.drawable.ic_play);
-                    }
-
-                    else
-                    {
-                        Log.i(LOG_TAG, "play");
-                        player.play();
-                        playButton.setImageResource(R.drawable.ic_pause_circle_black);
-                    }
-                }
-            });
+            initializePlayButton(view);
         }
     }
+
+    private void initializePlayButton(View view) {
+        final ImageButton playButton = ((ImageButton) view.findViewById(R.id.play_button));
+
+        playButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                if (player == null)
+                {
+                    player = new AudioPlayer(getActivity().getFileStreamPath(RecordViewActivity.currentRecord.getRecording()));
+                }
+
+                if (player.isPlaying())
+                {
+                    Log.i(LOG_TAG, "stop");
+                    player.stop();
+                    playButton.setImageResource(R.drawable.ic_play);
+                }
+
+                else
+                {
+                    Log.i(LOG_TAG, "play");
+                    player.play();
+                    playButton.setImageResource(R.drawable.ic_pause_circle_black);
+                }
+            }
+        });
+    }
+
+
+    public void onStop() {
+        super.onStop();
+        stopAudio();
+    }
+
+    public void onPause() {
+        super.onPause();
+        stopAudio();
+    }
+
+    public void onDestroyView() {
+        super.onDestroyView();
+        stopAudio();
+    }
+
+    private void stopAudio() {
+        try
+        {
+            if (player != null)
+                player.stop();
+        } catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
 }

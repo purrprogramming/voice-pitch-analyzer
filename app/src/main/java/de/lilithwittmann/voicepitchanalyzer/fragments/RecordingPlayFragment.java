@@ -4,9 +4,11 @@ package de.lilithwittmann.voicepitchanalyzer.fragments;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import de.lilithwittmann.voicepitchanalyzer.R;
@@ -95,29 +97,33 @@ public class RecordingPlayFragment extends Fragment
                 ((TextView) view.findViewById(R.id.personal_range)).setText(getResources().getString(R.string.unknown));
             }
 
-            //            ((ImageButton) view.findViewById(R.id.play_button)).setOnClickListener(new View.OnClickListener()
-            //            {
-            //                @Override
-            //                public void onClick(View v)
-            //                {
-            //                    if (player == null)
-            //                    {
-            //                        player = new AudioPlayer(getActivity().getFileStreamPath(RecordViewActivity.currentRecord.getRecording()));
-            //                    }
-            //
-            //                    if (player.isPlaying())
-            //                    {
-            //                        Log.i(LOG_TAG, "stop");
-            //                        player.stop();
-            //                    }
-            //
-            //                    else
-            //                    {
-            //                        Log.i(LOG_TAG, "play");
-            //                        player.play();
-            //                    }
-            //                }
-            //            });
+            final ImageButton playButton = ((ImageButton) view.findViewById(R.id.play_button));
+
+            playButton.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    if (player == null)
+                    {
+                        player = new AudioPlayer(getActivity().getFileStreamPath(RecordViewActivity.currentRecord.getRecording()));
+                    }
+
+                    if (player.isPlaying())
+                    {
+                        Log.i(LOG_TAG, "stop");
+                        player.stop();
+                        playButton.setImageResource(R.drawable.ic_play);
+                    }
+
+                    else
+                    {
+                        Log.i(LOG_TAG, "play");
+                        player.play();
+                        playButton.setImageResource(R.drawable.ic_pause_circle_black);
+                    }
+                }
+            });
         }
     }
 }

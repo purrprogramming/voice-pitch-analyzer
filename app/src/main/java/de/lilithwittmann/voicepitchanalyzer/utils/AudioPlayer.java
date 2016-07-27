@@ -21,22 +21,15 @@ public class AudioPlayer
 
     public AudioPlayer(File file)
     {
-
-        int sampleRate = SampleRateCalculator.getMaxSupportedSampleRate();
-        Integer bufferSize = AudioTrack.getMinBufferSize(sampleRate, AudioFormat.CHANNEL_OUT_MONO, android.media.AudioFormat.CHANNEL_OUT_MONO) * 2;
-        track = new AudioTrack(AudioManager.STREAM_MUSIC, sampleRate, AudioFormat.CHANNEL_OUT_MONO,
-                AudioFormat.ENCODING_PCM_16BIT,
-                bufferSize,
-                AudioTrack.MODE_STREAM);
-
         this.file = file;
     }
 
-
     public void play()
     {
+        initializeTrack();
+
         byte[] byteData = new byte[(int) file.length()];
-        Log.d("audioPlayer fileLength", (int) file.length() + "");
+        Log.d("audioPlayer fileLength", (int) file.length() + " " + file.getAbsolutePath());
 
         FileInputStream in = null;
         try
@@ -44,10 +37,6 @@ public class AudioPlayer
             in = new FileInputStream(file);
             in.read(byteData);
             in.close();
-        } catch (FileNotFoundException e)
-        {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
         } catch (IOException e)
         {
             e.printStackTrace();
@@ -67,7 +56,15 @@ public class AudioPlayer
         {
             Log.d("audioPlayer", "audio track is not initialised ");
         }
+    }
 
+    private void initializeTrack() {
+        int sampleRate = SampleRateCalculator.getMaxSupportedSampleRate();
+        Integer bufferSize = AudioTrack.getMinBufferSize(sampleRate, AudioFormat.CHANNEL_OUT_MONO, AudioFormat.CHANNEL_OUT_MONO) * 2;
+        track = new AudioTrack(AudioManager.STREAM_MUSIC, sampleRate, AudioFormat.CHANNEL_OUT_MONO,
+                AudioFormat.ENCODING_PCM_16BIT,
+                bufferSize,
+                AudioTrack.MODE_STREAM);
     }
 
     public void stop()

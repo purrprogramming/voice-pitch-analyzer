@@ -460,9 +460,9 @@ public class RecordingFragment extends Fragment
                 e.printStackTrace();
             }
 
-            //this.recorder = new AudioRecorder(this.sampleRate, this.bufferRate, fos);
+            this.recorder = new AudioRecorder(this.sampleRate, this.bufferRate, fos);
             dispatcher.addAudioProcessor(p);
-            //dispatcher.addAudioProcessor(recorder);
+            dispatcher.addAudioProcessor(recorder);
             this.recordThread = new Thread(dispatcher, "Audio Dispatcher");
             this.recordThread.start();
 

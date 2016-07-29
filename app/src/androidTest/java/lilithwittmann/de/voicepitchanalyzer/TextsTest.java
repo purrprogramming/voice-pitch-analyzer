@@ -1,4 +1,4 @@
-package de.lilithwittmann.voicepitchanalyzer;
+package lilithwittmann.de.voicepitchanalyzer;
 
 import android.test.ActivityUnitTestCase;
 import android.test.suitebuilder.annotation.SmallTest;

@@ -1,7 +1,8 @@
 package de.lilithwittmann.voicepitchanalyzer.fragments;
 
-
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -16,10 +17,6 @@ import de.lilithwittmann.voicepitchanalyzer.activities.RecordViewActivity;
 import de.lilithwittmann.voicepitchanalyzer.utils.AudioPlayer;
 import de.lilithwittmann.voicepitchanalyzer.utils.PitchCalculator;
 
-
-/**
- * A simple {@link Fragment} subclass.
- */
 public class RecordingPlayFragment extends Fragment
 {
     private static final String ARG_SECTION_NUMBER = "section_number";
@@ -111,7 +108,7 @@ public class RecordingPlayFragment extends Fragment
             {
                 if (player == null)
                 {
-                    player = new AudioPlayer(getActivity().getFileStreamPath(RecordViewActivity.currentRecord.getRecording()));
+                    player = createAudioPlayer(v);
                 }
 
                 if (player.isPlaying())
@@ -131,6 +128,28 @@ public class RecordingPlayFragment extends Fragment
         });
     }
 
+    private AudioPlayer createAudioPlayer(final View view) {
+        AudioPlayer player = new AudioPlayer(getActivity().getFileStreamPath(RecordViewActivity.currentRecord.getRecording()));
+
+        AudioEndHandler handler = new AudioEndHandler(view);
+        player.setOnAudioEnd(handler);
+
+        return player;
+    }
+
+    private static class AudioEndHandler extends Handler {
+        private final View view;
+
+        AudioEndHandler(View view) {
+            this.view = view;
+        }
+
+        public void handleMessage(Message msg)
+        {
+            final ImageButton playButton = ((ImageButton) view.findViewById(R.id.play_button));
+            playButton.setImageResource(R.drawable.ic_play);
+        }
+    }
 
     public void onStop() {
         super.onStop();

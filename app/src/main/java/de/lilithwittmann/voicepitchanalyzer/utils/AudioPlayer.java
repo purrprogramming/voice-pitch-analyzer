@@ -3,12 +3,13 @@ package de.lilithwittmann.voicepitchanalyzer.utils;
 import android.media.AudioFormat;
 import android.media.AudioManager;
 import android.media.AudioTrack;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
+import de.lilithwittmann.voicepitchanalyzer.R;
+import org.apache.commons.io.IOUtils;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 
 /**
  * Created by lilith on 7/6/15.
@@ -16,65 +17,73 @@ import java.io.IOException;
 public class AudioPlayer
 {
     private boolean isPlaying;
-    private final File file;
-    AudioTrack track = null;
+    private InputStream audioIn;
+    private byte[] audioData;
+
+    private AudioTrack track = null;
+
+    private Handler onAudioEnd = new Handler();
 
     public AudioPlayer(File file)
     {
-        this.file = file;
+        try {
+            audioIn = new FileInputStream(file);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public AudioPlayer(InputStream audio)
+    {
+        this.audioIn = audio;
     }
 
     public void play()
     {
         initializeTrack();
+        if (audioData == null)
+            audioData = readAudioData();
 
-        final byte[] byteData = new byte[(int) file.length()];
-        Log.d("audioPlayer fileLength", (int) file.length() + " " + file.getAbsolutePath());
+        asyncPlayTrack(audioData, this.track);
+    }
 
-        FileInputStream in = null;
+    private byte[] readAudioData() {
+        byte[] audioData = new byte[0];
+
         try
         {
-            in = new FileInputStream(file);
-            in.read(byteData);
-            in.close();
+            audioData = IOUtils.toByteArray(audioIn);
         } catch (IOException e)
         {
             e.printStackTrace();
+            onAudioEnd.sendEmptyMessage(-1);
         }
 
-        if (track != null)
-        {
-            asyncPlayTrack(byteData);
-        }
-        else
-        {
-            Log.d("audioPlayer", "audio track is not initialised ");
-        }
+        return audioData;
     }
 
-    private void asyncPlayTrack(final byte[] byteData) {
+    private void asyncPlayTrack(final byte[] byteData, final AudioTrack track) {
         new Thread(new Runnable()
         {
             public void run()
             {
                 isPlaying = true;
                 track.play();
-
                 track.write(byteData, 0, byteData.length);
+
                 if (isTrackInitialized())
-                {
-                    track.stop();
-                    track.release();
-                }
+                    tryStopPlayer();
 
                 isPlaying = false;
+                onAudioEnd.sendEmptyMessage(0);
             }
         }).start();
     }
 
     private void initializeTrack() {
         int sampleRate = SampleRateCalculator.getMaxSupportedSampleRate();
-        Integer bufferSize = AudioTrack.getMinBufferSize(sampleRate, AudioFormat.CHANNEL_OUT_MONO, AudioFormat.CHANNEL_OUT_MONO) * 2;
+        Integer bufferSize = AudioTrack.getMinBufferSize(
+                sampleRate, AudioFormat.CHANNEL_OUT_MONO, AudioFormat.CHANNEL_OUT_MONO) * 2;
 
         track = new AudioTrack(AudioManager.STREAM_MUSIC, sampleRate, AudioFormat.CHANNEL_OUT_MONO,
                 AudioFormat.ENCODING_PCM_16BIT,
@@ -87,17 +96,23 @@ public class AudioPlayer
         if (!isTrackInitialized())
             return;
 
+        tryStopPlayer();
+
+        this.isPlaying = false;
+    }
+
+    private void tryStopPlayer() {
         try
         {
+            // pause() appears to be more snappy in audio cutoff than stop()
             this.track.pause();
             this.track.flush();
             this.track.release();
         } catch (IllegalStateException e)
         {
-            e.printStackTrace();
+            // Calling from multiple threads exception, doesn't matter, so just eat it in the rare event it occurs.
+            // AudioTrack appears fine for multiple thread usage otherwise.
         }
-
-        this.isPlaying = false;
     }
 
     private boolean isTrackInitialized() {
@@ -108,5 +123,9 @@ public class AudioPlayer
     public boolean isPlaying()
     {
         return isPlaying;
+    }
+
+    public void setOnAudioEnd(Handler onAudioEnd) {
+        this.onAudioEnd = onAudioEnd;
     }
 }

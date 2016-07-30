@@ -101,6 +101,13 @@ public class RecordingPlayFragment extends Fragment
     private void initializePlayButton(View view) {
         final ImageButton playButton = ((ImageButton) view.findViewById(R.id.play_button));
 
+        String audioFile = RecordViewActivity.currentRecord.getRecording();
+        if (audioFile == null || audioFile.isEmpty())
+        {
+            playButton.setVisibility(View.GONE);
+            return;
+        }
+
         playButton.setOnClickListener(new View.OnClickListener()
         {
             @Override

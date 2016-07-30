@@ -41,6 +41,7 @@ import de.lilithwittmann.voicepitchanalyzer.models.PitchRange;
 import de.lilithwittmann.voicepitchanalyzer.models.Recording;
 import de.lilithwittmann.voicepitchanalyzer.models.Texts;
 import de.lilithwittmann.voicepitchanalyzer.models.database.RecordingDB;
+import de.lilithwittmann.voicepitchanalyzer.models.database.StorageMaintainer;
 import de.lilithwittmann.voicepitchanalyzer.utils.AudioRecorder;
 import de.lilithwittmann.voicepitchanalyzer.utils.PitchCalculator;
 import de.lilithwittmann.voicepitchanalyzer.utils.SampleRateCalculator;
@@ -177,6 +178,9 @@ public class RecordingFragment extends Fragment
 
                         RecordingDB recordingDB = new RecordingDB(getActivity());
                         currentRecord = recordingDB.saveRecording(currentRecord);
+
+                        StorageMaintainer maintainer = new StorageMaintainer(getActivity());
+                        maintainer.cleanupStorage();
 
                         v.setVisibility(View.INVISIBLE);
 

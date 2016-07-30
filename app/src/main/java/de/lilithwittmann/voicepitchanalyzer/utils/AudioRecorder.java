@@ -16,16 +16,9 @@ import be.tarsos.dsp.AudioProcessor;
  */
 public class AudioRecorder implements AudioProcessor {
     private final FileOutputStream file;
-    AudioTrack track = null;
     private boolean firstRun;
 
     public AudioRecorder(Integer sampleRate, Integer bufferRate, FileOutputStream file) {
-        Integer bufferSize = AudioTrack.getMinBufferSize(sampleRate, AudioFormat.CHANNEL_OUT_MONO, android.media.AudioFormat.CHANNEL_OUT_MONO) * 2;
-        track = new AudioTrack(AudioManager.STREAM_MUSIC, sampleRate, AudioFormat.CHANNEL_OUT_MONO,
-                AudioFormat.ENCODING_PCM_16BIT,
-                bufferSize,
-                AudioTrack.MODE_STREAM);
-
         this.file = file;
     }
 

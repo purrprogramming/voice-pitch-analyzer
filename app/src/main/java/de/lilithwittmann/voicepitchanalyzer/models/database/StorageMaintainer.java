@@ -3,6 +3,7 @@ package de.lilithwittmann.voicepitchanalyzer.models.database;
 
 import android.content.Context;
 import android.util.Log;
+import com.crashlytics.android.Crashlytics;
 import de.lilithwittmann.voicepitchanalyzer.models.Recording;
 
 import java.io.File;
@@ -15,7 +16,7 @@ import static de.lilithwittmann.voicepitchanalyzer.models.database.RecordingDB.R
  * sure storage used does not exceed a certain threshold.
  */
 public class StorageMaintainer {
-    private static final int MAX_RECORDINGS_SAVED = 150;
+    private static final int SAVED_RECORDINGS_LIMIT = 100;
     private final Context context;
 
     public StorageMaintainer(Context context) {
@@ -29,6 +30,7 @@ public class StorageMaintainer {
         } catch (Exception ex) {
             // Don't want to crash the app on a non completely necessary maintenance task so ignore exceptions.
             ex.printStackTrace();
+            Crashlytics.log(Log.DEBUG, "storage limiter", "Error removing old recording files: " + ex.getMessage());
         }
     }
 
@@ -38,10 +40,10 @@ public class StorageMaintainer {
         List<Recording> recordings = db.getRecordings(COLUMN_NAME_FILE + " IS NOT NULL");
         Log.d("storage maintainer", "Found " + recordings.size() + " recordings with files.");
 
-        if (recordings.size() < MAX_RECORDINGS_SAVED)
+        if (recordings.size() < SAVED_RECORDINGS_LIMIT)
             return;
 
-        List<Recording> toDelete = recordings.subList(MAX_RECORDINGS_SAVED, recordings.size());
+        List<Recording> toDelete = recordings.subList(SAVED_RECORDINGS_LIMIT, recordings.size());
         int deletedCount = 0;
 
         for (Recording recordOn : toDelete)

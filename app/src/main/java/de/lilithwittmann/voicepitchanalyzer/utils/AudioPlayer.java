@@ -12,7 +12,8 @@ import org.apache.commons.io.IOUtils;
 import java.io.*;
 
 /**
- * Created by lilith on 7/6/15.
+ * Since we process mic input with TarsosDSP which can only does pcm without extra work we have to use
+ * AudioTrack instead of MediaPlayer for playback which requires this little player to be written around it.
  */
 public class AudioPlayer
 {
@@ -44,22 +45,33 @@ public class AudioPlayer
         if (audioData == null)
             audioData = readAudioData();
 
+        float length = getTrackLength();
+        Log.d("audio player", "track length: " + length + " seconds");
+
         asyncPlayTrack(audioData, this.track);
     }
 
-    private byte[] readAudioData() {
-        byte[] audioData = new byte[0];
+    public void stop()
+    {
+        if (!isTrackInitialized())
+            return;
 
-        try
-        {
-            audioData = IOUtils.toByteArray(audioIn);
-        } catch (IOException e)
-        {
-            e.printStackTrace();
-            onAudioEnd.sendEmptyMessage(-1);
-        }
+        tryStopPlayer();
 
-        return audioData;
+        this.isPlaying = false;
+    }
+
+    private void initializeTrack() {
+        int sampleRate = SampleRateCalculator.getMaxSupportedSampleRate();
+        Integer bufferSize = AudioTrack.getMinBufferSize(
+                sampleRate, AudioFormat.CHANNEL_OUT_MONO, AudioFormat.CHANNEL_OUT_MONO) * 2;
+
+        track = new AudioTrack(AudioManager.STREAM_MUSIC,
+                sampleRate,
+                AudioFormat.CHANNEL_OUT_MONO,
+                AudioFormat.ENCODING_PCM_16BIT,
+                bufferSize,
+                AudioTrack.MODE_STREAM);
     }
 
     private void asyncPlayTrack(final byte[] byteData, final AudioTrack track) {
@@ -80,25 +92,19 @@ public class AudioPlayer
         }).start();
     }
 
-    private void initializeTrack() {
-        int sampleRate = SampleRateCalculator.getMaxSupportedSampleRate();
-        Integer bufferSize = AudioTrack.getMinBufferSize(
-                sampleRate, AudioFormat.CHANNEL_OUT_MONO, AudioFormat.CHANNEL_OUT_MONO) * 2;
+    private byte[] readAudioData() {
+        byte[] audioData = new byte[0];
 
-        track = new AudioTrack(AudioManager.STREAM_MUSIC, sampleRate, AudioFormat.CHANNEL_OUT_MONO,
-                AudioFormat.ENCODING_PCM_16BIT,
-                bufferSize,
-                AudioTrack.MODE_STREAM);
-    }
+        try
+        {
+            audioData = IOUtils.toByteArray(audioIn);
+        } catch (IOException e)
+        {
+            e.printStackTrace();
+            onAudioEnd.sendEmptyMessage(-1);
+        }
 
-    public void stop()
-    {
-        if (!isTrackInitialized())
-            return;
-
-        tryStopPlayer();
-
-        this.isPlaying = false;
+        return audioData;
     }
 
     private void tryStopPlayer() {
@@ -125,7 +131,12 @@ public class AudioPlayer
         return isPlaying;
     }
 
-    public void setOnAudioEnd(Handler onAudioEnd) {
-        this.onAudioEnd = onAudioEnd;
+    public void setOnComplete(Handler onComplete) {
+        this.onAudioEnd = onComplete;
+    }
+
+    private float getTrackLength() {
+        int sampleRate = SampleRateCalculator.getMaxSupportedSampleRate();
+        return (float) ((audioData.length/sampleRate) / 2.0);
     }
 }

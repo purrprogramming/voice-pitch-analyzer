@@ -16,7 +16,7 @@ import be.tarsos.dsp.AudioProcessor;
  */
 public class AudioRecorder implements AudioProcessor {
     private final FileOutputStream file;
-    private boolean firstRun;
+    private boolean firstRun = true;
 
     public AudioRecorder(Integer sampleRate, Integer bufferRate, FileOutputStream file) {
         this.file = file;
@@ -25,7 +25,7 @@ public class AudioRecorder implements AudioProcessor {
     @Override
     public boolean process(AudioEvent audioEvent) {
         if (audioEvent == null)
-            return false;
+            return true;
 
         Log.d("recording audio", String.valueOf(audioEvent.getTimeStamp()));
 
@@ -35,7 +35,7 @@ public class AudioRecorder implements AudioProcessor {
         }
 
         try {
-            this.file.write(audioEvent.getByteBuffer(), 0, audioEvent.getBufferSize());
+            this.file.write(audioEvent.getByteBuffer());
         } catch (IOException e) {
             e.printStackTrace();
         }

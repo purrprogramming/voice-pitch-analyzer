@@ -139,7 +139,7 @@ public class RecordingPlayFragment extends Fragment
         AudioPlayer player = new AudioPlayer(getActivity().getFileStreamPath(RecordViewActivity.currentRecord.getRecording()));
 
         AudioEndHandler handler = new AudioEndHandler(view);
-        player.setOnAudioEnd(handler);
+        player.setOnComplete(handler);
 
         return player;
     }

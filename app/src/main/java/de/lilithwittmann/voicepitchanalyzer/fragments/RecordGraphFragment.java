@@ -42,6 +42,8 @@ public class RecordGraphFragment extends Fragment implements OnChartValueSelecte
      */
     private static final String ARG_SECTION_NUMBER = "section_number";
     private OnFragmentInteractionListener mListener;
+    private LineDataSet dataSet;
+    private LineData lineData;
 
     public RecordGraphFragment()
     {
@@ -77,12 +79,12 @@ public class RecordGraphFragment extends Fragment implements OnChartValueSelecte
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState)
     {
         LineChart chart = (LineChart) view.findViewById(R.id.recording_chart);
-        LineDataSet dataSet = new LineDataSet(mListener.startingPitchEntries(), getResources().getString(R.string.pitch_graph_single_recording));
+        dataSet = new LineDataSet(mListener.startingPitchEntries(), getResources().getString(R.string.pitch_graph_single_recording));
 
         dataSet.setCircleColor(getResources().getColor(R.color.indicators));
         dataSet.setColor(getResources().getColor(R.color.indicators));
 
-        LineData lineData = new LineData(ChartData.generateXVals(0, dataSet.getEntryCount()), dataSet);
+        lineData = new LineData(ChartData.generateXVals(0, dataSet.getEntryCount()), dataSet);
         chart.setData(lineData);
 
         long minPitch = Math.round(PitchCalculator.minPitch);
@@ -126,6 +128,19 @@ public class RecordGraphFragment extends Fragment implements OnChartValueSelecte
 //        chart.animateX(3000);
         chart.getLegend().setEnabled(false);
         super.onViewCreated(view, savedInstanceState);
+    }
+
+    public void addNewPitch(Entry pitch) {
+        if (dataSet == null || getView() == null)
+            return;
+
+        lineData.addXValue("" + pitch.getXIndex());
+        dataSet.addEntry(pitch);
+        lineData.notifyDataChanged();
+
+        LineChart chart = (LineChart) getView().findViewById(R.id.recording_chart);
+        chart.notifyDataSetChanged();
+        chart.invalidate();
     }
 
     @Override

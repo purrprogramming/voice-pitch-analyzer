@@ -6,7 +6,6 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -18,7 +17,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
 
 import com.crashlytics.android.Crashlytics;
 
@@ -26,7 +24,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Locale;
 import java.util.UUID;
 
 import be.tarsos.dsp.AudioDispatcher;
@@ -405,6 +402,8 @@ public class RecordingFragment extends Fragment
                         @Override
                         public void run()
                         {
+                            mListener.onPitchDetected(pitchInHz);
+
                             Log.i(LOG_TAG, String.format("Pitch: %s", pitchInHz));
                             calculator.addPitch((double) pitchInHz);
                             Log.i(LOG_TAG, String.format("Avg: %s (%s - %s)", calculator.calculatePitchAverage().toString(), calculator.calculateMinAverage().toString(), calculator.calculateMaxAverage().toString()));
@@ -442,7 +441,6 @@ public class RecordingFragment extends Fragment
 
         return false;
     }
-
 
     private boolean stopRecording()
     {
@@ -490,8 +488,10 @@ public class RecordingFragment extends Fragment
      */
     public interface OnFragmentInteractionListener
     {
-        public void onRecordFinished(long recordID);
+        void onPitchDetected(float pitchInHz);
 
-        public void onCancel();
+        void onRecordFinished(long recordID);
+
+        void onCancel();
     }
 }

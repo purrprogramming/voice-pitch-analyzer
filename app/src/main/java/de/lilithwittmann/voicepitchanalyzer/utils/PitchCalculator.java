@@ -15,6 +15,10 @@ public class PitchCalculator {
     public static Double maxFemalePitch = 255.0;
     public static Double minMalePitch = 85.0;
     public static Double maxMalePitch = 180.0;
+
+    private static final Double HIGHER_VOICE_CUT_OFF = 145.0;
+    private static final Double LOWER_VOICE_CUT_OFF = 110.0;
+
     private List<Double> pitches = new ArrayList<Double>();
 
     public static <T> List<T> copyList(List<T> source) {
@@ -26,7 +30,12 @@ public class PitchCalculator {
     }
 
     public Boolean addPitch(Double pitch) {
-        if (pitch > minPitch && pitch < maxPitch) {
+        // if voice is a 'high' voice we can confidently bump up the minPitch a little to remove
+        // annoying extraneous pitch result points and same for low voices
+        Double minPitchCutoff = getMinPitchCutoff();
+        Double maxPitchCutoff = getMaxPitchCutoff();
+
+        if (pitch > minPitchCutoff && pitch < maxPitchCutoff) {
             this.pitches.add(pitch);
             return Boolean.TRUE;
         }
@@ -94,5 +103,19 @@ public class PitchCalculator {
         return sum;
     }
 
+    private Double getMinPitchCutoff() {
+        Double minPitchCutoff = minPitch;
+        if (calculatePitchAverage() > HIGHER_VOICE_CUT_OFF)
+            minPitchCutoff = 85.0;
 
+        return minPitchCutoff;
+    }
+
+    private Double getMaxPitchCutoff() {
+        Double maxPitchCutoff = maxPitch;
+        if (calculatePitchAverage() < LOWER_VOICE_CUT_OFF)
+            maxPitchCutoff = 255.0;
+
+        return maxPitchCutoff;
+    }
 }

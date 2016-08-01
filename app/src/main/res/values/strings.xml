@@ -84,4 +84,5 @@
     <!-- progress -->
     <string name="progress">Progress</string>
     <string name="title_activity_progress">Overall Progress</string>
+    <string name="title_reading">Reading</string>
 </resources>

@@ -24,6 +24,8 @@ import de.lilithwittmann.voicepitchanalyzer.activities.RecordViewActivity;
 import de.lilithwittmann.voicepitchanalyzer.utils.GraphValueFormatter;
 import de.lilithwittmann.voicepitchanalyzer.utils.PitchCalculator;
 
+import java.util.List;
+
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
@@ -75,7 +77,7 @@ public class RecordGraphFragment extends Fragment implements OnChartValueSelecte
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState)
     {
         LineChart chart = (LineChart) view.findViewById(R.id.recording_chart);
-        LineDataSet dataSet = new LineDataSet(RecordViewActivity.currentRecord.getRange().getGraphEntries(), getResources().getString(R.string.pitch_graph_single_recording));
+        LineDataSet dataSet = new LineDataSet(mListener.startingPitchEntries(), getResources().getString(R.string.pitch_graph_single_recording));
 
         dataSet.setCircleColor(getResources().getColor(R.color.indicators));
         dataSet.setColor(getResources().getColor(R.color.indicators));
@@ -126,15 +128,6 @@ public class RecordGraphFragment extends Fragment implements OnChartValueSelecte
         super.onViewCreated(view, savedInstanceState);
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri)
-    {
-        if (mListener != null)
-        {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
-
     @Override
     public void onAttach(Activity activity)
     {
@@ -169,20 +162,8 @@ public class RecordGraphFragment extends Fragment implements OnChartValueSelecte
 
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
     public interface OnFragmentInteractionListener
     {
-        // TODO: Update argument type and name
-        public void onFragmentInteraction(Uri uri);
+        List<Entry> startingPitchEntries();
     }
-
 }

@@ -15,8 +15,10 @@ import android.view.MenuItem;
 
 import com.crashlytics.android.Crashlytics;
 
+import java.util.List;
 import java.util.Locale;
 
+import com.github.mikephil.charting.data.Entry;
 import de.lilithwittmann.voicepitchanalyzer.R;
 import de.lilithwittmann.voicepitchanalyzer.fragments.RecordGraphFragment;
 import de.lilithwittmann.voicepitchanalyzer.fragments.RecordingOverviewFragment;
@@ -131,9 +133,8 @@ public class RecordViewActivity extends ActionBarActivity implements ActionBar.T
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void onFragmentInteraction(Uri uri) {
-        // empty
+    public List<Entry> startingPitchEntries() {
+        return currentRecord.getRange().getGraphEntries();
     }
 
     @Override

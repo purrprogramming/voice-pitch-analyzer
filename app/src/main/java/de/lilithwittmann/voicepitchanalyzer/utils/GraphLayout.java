@@ -29,7 +29,7 @@ public class GraphLayout
         chart.setDoubleTapToZoomEnabled(false);
         chart.setDrawGridBackground(false);
 
-        chart.setHighlightEnabled(true);
+        chart.getData().setHighlightEnabled(true);
 
         chart.setHardwareAccelerationEnabled(true);
         chart.getLegend().setEnabled(false);

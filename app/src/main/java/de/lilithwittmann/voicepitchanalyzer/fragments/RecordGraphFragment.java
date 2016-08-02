@@ -16,8 +16,8 @@ import com.github.mikephil.charting.data.ChartData;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
-import com.github.mikephil.charting.utils.Highlight;
 
 import de.lilithwittmann.voicepitchanalyzer.R;
 import de.lilithwittmann.voicepitchanalyzer.activities.RecordViewActivity;
@@ -118,7 +118,7 @@ public class RecordGraphFragment extends Fragment implements OnChartValueSelecte
         chart.setDoubleTapToZoomEnabled(false);
         chart.setDrawGridBackground(false);
 
-        chart.setHighlightEnabled(true);
+        dataSet.setHighlightEnabled(true);
 
         chart.setHardwareAccelerationEnabled(true);
 //        chart.animateX(3000);

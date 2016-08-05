@@ -94,6 +94,8 @@ public class RecordingActivity extends ActionBarActivity implements RecordingFra
     public void onRecordFinished(long recordingID)
     {
         savePreferences();
+        ReadingFragment.incrementTextPage(this);
+
         Intent intent = new Intent(this, RecordViewActivity.class);
         intent.putExtra(Recording.KEY, recordingID);
         startActivity(intent);

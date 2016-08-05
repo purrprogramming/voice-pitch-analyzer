@@ -23,10 +23,7 @@ public class ReadingFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState)
-    {
-        // Inflate the layout for this fragment
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_reading, container, false);
     }
 
@@ -36,16 +33,33 @@ public class ReadingFragment extends Fragment {
 
         Texts texts = new Texts();
         Context context = getActivity();
-        String lang = "en";
-        if (texts.supportsLocale(Locale.getDefault().getLanguage()) == Boolean.TRUE) {
-            lang = Locale.getDefault().getLanguage();
+        String lang = getLanguage(texts);
+
+        int textNumber = getCurrentTextPage(context);
+
+        //render text
+        final TextView recording_text = (TextView) view.findViewById(R.id.recording_text);
+        recording_text.setText(texts.getText(lang, textNumber));
+    }
+
+    private static int getCurrentTextPage(Context context) {
+        Texts texts = new Texts();
+        SharedPreferences sharedPref = getPreferences(context);
+
+        int textNumber = sharedPref.getInt(context.getString(R.string.saved_text_number), 1);
+
+        if (textNumber > texts.countTexts(getLanguage(texts))) {
+            textNumber = 1;
         }
 
-        // get current textNumber
-        SharedPreferences sharedPref = context.getSharedPreferences(
-                getString(R.string.preference_file_key), Context.MODE_PRIVATE);
-        Integer textNumber = sharedPref.getInt(getString(R.string.saved_text_number), 1);
+        return textNumber;
+    }
 
+    public static void incrementTextPage(Context context) {
+        int textNumber = getCurrentTextPage(context);
+        Texts texts = new Texts();
+        String lang = getLanguage(texts);
+        SharedPreferences sharedPref = getPreferences(context);
 
         // calculate next textNumber
         Integer nextText = 1;
@@ -54,15 +68,24 @@ public class ReadingFragment extends Fragment {
         } else if (textNumber > texts.countTexts(lang)) {
             //really special case - if the user changes the device language and in the new language there are
             // less text samples available than in the previous one, set the text number back to one
-            textNumber = 1;
             nextText = 2;
         }
 
         //save next textNumber
-        sharedPref.edit().putInt(getString(R.string.saved_text_number), nextText).apply();
+        sharedPref.edit().putInt(context.getString(R.string.saved_text_number), nextText).apply();
+    }
 
-        //render text
-        final TextView recording_text = (TextView) view.findViewById(R.id.recording_text);
-        recording_text.setText(texts.getText(lang, textNumber));
+    private static SharedPreferences getPreferences(Context context) {
+        return context.getSharedPreferences(
+                    context.getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+    }
+
+    private static String getLanguage(Texts texts) {
+        String lang = "en";
+        if (texts.supportsLocale(Locale.getDefault().getLanguage()) == Boolean.TRUE) {
+            lang = Locale.getDefault().getLanguage();
+        }
+
+        return lang;
     }
 }

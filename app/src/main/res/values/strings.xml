@@ -19,6 +19,8 @@
     <string name="record">Record</string>
     <string name="start_recording">Record</string>
     <string name="stop_recording">Stop</string>
+    <string name="title_reading">Reading</string>
+    <string name="recording_tab_index" translatable="false">recording_tab_index</string>
 
     <!-- recording analysis -->
     <string name="title_section1">Overview</string>
@@ -84,6 +86,4 @@
     <!-- progress -->
     <string name="progress">Progress</string>
     <string name="title_activity_progress">Overall Progress</string>
-    <string name="title_reading">Reading</string>
-    <string name="recording_tab_index">0</string>
 </resources>

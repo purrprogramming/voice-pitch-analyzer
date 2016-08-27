@@ -1,12 +1,15 @@
 package de.lilithwittmann.voicepitchanalyzer.fragments;
 
-
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import de.lilithwittmann.voicepitchanalyzer.R;
@@ -14,10 +17,6 @@ import de.lilithwittmann.voicepitchanalyzer.activities.RecordViewActivity;
 import de.lilithwittmann.voicepitchanalyzer.utils.AudioPlayer;
 import de.lilithwittmann.voicepitchanalyzer.utils.PitchCalculator;
 
-
-/**
- * A simple {@link Fragment} subclass.
- */
 public class RecordingPlayFragment extends Fragment
 {
     private static final String ARG_SECTION_NUMBER = "section_number";
@@ -95,29 +94,94 @@ public class RecordingPlayFragment extends Fragment
                 ((TextView) view.findViewById(R.id.personal_range)).setText(getResources().getString(R.string.unknown));
             }
 
-            //            ((ImageButton) view.findViewById(R.id.play_button)).setOnClickListener(new View.OnClickListener()
-            //            {
-            //                @Override
-            //                public void onClick(View v)
-            //                {
-            //                    if (player == null)
-            //                    {
-            //                        player = new AudioPlayer(getActivity().getFileStreamPath(RecordViewActivity.currentRecord.getRecording()));
-            //                    }
-            //
-            //                    if (player.isPlaying())
-            //                    {
-            //                        Log.i(LOG_TAG, "stop");
-            //                        player.stop();
-            //                    }
-            //
-            //                    else
-            //                    {
-            //                        Log.i(LOG_TAG, "play");
-            //                        player.play();
-            //                    }
-            //                }
-            //            });
+            initializePlayButton(view);
         }
     }
+
+    private void initializePlayButton(View view) {
+        final ImageButton playButton = ((ImageButton) view.findViewById(R.id.play_button));
+
+        String audioFile = RecordViewActivity.currentRecord.getRecording();
+        if (audioFile == null || audioFile.isEmpty())
+        {
+            playButton.setVisibility(View.GONE);
+            return;
+        }
+
+        playButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                if (player == null)
+                {
+                    player = createAudioPlayer(v);
+                }
+
+                if (player.isPlaying())
+                {
+                    Log.i(LOG_TAG, "stop");
+                    player.stop();
+                    playButton.setImageResource(R.drawable.ic_play);
+                }
+
+                else
+                {
+                    Log.i(LOG_TAG, "play");
+                    player.play();
+                    playButton.setImageResource(R.drawable.ic_pause_circle_black);
+                }
+            }
+        });
+    }
+
+    private AudioPlayer createAudioPlayer(final View view) {
+        AudioPlayer player = new AudioPlayer(getActivity().getFileStreamPath(RecordViewActivity.currentRecord.getRecording()));
+
+        AudioEndHandler handler = new AudioEndHandler(view);
+        player.setOnComplete(handler);
+
+        return player;
+    }
+
+    private static class AudioEndHandler extends Handler {
+        private final View view;
+
+        AudioEndHandler(View view) {
+            this.view = view;
+        }
+
+        public void handleMessage(Message msg)
+        {
+            final ImageButton playButton = ((ImageButton) view.findViewById(R.id.play_button));
+            playButton.setImageResource(R.drawable.ic_play);
+        }
+    }
+
+    public void onStop() {
+        super.onStop();
+        stopAudio();
+    }
+
+    public void onPause() {
+        super.onPause();
+        stopAudio();
+    }
+
+    public void onDestroyView() {
+        super.onDestroyView();
+        stopAudio();
+    }
+
+    private void stopAudio() {
+        try
+        {
+            if (player != null)
+                player.stop();
+        } catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
 }

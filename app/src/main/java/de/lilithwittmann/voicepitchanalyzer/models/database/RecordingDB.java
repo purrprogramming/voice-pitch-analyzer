@@ -98,6 +98,10 @@ public class RecordingDB {
     }
 
     public List<Recording> getRecordings() {
+        return getRecordings(null);
+    }
+
+    public List<Recording> getRecordings(String where) {
         List<Recording> recordings = new ArrayList<Recording>();
         RecordingDbHelper mDbHelper = new RecordingDbHelper(this.context);
         SQLiteDatabase db = mDbHelper.getReadableDatabase();
@@ -120,7 +124,7 @@ public class RecordingDB {
         Cursor c = db.query(
                 RecordingEntry.TABLE_NAME,  // The table to query
                 projection,                               // The columns to return
-                null,                                // The columns for the WHERE clause
+                where,                                // The columns for the WHERE clause
                 null,                            // The values for the WHERE clause
                 null,                                     // don't group the rows
                 null,                                     // don't filter by row groups
@@ -141,6 +145,7 @@ public class RecordingDB {
             recordings.add(recording);
             c.moveToNext();
         }
+
         return recordings;
     }
 
@@ -202,7 +207,23 @@ public class RecordingDB {
 
         selection = PitchEntry._ID + " LIKE ?";
         db.delete(RecordingEntry.TABLE_NAME, selection, selectionArgs);
+    }
 
+    public void updateRecordingFile(long id, String file) {
+        ContentValues updates = new ContentValues();
+        updates.put(RecordingEntry.COLUMN_NAME_FILE, file);
+
+        updateRecording(id, updates);
+    }
+
+    public void updateRecording(long id, ContentValues updates) {
+        RecordingDbHelper mDbHelper = new RecordingDbHelper(this.context);
+        SQLiteDatabase db = mDbHelper.getReadableDatabase();
+
+        String whereClause = RecordingEntry._ID + " LIKE ?";
+        String[] whereParams = {String.valueOf(id)};
+
+        db.update(RecordingEntry.TABLE_NAME, updates, whereClause, whereParams);
     }
 
     private List<Double> getPitch(long id) {

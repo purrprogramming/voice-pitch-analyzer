@@ -45,7 +45,7 @@ public class GraphLayout
         chart.setDoubleTapToZoomEnabled(false);
         chart.setDrawGridBackground(false);
 
-        chart.setHighlightEnabled(true);
+        chart.getData().setHighlightEnabled(true);
 
         chart.getAxisLeft().setAxisMaxValue(PitchCalculator.maxPitch.floatValue());
         chart.getAxisRight().setAxisMaxValue(PitchCalculator.maxPitch.floatValue());

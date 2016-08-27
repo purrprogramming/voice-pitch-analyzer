@@ -65,13 +65,18 @@ public class ProgressFragment extends Fragment
             dataSet.setCircleColor(getResources().getColor(R.color.canvas_dark));
             dataSet.setColor(getResources().getColor(R.color.canvas_dark));
             dataSet.setCircleSize(5f);
-            dataSet.setCubicIntensity(100f);
+//            dataSet.setCubicIntensity(0.05f);
             dataSet.setAxisDependency(YAxis.AxisDependency.LEFT);
 
             data.setData(lineData);
             data.setData(barData);
             chart.setData(data);
             GraphLayout.FormatChart(chart);
+
+            chart.setTouchEnabled(true);
+//            chart.setScaleEnabled(true);
+//            chart.setPinchZoom(true);
+//            chart.setDoubleTapToZoomEnabled(true);
 
             chart.setDrawValueAboveBar(false);
             chart.setDrawOrder(new DrawOrder[]{

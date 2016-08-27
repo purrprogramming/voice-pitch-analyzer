@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- male range -->
+    <color name="male_range">#e6e3f7</color>
+    <!-- male & female overlap [androgynous] -->
+    <color name="androgynous_range">#b5aad6</color>
+    <!-- female range -->
+    <color name="female_range">#948ec5</color>
     <!-- lightest hue -->
     <color name="canvas_light">#D1C4E9</color>
     <!-- light hue -->

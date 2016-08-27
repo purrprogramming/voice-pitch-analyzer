@@ -64,6 +64,7 @@
     <string name="italian">Italian</string>
     <string name="aurora_viana" translatable="false">Aurora Viana</string>
     <string name="text_origin">All texts from »The Picture of Dorian Gray« by Oscar Wilde</string>
+    <string name="github" translatable="false"><a href="https://github.com/purrprogramming/voice-pitch-analyzer">GitHub</a></string>
 
     <!-- start screen -->
     <string name="welcome">Hey there!</string>

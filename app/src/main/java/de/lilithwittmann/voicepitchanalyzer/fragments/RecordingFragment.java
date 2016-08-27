@@ -46,10 +46,7 @@ import de.lilithwittmann.voicepitchanalyzer.utils.PitchCalculator;
 import de.lilithwittmann.voicepitchanalyzer.utils.SampleRateCalculator;
 
 /**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link RecordingFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
+ * fragment containing text for reading, record/stop and cancel buttons
  */
 public class RecordingFragment extends Fragment
 {

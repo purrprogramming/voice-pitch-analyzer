@@ -27,7 +27,7 @@ public class RecordingList
     private double avg = -1;
     private double min = -1;
     private double max = -1;
-    // initialise to now so that checking works correctly in constructor
+    // initialise to 'now' so that checking works correctly in constructor
     private long beginning = new Date().getTime();
     private long end = 0;
 
@@ -83,13 +83,8 @@ public class RecordingList
 
             if (!this.containsIndex(result, index))
             {
-                //                if (difference.getStandardDays() != 0)
-                //                {
                 Log.i("RecordingList", String.format("beginning: %s", new DateTime(this.getBeginning()).toDateTime()));
                 result.add(new Entry((float) record.getValue().getRange().getAvg(), index));
-
-                //                    lastDate = record.getKey();
-                //                }
             }
         }
 

@@ -75,7 +75,7 @@ public class ProgressFragment extends Fragment
 
             chart.setTouchEnabled(true);
 //            chart.setScaleEnabled(true);
-//            chart.setPinchZoom(true);
+            chart.setPinchZoom(true);
 //            chart.setDoubleTapToZoomEnabled(true);
 
             chart.setDrawValueAboveBar(false);

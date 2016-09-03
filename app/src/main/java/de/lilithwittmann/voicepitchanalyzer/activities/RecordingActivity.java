@@ -30,6 +30,9 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+/***
+ * activity containing RecordingFragment with which a new record can be made
+ */
 
 public class RecordingActivity extends ActionBarActivity implements RecordingFragment.OnFragmentInteractionListener, RecordGraphFragment.OnFragmentInteractionListener
 {

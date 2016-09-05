@@ -1,7 +1,6 @@
 package de.lilithwittmann.voicepitchanalyzer.fragments;
 
 import android.app.Activity;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -9,22 +8,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.github.mikephil.charting.charts.CombinedChart;
 import com.github.mikephil.charting.components.YAxis;
-import com.github.mikephil.charting.data.BarData;
-import com.github.mikephil.charting.data.ChartData;
-import com.github.mikephil.charting.data.CombinedData;
-import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.data.LineData;
-import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.data.*;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
-
-import java.util.List;
-
 import de.lilithwittmann.voicepitchanalyzer.R;
-import de.lilithwittmann.voicepitchanalyzer.activities.RecordViewActivity;
 import de.lilithwittmann.voicepitchanalyzer.utils.GraphLayout;
 
 import java.util.List;
@@ -45,8 +34,10 @@ public class RecordGraphFragment extends Fragment implements OnChartValueSelecte
      */
     private static final String ARG_SECTION_NUMBER = "section_number";
     private OnFragmentInteractionListener mListener;
-    private LineDataSet dataSet;
-    private LineData lineData;
+    private LineDataSet pitchDataSet;
+    private LineData pitchData;
+    private BarData genderBarData;
+    private CombinedData chartData;
 
     public RecordGraphFragment()
     {
@@ -82,26 +73,28 @@ public class RecordGraphFragment extends Fragment implements OnChartValueSelecte
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState)
     {
         CombinedChart chart = (CombinedChart) view.findViewById(R.id.recording_chart);
-        dataSet = new LineDataSet(mListener.startingPitchEntries(), getResources().getString(R.string.pitch_graph_single_recording));
-
+        pitchDataSet = new LineDataSet(mListener.startingPitchEntries(), getResources().getString(R.string.pitch_graph_single_recording));
         // generate x value strings
         // [1, 2, 3,... basically random numbers as the recorded pitch is based on processor speed]
-        List<String> xVals = ChartData.generateXVals(0, dataSet.getEntryCount());
-        CombinedData data = new CombinedData(xVals);
-        BarData barData = new BarData(xVals, GraphLayout.getOverallRange(this.getContext(), xVals.size()));
+        List<String> xVals = ChartData.generateXVals(0, pitchDataSet.getEntryCount());
+        chartData = new CombinedData(xVals);
 
-        chart.setData(lineData);
-        dataSet.setColor(getResources().getColor(R.color.canvas_dark));
-        dataSet.setDrawCircles(false);
-        dataSet.setLineWidth(2f);
-        dataSet.setDrawValues(false);
+        pitchDataSet.setColor(getResources().getColor(R.color.canvas_dark));
+        pitchDataSet.setDrawCircles(false);
+        pitchDataSet.setLineWidth(2f);
+        pitchDataSet.setDrawValues(false);
+        pitchDataSet.setAxisDependency(YAxis.AxisDependency.LEFT);
 
-        dataSet.setAxisDependency(YAxis.AxisDependency.LEFT);
+        pitchData = new LineData(xVals, pitchDataSet);
+        chartData.setData(pitchData);
 
-        LineData lineData = new LineData(xVals, dataSet);
-        data.setData(lineData);
-        data.setData(barData);
-        chart.setData(data);
+        genderBarData = new BarData(xVals, GraphLayout.getOverallRange(this.getContext(), xVals.size()));
+        // Bug with chart lib that throws exception for empty bar charts so must skip adding it on init
+        // if were coming from the live pitch graph.
+        if (!xVals.isEmpty())
+            chartData.setData(genderBarData);
+
+        chart.setData(chartData);
 
         chart.setDrawValueAboveBar(false);
         chart.setDrawOrder(new CombinedChart.DrawOrder[]{
@@ -114,19 +107,28 @@ public class RecordGraphFragment extends Fragment implements OnChartValueSelecte
 
         GraphLayout.FormatChart(chart);
 
-        //        chart.animateX(3000);
         super.onViewCreated(view, savedInstanceState);
     }
 
     public void addNewPitch(Entry pitch) {
-        if (dataSet == null || getView() == null)
+        if (pitchDataSet == null || getView() == null)
             return;
 
-        lineData.addXValue("" + pitch.getXIndex());
-        dataSet.addEntry(pitch);
-        lineData.notifyDataChanged();
+        pitchData.addXValue("" + pitch.getXIndex());
+        pitchDataSet.addEntry(pitch);
 
-        LineChart chart = (LineChart) getView().findViewById(R.id.recording_chart);
+        genderBarData.clearValues();
+        genderBarData.addDataSet(GraphLayout.getOverallRange(this.getContext(), pitchData.getXValCount()));
+
+        CombinedChart chart = (CombinedChart) getView().findViewById(R.id.recording_chart);
+        if (pitchData.getXValCount() == 1) {
+            // If were starting fresh from live pitch graph we must initialize the bardata here since
+            // it does not get initialized on view creation to avoid a bug with the chart library
+            chartData.setData(genderBarData);
+            chart.setData(chartData);
+        }
+
+        chartData.notifyDataChanged();
         chart.notifyDataSetChanged();
         chart.invalidate();
     }

@@ -18,8 +18,8 @@ import com.github.mikephil.charting.data.CombinedData;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
-import com.github.mikephil.charting.utils.Highlight;
 
 import java.util.List;
 
@@ -78,6 +78,14 @@ public class RecordGraphFragment extends Fragment implements OnChartValueSelecte
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState)
     {
         CombinedChart chart = (CombinedChart) view.findViewById(R.id.recording_chart);
+        
+        // don't try to render chart when there is no recording data
+        if (RecordViewActivity.currentRecord.getRange().getGraphEntries().isEmpty())
+        {
+            super.onViewCreated(view, savedInstanceState);
+            return;
+        }
+
         LineDataSet dataSet = new LineDataSet(RecordViewActivity.currentRecord.getRange().getGraphEntries(), getResources().getString(R.string.pitch_graph_single_recording));
 
         // generate x value strings
@@ -108,6 +116,7 @@ public class RecordGraphFragment extends Fragment implements OnChartValueSelecte
         });
 
         GraphLayout.FormatChart(chart);
+
 
         //        chart.animateX(3000);
         super.onViewCreated(view, savedInstanceState);

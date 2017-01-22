@@ -27,6 +27,7 @@ public class RecordingList
     private double avg = -1;
     private double min = -1;
     private double max = -1;
+    // initialise to 'now' so that checking works correctly in constructor
     private long beginning = new Date().getTime();
     private long end = 0;
 
@@ -36,6 +37,7 @@ public class RecordingList
 
         for (Recording recording : list)
         {
+            // set beginning & end correctly
             if (recording.getDate().getTime() < this.getBeginning())
             {
                 this.setBeginning(recording.getDate().getTime());
@@ -50,6 +52,15 @@ public class RecordingList
         }
     }
 
+    /***
+     * get the graph entries for progress fragment
+     * only one entry per day
+     * if there are more than one recordings per day,
+     * only use the first entry of that day
+     * for future: calculate average as this day's value
+     *
+     * @return
+     */
     public List<Entry> getGraphEntries()
     {
         List<Entry> result = new ArrayList<Entry>();
@@ -59,13 +70,6 @@ public class RecordingList
 
         for (Hashtable.Entry<Date, Recording> record : this.getRecordings().entrySet())
         {
-            //            if (new Duration(new DateTime(lastDate), new DateTime(record.getKey())).getStandardDays() != 0)
-            //            {
-            //                result.add(new Entry((float) record.getValue().getRange().getAvg(), (int) new Duration(new DateTime(this.getBeginning()), new DateTime(record.getKey())).getStandardDays()));
-            //
-            //                lastDate = record.getKey();
-            //            }
-            //        }
 
             // check if there are multiple entries for this date
             DateTime lastTime = new DateTime(lastDate);

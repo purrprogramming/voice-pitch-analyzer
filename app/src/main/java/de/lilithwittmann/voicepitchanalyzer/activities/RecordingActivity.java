@@ -11,7 +11,9 @@ import de.lilithwittmann.voicepitchanalyzer.fragments.RecordingFragment;
 import de.lilithwittmann.voicepitchanalyzer.models.Recording;
 import io.fabric.sdk.android.Fabric;
 
-
+/***
+ * activity containing RecordingFragment with which a new record can be made
+ */
 public class RecordingActivity extends ActionBarActivity implements RecordingFragment.OnFragmentInteractionListener /*, RecordingListFragment.OnFragmentInteractionListener, RecordGraphFragment.OnFragmentInteractionListener*/
 {
     private static final String LOG_TAG = RecordingActivity.class.getSimpleName();

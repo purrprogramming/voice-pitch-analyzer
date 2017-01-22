@@ -96,10 +96,19 @@
     </style>
 
     <!--<style name="SnackbarAction" parent="TextAppearance.Design.Snackbar.Action">-->
-        <!--<item name="android:color">@color/action_bar</item>-->
+    <!--<item name="android:color">@color/action_bar</item>-->
     <!--</style>-->
 
     <style name="TextAppearance.Standard" parent="@android:style/TextAppearance.DeviceDefault">
         <!--<item name="android:textColor">#FF00FF</item>-->
     </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 </resources>

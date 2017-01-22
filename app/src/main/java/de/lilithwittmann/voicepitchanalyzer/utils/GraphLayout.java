@@ -83,9 +83,9 @@ public class GraphLayout
         set.setColors(new int[]{context.getResources().getColor(R.color.female_range),
                                 context.getResources().getColor(R.color.androgynous_range),
                                 context.getResources().getColor(R.color.male_range)});
-        set.setStackLabels(new String[]{context.getResources().getString(R.string.male_range),
+        set.setStackLabels(new String[]{context.getResources().getString(R.string.female_range),
                                         context.getResources().getString(R.string.androgynous_range),
-                                        context.getResources().getString(R.string.female_range)});
+                                        context.getResources().getString(R.string.male_range)});
 
         //        List<BarDataSet> setList = new ArrayList<BarDataSet>();
         //        setList.add(set);

@@ -14,6 +14,7 @@ import com.github.mikephil.charting.data.*;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import de.lilithwittmann.voicepitchanalyzer.R;
+import de.lilithwittmann.voicepitchanalyzer.activities.RecordViewActivity;
 import de.lilithwittmann.voicepitchanalyzer.utils.GraphLayout;
 
 import java.util.List;
@@ -73,6 +74,7 @@ public class RecordGraphFragment extends Fragment implements OnChartValueSelecte
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState)
     {
         CombinedChart chart = (CombinedChart) view.findViewById(R.id.recording_chart);
+
         pitchDataSet = new LineDataSet(mListener.startingPitchEntries(), getResources().getString(R.string.pitch_graph_single_recording));
         // generate x value strings
         // [1, 2, 3,... basically random numbers as the recorded pitch is based on processor speed]

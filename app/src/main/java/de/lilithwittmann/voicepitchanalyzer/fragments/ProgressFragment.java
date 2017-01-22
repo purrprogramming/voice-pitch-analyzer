@@ -65,7 +65,8 @@ public class ProgressFragment extends Fragment
             dataSet.setCircleColor(getResources().getColor(R.color.canvas_dark));
             dataSet.setColor(getResources().getColor(R.color.canvas_dark));
             dataSet.setCircleSize(5f);
-//            dataSet.setCubicIntensity(0.05f);
+
+            dataSet.setCubicIntensity(0.05f);
             dataSet.setAxisDependency(YAxis.AxisDependency.LEFT);
 
             data.setData(lineData);

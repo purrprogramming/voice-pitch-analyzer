@@ -50,7 +50,7 @@ public class SwipeAdapter extends RecyclerView.Adapter<SwipeAdapter.SwipeViewHol
         // create a new view
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
         {
-            Log.i("SwipeAdapter", String.format("API level largaer than %s", Build.VERSION_CODES.LOLLIPOP));
+            Log.i("SwipeAdapter", String.format("API level larger than %s", Build.VERSION_CODES.LOLLIPOP));
             view = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.listview, parent, false);
         }
@@ -115,7 +115,7 @@ public class SwipeAdapter extends RecyclerView.Adapter<SwipeAdapter.SwipeViewHol
         {
             public void onClick(View v)
             {
-                Log.i("SwipeAdapter", "onClick() -- undo deletesa");
+                Log.i("SwipeAdapter", "onClick() -- undo delete");
                 recordings.add(itemPosition, deletedRecord);
                 notifyItemInserted(itemPosition);
             }
@@ -135,6 +135,15 @@ public class SwipeAdapter extends RecyclerView.Adapter<SwipeAdapter.SwipeViewHol
                             RecordingDB db = new RecordingDB(activity);
                             db.deleteRecording(deletedRecord.getId());
                         }
+                        //            switch (event)
+                        //            {
+                        //                case Snackbar.Callback.DISMISS_EVENT_ACTION:
+                        //                    break;
+                        //            }
+
+                        Log.i("SwipeAdapter", "item should now actually be deleted from DB");
+                        // RecordingDB db = new RecordingDB(activity);
+                        // db.deleteRecording(deletedRecord.getId());
                     }
                 })
                 .show();

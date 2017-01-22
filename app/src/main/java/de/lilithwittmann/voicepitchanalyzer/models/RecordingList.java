@@ -10,11 +10,13 @@ import org.joda.time.Duration;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.Hashtable;
 import java.util.List;
 
 import de.lilithwittmann.voicepitchanalyzer.models.database.RecordingDB;
+import de.lilithwittmann.voicepitchanalyzer.utils.EntryComparator;
 
 /**
  * Created by Yuri on 30.01.16.
@@ -57,15 +59,60 @@ public class RecordingList
 
         for (Hashtable.Entry<Date, Recording> record : this.getRecordings().entrySet())
         {
-            if (new Duration(new DateTime(lastDate), new DateTime(record.getKey())).getStandardDays() > 0)
-            {
-                result.add(new Entry((float) record.getValue().getRange().getAvg(), (int) new Duration(new DateTime(this.getBeginning()), new DateTime(record.getKey())).getStandardDays()));
+            //            if (new Duration(new DateTime(lastDate), new DateTime(record.getKey())).getStandardDays() != 0)
+            //            {
+            //                result.add(new Entry((float) record.getValue().getRange().getAvg(), (int) new Duration(new DateTime(this.getBeginning()), new DateTime(record.getKey())).getStandardDays()));
+            //
+            //                lastDate = record.getKey();
+            //            }
+            //        }
 
-                lastDate = record.getKey();
+            // check if there are multiple entries for this date
+            DateTime lastTime = new DateTime(lastDate);
+            DateTime recordTime = new DateTime(record.getKey());
+            Duration difference = new Duration(lastTime, recordTime);
+
+            Log.i("test", String.format("last date: %s", lastTime));
+            Log.i("test", String.format("current record: %s", lastDate));
+            Log.i("test", String.format("difference: %s", difference.getStandardDays()));
+
+            int index = (int) new Duration(new DateTime(this.getBeginning()), new DateTime(record.getKey())).getStandardDays();
+
+            if (!this.containsIndex(result, index))
+            {
+                Log.i("RecordingList", String.format("beginning: %s", new DateTime(this.getBeginning()).toDateTime()));
+                result.add(new Entry((float) record.getValue().getRange().getAvg(), index));
             }
         }
 
+        Collections.sort(result, new EntryComparator());
+
+        for (Entry entry : result)
+        {
+            Log.i("result", String.format("%s: %s", entry.getXIndex(), entry.getVal()));
+        }
+
         return result;
+    }
+
+    /***
+     * check if Entry with given index value is already in list
+     *
+     * @param list
+     * @param index
+     * @return
+     */
+    private boolean containsIndex(List<Entry> list, int index)
+    {
+        for (Entry entry : list)
+        {
+            if (entry.getXIndex() == index)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public List<String> getDates()

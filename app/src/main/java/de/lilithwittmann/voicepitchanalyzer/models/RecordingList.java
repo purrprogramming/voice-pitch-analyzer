@@ -70,6 +70,7 @@ public class RecordingList
 
         for (Hashtable.Entry<Date, Recording> record : this.getRecordings().entrySet())
         {
+
             // check if there are multiple entries for this date
             DateTime lastTime = new DateTime(lastDate);
             DateTime recordTime = new DateTime(record.getKey());

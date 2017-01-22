@@ -70,4 +70,5 @@ Por favor grave algo pressionando o ícone de microfone no canto superior direit
     <string name="mic_permission_title">Acesso ao microfone necessário</string>
     <string name="progress">Progresso </string>
     <string name="title_activity_progress">Progresso total</string>
+    <string name="title_text">Texto</string>
 </resources>

@@ -5,8 +5,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.PersistableBundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTabHost;
 import android.support.v7.app.ActionBarActivity;
 
@@ -25,8 +23,6 @@ import de.lilithwittmann.voicepitchanalyzer.models.Recording;
 import de.lilithwittmann.voicepitchanalyzer.utils.PitchCalculator;
 import io.fabric.sdk.android.Fabric;
 
-import java.util.AbstractList;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -50,7 +46,7 @@ public class RecordingActivity extends ActionBarActivity implements RecordingFra
         tabHost = (FragmentTabHost)findViewById(R.id.tabhost);
         tabHost.setup(this, getSupportFragmentManager(), R.id.realtabcontent);
 
-        addTab(ReadingFragment.class, getString(R.string.title_reading));
+        addTab(ReadingFragment.class, getString(R.string.title_text));
         addTab(RecordGraphFragment.class, getString(R.string.title_section2));
 
         SharedPreferences sharedPref =

@@ -20,6 +20,7 @@
     <string name="start_recording">Record</string>
     <string name="stop_recording">Stop</string>
     <string name="title_text">Text</string>
+    <string name="realtime_graph">Real-Time Graph</string>
     <string name="recording_tab_index" translatable="false">recording_tab_index</string>
 
     <!-- recording analysis -->
@@ -82,9 +83,9 @@
     <!-- permission request -->
     <string name="mic_permission_explanation">In order to record your voice, you need to give Voice Pitch Analyzer permission to access this device\'s microphone.</string>
     <string name="settings">Settings</string>
-    <string name="mic_permission_title">Microphone Access required</string>
+    <string name="mic_permission_title">Microphone access required</string>
 
     <!-- progress -->
-    <string name="progress">Progress</string>
+    <string name="progress">Pitch</string>
     <string name="title_activity_progress">Overall Progress</string>
 </resources>

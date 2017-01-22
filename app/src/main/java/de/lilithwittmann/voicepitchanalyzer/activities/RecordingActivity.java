@@ -7,14 +7,17 @@ import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.v4.app.FragmentTabHost;
 import android.support.v7.app.ActionBarActivity;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TabHost;
 import android.widget.TextView;
-import com.crashlytics.android.Crashlytics;
 
+import com.crashlytics.android.Crashlytics;
 import com.github.mikephil.charting.data.Entry;
+
+import java.util.LinkedList;
+import java.util.List;
+
 import de.lilithwittmann.voicepitchanalyzer.R;
 import de.lilithwittmann.voicepitchanalyzer.fragments.ReadingFragment;
 import de.lilithwittmann.voicepitchanalyzer.fragments.RecordGraphFragment;
@@ -22,9 +25,6 @@ import de.lilithwittmann.voicepitchanalyzer.fragments.RecordingFragment;
 import de.lilithwittmann.voicepitchanalyzer.models.Recording;
 import de.lilithwittmann.voicepitchanalyzer.utils.PitchCalculator;
 import io.fabric.sdk.android.Fabric;
-
-import java.util.LinkedList;
-import java.util.List;
 
 /***
  * activity containing RecordingFragment with which a new record can be made
@@ -46,8 +46,8 @@ public class RecordingActivity extends ActionBarActivity implements RecordingFra
         tabHost = (FragmentTabHost)findViewById(R.id.tabhost);
         tabHost.setup(this, getSupportFragmentManager(), R.id.realtabcontent);
 
-        addTab(ReadingFragment.class, getString(R.string.title_text));
-        addTab(RecordGraphFragment.class, getString(R.string.title_section2));
+        this.addTab(ReadingFragment.class, getString(R.string.title_text));
+        this.addTab(RecordGraphFragment.class, getString(R.string.realtime_graph));
 
         SharedPreferences sharedPref =
                 getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
@@ -57,7 +57,7 @@ public class RecordingActivity extends ActionBarActivity implements RecordingFra
     }
 
     private void addTab(final Class view, String tag) {
-        View tabview = createStyledTabView(tabHost.getContext(), tag);
+        View tabview = this.createStyledTabView(tabHost.getContext(), tag);
         TabHost.TabSpec setContent = tabHost.newTabSpec(tag).setIndicator(tabview);
 
         tabHost.addTab(setContent, view, null);
@@ -83,7 +83,7 @@ public class RecordingActivity extends ActionBarActivity implements RecordingFra
         boolean pitchAccepted = calculator.addPitch((double) pitchInHz);
 
         RecordGraphFragment graph = (RecordGraphFragment) getSupportFragmentManager()
-                .findFragmentByTag(getString(R.string.title_section2));
+                .findFragmentByTag(getString(R.string.realtime_graph));
 
         if (graph != null && pitchAccepted)
             graph.addNewPitch(new Entry(pitchInHz, calculator.getPitches().size()));

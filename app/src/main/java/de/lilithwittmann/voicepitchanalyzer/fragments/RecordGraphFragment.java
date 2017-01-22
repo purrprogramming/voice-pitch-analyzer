@@ -8,16 +8,22 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.github.mikephil.charting.charts.CombinedChart;
 import com.github.mikephil.charting.components.YAxis;
-import com.github.mikephil.charting.data.*;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.ChartData;
+import com.github.mikephil.charting.data.CombinedData;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
-import de.lilithwittmann.voicepitchanalyzer.R;
-import de.lilithwittmann.voicepitchanalyzer.activities.RecordViewActivity;
-import de.lilithwittmann.voicepitchanalyzer.utils.GraphLayout;
 
 import java.util.List;
+
+import de.lilithwittmann.voicepitchanalyzer.R;
+import de.lilithwittmann.voicepitchanalyzer.utils.GraphLayout;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -75,7 +81,7 @@ public class RecordGraphFragment extends Fragment implements OnChartValueSelecte
     {
         CombinedChart chart = (CombinedChart) view.findViewById(R.id.recording_chart);
 
-        pitchDataSet = new LineDataSet(mListener.startingPitchEntries(), getResources().getString(R.string.pitch_graph_single_recording));
+        pitchDataSet = new LineDataSet(mListener.startingPitchEntries(), getResources().getString(R.string.progress));
         // generate x value strings
         // [1, 2, 3,... basically random numbers as the recorded pitch is based on processor speed]
         List<String> xVals = ChartData.generateXVals(0, pitchDataSet.getEntryCount());

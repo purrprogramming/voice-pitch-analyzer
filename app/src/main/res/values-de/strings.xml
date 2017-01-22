@@ -18,7 +18,7 @@
     <string name="female">weiblich</string>
     <string name="in_between">im Mittelfeld</string>
     <string name="male">männlich</string>
-    <string name="personal_range">Deine Stimmlange ist überwiegend</string>
+    <string name="personal_range">Deine Stimmlange klingt überwiegend</string>
     <string name="action_about">Über</string>
     <string name="libraries">Verwendete Libraries:</string>
     <string name="programming">Programmierung</string>
@@ -49,7 +49,8 @@
     <string name="mic_permission_explanation">Um Deine Stimme aufnehmen zu können, braucht Voice Pitch Analyzer Zugriff auf das Mikrofon.</string>
     <string name="mic_permission_title">Mikrofonzugriff benötigt</string>
     <string name="settings">Einstellungen</string>
-    <string name="progress">Verlauf</string>
+    <string name="progress">Tonlage</string>
     <string name="title_text">Text</string>
-    <string name="title_activity_progress">Verlauf</string>
+    <string name="title_activity_progress">Stimmverlauf</string>
+    <string name="realtime_graph">Echtzeitverlauf</string>
 </resources>

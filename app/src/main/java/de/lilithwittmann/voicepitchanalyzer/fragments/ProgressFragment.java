@@ -22,7 +22,7 @@ import de.lilithwittmann.voicepitchanalyzer.models.RecordingList;
 import de.lilithwittmann.voicepitchanalyzer.utils.GraphLayout;
 
 /**
- * A simple {@link Fragment} subclass.
+ * Fragment containing a graph showing pitch data from all recordings
  */
 public class ProgressFragment extends Fragment
 {

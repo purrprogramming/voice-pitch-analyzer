@@ -7,17 +7,15 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.provider.BaseColumns;
 
+import com.crashlytics.android.answers.Answers;
+import com.crashlytics.android.answers.CustomEvent;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import de.lilithwittmann.voicepitchanalyzer.models.PitchRange;
 import de.lilithwittmann.voicepitchanalyzer.models.Recording;
-
-
-import com.crashlytics.android.Crashlytics;
-import com.crashlytics.android.answers.Answers;
-import com.crashlytics.android.answers.CustomEvent;
 
 
 /**
@@ -59,7 +57,6 @@ public class RecordingDB {
     }
 
     public Recording saveRecording(Recording recording) {
-
         //log recordings for statistics
         Answers.getInstance().logCustom(new CustomEvent("RecordingSaved")
                 .putCustomAttribute("average", recording.getRange().getAvg())

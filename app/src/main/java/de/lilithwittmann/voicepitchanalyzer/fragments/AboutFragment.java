@@ -44,15 +44,19 @@ public class AboutFragment extends Fragment
     {
         super.onViewCreated(view, savedInstanceState);
 
-        // enable text links for licences
+        // enable text links for licences etc.
         TextView apacheLicence = (TextView) view.findViewById(R.id.apache);
+        TextView apacheLicence2 = (TextView) view.findViewById(R.id.apache2);
         TextView gpl = (TextView) view.findViewById(R.id.gpl);
         TextView programming = (TextView) view.findViewById(R.id.programming);
         TextView design = (TextView) view.findViewById(R.id.design);
+        TextView github = (TextView) view.findViewById(R.id.github);
 
         apacheLicence.setMovementMethod(android.text.method.LinkMovementMethod.getInstance());
+        apacheLicence2.setMovementMethod(android.text.method.LinkMovementMethod.getInstance());
         gpl.setMovementMethod(android.text.method.LinkMovementMethod.getInstance());
         programming.setMovementMethod(android.text.method.LinkMovementMethod.getInstance());
         design.setMovementMethod(android.text.method.LinkMovementMethod.getInstance());
+        github.setMovementMethod(android.text.method.LinkMovementMethod.getInstance());
     }
 }

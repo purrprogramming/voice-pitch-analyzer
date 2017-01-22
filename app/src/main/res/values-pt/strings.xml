@@ -21,7 +21,7 @@ Média Mínima: %1$sHz, Média Máxima: %2$sHz, Média: %3$sHz
 <string name="male_range">Extensão masculina</string>
 <string name="female_range">Extensão feminina</string>
 <string name="your_range">Sua Extensão</string>
-<string name="personal_range">Sua Extensão é principalmente</string>
+<string name="personal_range">Sua extensão é principalmente</string>
 <string name="male">masculina</string>
 <string name="female">feminina</string>
 <string name="in_between">no meio</string>
@@ -56,4 +56,18 @@ Microfone não é suportado ainda. Os desenvolvedores foram informados.
 <string name="empty">
 Por favor grave algo pressionando o ícone de microfone no canto superior direito.
 </string>
+    <string name="portuguese">Português</string>
+    <string name="italian">Italiano</string>
+    <string name="german">Alemão</string>
+    <string name="translation">Tradução</string>
+    <string name="undo">Desfazer</string>
+    <string name="english">Inglês</string>
+    <string name="androgynous_range">Extensão andrógina</string>
+    <string name="text_origin">Texto: Oscar Wilde - O Retrato de Dorian Gray</string>
+    <string name="settings">Definições</string>
+    <string name="mic_permission_explanation">In order to record your voice, you need to give Voice Pitch Analyzer permission to access this device\'s microphone.</string>
+    <string name="record_deleted">Gravação excluído</string>
+    <string name="mic_permission_title">Acesso ao microfone necessário</string>
+    <string name="progress">Progresso </string>
+    <string name="title_activity_progress">Progresso total</string>
 </resources>

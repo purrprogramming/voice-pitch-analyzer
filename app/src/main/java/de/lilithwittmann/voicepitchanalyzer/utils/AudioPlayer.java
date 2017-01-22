@@ -28,6 +28,7 @@ public class AudioPlayer
                 AudioFormat.ENCODING_PCM_16BIT,
                 bufferSize,
                 AudioTrack.MODE_STREAM);
+
         this.file = file;
     }
 

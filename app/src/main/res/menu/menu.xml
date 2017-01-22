@@ -7,6 +7,11 @@
         android:icon="@drawable/ic_settings_voice_white_48dp"
         app:showAsAction="always" />
     <item
+        android:id="@+id/action_progress"
+        android:title="@string/progress"
+        android:icon="@drawable/ic_assessment_white_48dp"
+        app:showAsAction="ifRoom" />
+    <item
         android:id="@+id/action_about"
         android:orderInCategory="100"
         android:title="@string/action_about"

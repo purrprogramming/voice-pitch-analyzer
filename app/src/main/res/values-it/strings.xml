@@ -21,13 +21,13 @@ Min media: %1$sHz, Max media: %2$sHz, Media: %3$sHz
 <string name="male_range">Intervallo maschile</string>
 <string name="female_range">Intervallo femminile</string>
 <string name="your_range">Il tuo intervallo</string>
-<string name="personal_range">Il tuo intervallo è piuttosto</string>
+<string name="personal_range">Il tuo intervallo suona piuttosto</string>
 <string name="male">maschile</string>
 <string name="female">femminile</string>
 <string name="in_between">tra</string>
 <string name="unknown">sconosciuto</string>
-<string name="pitch_max">massimo</string>
-<string name="pitch_min">minimo</string>
+<string name="pitch_max">Massimo</string>
+<string name="pitch_min">Minimo</string>
 <string name="pitch_max_avg">Media massima</string>
 <string name="pitch_min_avg">Media minima</string>
 <!-- about fragment -->
@@ -56,4 +56,18 @@ Microfono non supportato ancora. Gli sviluppatori già sono stati informati.
 <string name="empty">
 Sei pregato di registrare qualcosa premendo l\'icona del microfono sull\'angolo superiore destro.
 </string>
+    <string name="italian">Italiano</string>
+    <string name="portuguese">Portoghese</string>
+    <string name="german">Tedesco</string>
+    <string name="translation">Traduzione</string>
+    <string name="undo">Annullare</string>
+    <string name="english">Inglese</string>
+    <string name="androgynous_range">Intervallo neutro</string>
+    <string name="text_origin">Testo: Oscar Wilde - Il Ritratto di Dorian Gray</string>
+    <string name="record_deleted">Registrazione cancellato</string>
+    <string name="settings">Impostazioni</string>
+    <string name="mic_permission_explanation">L\'autorizzazione per accedere al microfono è necessaria per registrare la tua voce.</string>
+    <string name="mic_permission_title">L\'accesso al microfono richiesto</string>
+    <string name="progress">Progresso </string>
+    <string name="title_activity_progress">Progresso complessivo</string>
 </resources>

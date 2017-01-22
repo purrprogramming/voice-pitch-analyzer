@@ -19,6 +19,8 @@
     <string name="record">Record</string>
     <string name="start_recording">Record</string>
     <string name="stop_recording">Stop</string>
+    <string name="title_reading">Reading</string>
+    <string name="recording_tab_index" translatable="false">recording_tab_index</string>
 
     <!-- recording analysis -->
     <string name="title_section1">Overview</string>
@@ -33,7 +35,7 @@
     <string name="female_range">Female Range</string>
     <string name="androgynous_range">Androgynous Range</string>
     <string name="your_range">Your Range</string>
-    <string name="personal_range">Your Range is mostly</string>
+    <string name="personal_range">Your range sounds mostly</string>
     <string name="male">male</string>
     <string name="female">female</string>
     <string name="in_between">in between</string>
@@ -56,12 +58,15 @@
     <string name="apache_licence" translatable="false"><a href="http://www.apache.org/licenses/LICENSE-2.0">Apache 2.0</a></string>
     <string name="tarsos_dsp" translatable="false">TarsosDSP</string>
     <string name="gpl" translatable="false"><a href="http://www.gnu.org/licenses/gpl-3.0.en.html">GPL 3.0</a></string>
+    <string name="jodatime" translatable="false">Joda Time</string>
     <string name="translation">Translation</string>
     <string name="english">English</string>
     <string name="german">German</string>
     <string name="portuguese">Portuguese</string>
     <string name="italian">Italian</string>
     <string name="aurora_viana" translatable="false">Aurora Viana</string>
+    <string name="text_origin">All texts from »The Picture of Dorian Gray« by Oscar Wilde</string>
+    <string name="github" translatable="false"><a href="https://github.com/purrprogramming/voice-pitch-analyzer">GitHub</a></string>
 
     <!-- start screen -->
     <string name="welcome">Hey there!</string>
@@ -73,6 +78,13 @@
     <!-- error messages -->
     <string name="device_sample_rate_not_supported">Microphone not supported yet. The developers have been informed.</string>
     <string name="device_sample_rate_not_supported_title">Microphone not supported</string>
-    <string name="text_origin">All texts from »The Picture of Dorian Gray« by Oscar Wilde</string>
 
+    <!-- permission request -->
+    <string name="mic_permission_explanation">In order to record your voice, you need to give Voice Pitch Analyzer permission to access this device\'s microphone.</string>
+    <string name="settings">Settings</string>
+    <string name="mic_permission_title">Microphone Access required</string>
+
+    <!-- progress -->
+    <string name="progress">Progress</string>
+    <string name="title_activity_progress">Overall Progress</string>
 </resources>

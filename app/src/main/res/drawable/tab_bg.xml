@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape xmlns:android="http://schemas.android.com/apk/res/android"
+               android:shape="rectangle">
+            <solid android:color="@color/action_bar"/>
+
+        </shape>
+    </item>
+
+    <item android:drawable="@drawable/tab_indicator"/>
+</layer-list>

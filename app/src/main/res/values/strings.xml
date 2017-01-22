@@ -19,7 +19,7 @@
     <string name="record">Record</string>
     <string name="start_recording">Record</string>
     <string name="stop_recording">Stop</string>
-    <string name="title_reading">Reading</string>
+    <string name="title_text">Text</string>
     <string name="recording_tab_index" translatable="false">recording_tab_index</string>
 
     <!-- recording analysis -->

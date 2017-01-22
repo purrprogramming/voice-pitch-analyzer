@@ -57,8 +57,9 @@ public class GraphLayout
         chart.setDrawBorders(false);
 
         // set min/max values etc. for axes
-        chart.getAxisLeft().setStartAtZero(false);
-        chart.getAxisRight().setStartAtZero(false);
+        chart.getAxisLeft().setAxisMinValue(PitchCalculator.minMalePitch.floatValue());
+        chart.getAxisRight().setAxisMinValue(PitchCalculator.minMalePitch.floatValue());
+//        chart.getAxisRight().setStartAtZero(false);
 
         chart.setHardwareAccelerationEnabled(true);
         //        chart.getLegend().setEnabled(false);
@@ -80,12 +81,13 @@ public class GraphLayout
     {
         BarDataSet set = new BarDataSet(GraphLayout.getRangeEntries(amount), "");
         set.setDrawValues(false);
-        set.setColors(new int[]{context.getResources().getColor(R.color.female_range),
+        set.setColors(new int[]{context.getResources().getColor(R.color.male_range),
                                 context.getResources().getColor(R.color.androgynous_range),
-                                context.getResources().getColor(R.color.male_range)});
-        set.setStackLabels(new String[]{context.getResources().getString(R.string.female_range),
+                                context.getResources().getColor(R.color.female_range)});
+        set.setStackLabels(new String[]{context.getResources().getString(R.string.male_range),
                                         context.getResources().getString(R.string.androgynous_range),
-                                        context.getResources().getString(R.string.male_range)});
+                                        context.getResources().getString(R.string.female_range)
+        });
 
         //        List<BarDataSet> setList = new ArrayList<BarDataSet>();
         //        setList.add(set);
@@ -106,12 +108,10 @@ public class GraphLayout
         for (int i = 0; i < amount; i++)
         {
             result.add(new BarEntry(new float[]{
-                    PitchCalculator.maxFemalePitch.floatValue() - PitchCalculator.maxMalePitch.floatValue(),
+                    PitchCalculator.minMalePitch.floatValue()*2,
                     PitchCalculator.maxMalePitch.floatValue() - PitchCalculator.minFemalePitch.floatValue(),
-                    PitchCalculator.minFemalePitch.floatValue()// - PitchCalculator.minPitch.floatValue(),
-            }, i));
-
-            //            result.add(new BarEntry(new float[]{25, 50, 100, 200}, i));
+                    PitchCalculator.maxFemalePitch.floatValue() - PitchCalculator.maxMalePitch.floatValue(),
+                    }, i));
         }
 
         return result;

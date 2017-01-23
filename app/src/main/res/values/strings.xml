@@ -25,9 +25,8 @@
 
     <!-- recording analysis -->
     <string name="title_section1">Overview</string>
-    <string name="title_section2">@string/pitch_graph_single_recording</string>
+    <string name="title_section2">Pitch over Time</string>
     <string name="title_section3">Details</string>
-    <string name="pitch_graph_single_recording">Pitch over Time</string>
     <string name="min_max_avg">Min Avg: %1$sHz, Max Avg: %2$sHz, Average: %3$sHz</string>
     <string name="average">General Average</string>
     <string name="min_avg">Minimum Average</string>
@@ -60,6 +59,8 @@
     <string name="tarsos_dsp" translatable="false">TarsosDSP</string>
     <string name="gpl" translatable="false"><a href="http://www.gnu.org/licenses/gpl-3.0.en.html">GPL 3.0</a></string>
     <string name="jodatime" translatable="false">Joda Time</string>
+    <string name="contributors">Contributors</string>
+    <string name="mabboud" translatable="false"><a href="https://github.com/m-abboud">Maddie Abboud</a></string>
     <string name="translation">Translation</string>
     <string name="english">English</string>
     <string name="german">German</string>

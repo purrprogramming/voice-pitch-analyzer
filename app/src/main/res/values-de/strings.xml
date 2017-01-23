@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="pitch_graph_single_recording">Einzelne Tonhöhen</string>
     <string name="record">Aufnahme</string>
     <string name="start_recording">Aufnehmen</string>
     <string name="stop_recording">Anhalten</string>
     <string name="title_activity_recording">Neue Aufnahme</string>
     <string name="title_section1">Übersicht</string>
-    <string name="title_section2">@string/pitch_graph_single_recording</string>
+    <string name="title_section2">Einzelne Tonhöhen</string>
     <string name="title_section3">Details</string>
     <string name="min_max_avg">Min. Durchschn.: %1$sHz, Max. Durchschn.: %2$sHz, Durchschnitt: %3$sHz</string>
     <string name="average">Gesamtdurchschnitt</string>
@@ -53,4 +52,5 @@
     <string name="title_text">Text</string>
     <string name="title_activity_progress">Stimmverlauf</string>
     <string name="realtime_graph">Echtzeitverlauf</string>
+    <string name="contributors">Mitwirkende</string>
 </resources>

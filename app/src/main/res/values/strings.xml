@@ -20,13 +20,13 @@
     <string name="start_recording">Record</string>
     <string name="stop_recording">Stop</string>
     <string name="title_text">Text</string>
+    <string name="realtime_graph">Real-Time Graph</string>
     <string name="recording_tab_index" translatable="false">recording_tab_index</string>
 
     <!-- recording analysis -->
     <string name="title_section1">Overview</string>
-    <string name="title_section2">@string/pitch_graph_single_recording</string>
+    <string name="title_section2">Pitch over Time</string>
     <string name="title_section3">Details</string>
-    <string name="pitch_graph_single_recording">Pitch over Time</string>
     <string name="min_max_avg">Min Avg: %1$sHz, Max Avg: %2$sHz, Average: %3$sHz</string>
     <string name="average">General Average</string>
     <string name="min_avg">Minimum Average</string>
@@ -59,6 +59,8 @@
     <string name="tarsos_dsp" translatable="false">TarsosDSP</string>
     <string name="gpl" translatable="false"><a href="http://www.gnu.org/licenses/gpl-3.0.en.html">GPL 3.0</a></string>
     <string name="jodatime" translatable="false">Joda Time</string>
+    <string name="contributors">Contributors</string>
+    <string name="mabboud" translatable="false"><a href="https://github.com/m-abboud">Maddie Abboud</a></string>
     <string name="translation">Translation</string>
     <string name="english">English</string>
     <string name="german">German</string>
@@ -82,9 +84,9 @@
     <!-- permission request -->
     <string name="mic_permission_explanation">In order to record your voice, you need to give Voice Pitch Analyzer permission to access this device\'s microphone.</string>
     <string name="settings">Settings</string>
-    <string name="mic_permission_title">Microphone Access required</string>
+    <string name="mic_permission_title">Microphone access required</string>
 
     <!-- progress -->
-    <string name="progress">Progress</string>
+    <string name="progress">Pitch</string>
     <string name="title_activity_progress">Overall Progress</string>
 </resources>

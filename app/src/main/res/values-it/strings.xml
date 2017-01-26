@@ -9,9 +9,8 @@
 <string name="stop_recording">Stop</string>
 <!-- recording analysis -->
 <string name="title_section1">Visione generale</string>
-<string name="title_section2">@string/pitch_graph_single_recording</string>
+<string name="title_section2">Tono lungo il tempo</string>
 <string name="title_section3">Dettagli</string>
-<string name="pitch_graph_single_recording">Tono lungo il tempo</string>
 <string name="min_max_avg">
 Min media: %1$sHz, Max media: %2$sHz, Media: %3$sHz
 </string>
@@ -68,7 +67,8 @@ Sei pregato di registrare qualcosa premendo l\'icona del microfono sull\'angolo 
     <string name="settings">Impostazioni</string>
     <string name="mic_permission_explanation">L\'autorizzazione per accedere al microfono è necessaria per registrare la tua voce.</string>
     <string name="mic_permission_title">L\'accesso al microfono richiesto</string>
-    <string name="progress">Progresso </string>
+    <string name="progress">Tono</string>
     <string name="title_activity_progress">Progresso complessivo</string>
     <string name="title_text">Testo</string>
+    <string name="contributors">Contribuzione</string>
 </resources>

@@ -19,7 +19,6 @@
         android:stretchColumns="1">
 
         <TableRow>
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -35,7 +34,6 @@
         </TableRow>
 
         <TableRow>
-
             <TextView
                 android:id="@+id/design"
                 android:layout_width="wrap_content"
@@ -51,6 +49,34 @@
         </TableRow>
     </TableLayout>
 
+    <TextView
+        style="@android:style/TextAppearance.DeviceDefault.Large"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/contributors"/>
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:stretchColumns="1">
+
+    <TableRow>
+            <TextView
+                android:id="@+id/contributors"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/programming"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="right"
+                android:text="@string/mabboud"/>
+        </TableRow>
+    </TableLayout>
 
     <TextView
         style="@android:style/TextAppearance.DeviceDefault.Large"

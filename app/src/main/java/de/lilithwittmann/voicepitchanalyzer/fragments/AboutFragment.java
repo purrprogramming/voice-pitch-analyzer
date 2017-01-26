@@ -50,6 +50,7 @@ public class AboutFragment extends Fragment
         TextView gpl = (TextView) view.findViewById(R.id.gpl);
         TextView programming = (TextView) view.findViewById(R.id.programming);
         TextView design = (TextView) view.findViewById(R.id.design);
+        TextView contributors = (TextView) view.findViewById(R.id.contributors);
         TextView github = (TextView) view.findViewById(R.id.github);
 
         apacheLicence.setMovementMethod(android.text.method.LinkMovementMethod.getInstance());
@@ -57,6 +58,7 @@ public class AboutFragment extends Fragment
         gpl.setMovementMethod(android.text.method.LinkMovementMethod.getInstance());
         programming.setMovementMethod(android.text.method.LinkMovementMethod.getInstance());
         design.setMovementMethod(android.text.method.LinkMovementMethod.getInstance());
+        contributors.setMovementMethod(android.text.method.LinkMovementMethod.getInstance());
         github.setMovementMethod(android.text.method.LinkMovementMethod.getInstance());
     }
 }

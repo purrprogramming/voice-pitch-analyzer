@@ -23,7 +23,7 @@ import de.lilithwittmann.voicepitchanalyzer.utils.EntryComparator;
  */
 public class RecordingList
 {
-    private Hashtable<Date, Recording> recordings = new Hashtable<>();
+    private Hashtable<DateTime, Recording> recordings = new Hashtable<>();
     private double avg = -1;
     private double min = -1;
     private double max = -1;
@@ -48,7 +48,7 @@ public class RecordingList
                 this.setEnd(recording.getDate().getTime());
             }
 
-            this.getRecordings().put(recording.getDate(), recording);
+            this.getRecordings().put(new DateTime(recording.getDate()), recording);
         }
     }
 
@@ -64,25 +64,20 @@ public class RecordingList
     public List<Entry> getGraphEntries()
     {
         List<Entry> result = new ArrayList<Entry>();
-        Date lastDate = new Date(0);
 
         Log.i("test", String.format("duration: %s", (int) new Duration(new DateTime(this.getBeginning()), new DateTime(this.getEnd())).getStandardDays()));
 
-        for (Hashtable.Entry<Date, Recording> record : this.getRecordings().entrySet())
+        for (Hashtable.Entry<DateTime, Recording> record : this.getRecordings().entrySet())
         {
+            // reset time of day so .getDuration() will always calculate a duration of one day between two different dates
+            DateTime recordTime = new DateTime(record.getKey().getYear(), record.getKey().getMonthOfYear(), record.getKey().getDayOfMonth(), 0, 0, 0, 0);
+
+            // list index as duration in days since first recording
+            int index = (int) new Duration(this.getBeginningAsDate(), recordTime).getStandardDays();
 
             // check if there are multiple entries for this date
-            DateTime lastTime = new DateTime(lastDate);
-            DateTime recordTime = new DateTime(record.getKey());
-            Duration difference = new Duration(lastTime, recordTime);
-
-            Log.i("test", String.format("last date: %s", lastTime));
-            Log.i("test", String.format("current record: %s", lastDate));
-            Log.i("test", String.format("difference: %s", difference.getStandardDays()));
-
-            int index = (int) new Duration(new DateTime(this.getBeginning()), new DateTime(record.getKey())).getStandardDays();
-
-            if (!this.containsIndex(result, index))
+            // and only add date if recording contains any pitch data
+            if (!this.containsIndex(result, index) && record.getValue().getRange().getAvg() > 0)
             {
                 Log.i("RecordingList", String.format("beginning: %s", new DateTime(this.getBeginning()).toDateTime()));
                 result.add(new Entry((float) record.getValue().getRange().getAvg(), index));
@@ -122,32 +117,22 @@ public class RecordingList
     public List<String> getDates()
     {
         List<String> result = new ArrayList<String>();
-        int duration = (int) new Duration(new DateTime(this.getBeginning()), new DateTime(this.getEnd())).getStandardDays();
+        int duration = (int) new Duration(this.getBeginningAsDate(), new DateTime(this.getEnd())).getStandardDays();
 
         for (int i = 0; i <= duration; i++)
         {
-            result.add(DateFormat.getDateInstance().format(new DateTime(this.getBeginning()).plusDays(i).toDate()));
+            result.add(DateFormat.getDateInstance().format(this.getBeginningAsDate().plusDays(i).toDate()));
         }
-
-        //        for (Hashtable.Entry<Date, Recording> record : this.getRecordings().entrySet())
-        //        {
-        //            String date = DateFormat.getDateInstance().format(record.getKey());
-        //
-        //            if (!result.contains(date))
-        //            {
-        //                result.add(date);
-        //            }
-        //        }
 
         return result;
     }
 
-    public Hashtable<Date, Recording> getRecordings()
+    public Hashtable<DateTime, Recording> getRecordings()
     {
         return this.recordings;
     }
 
-    public void setRecordings(Hashtable<Date, Recording> recordings)
+    public void setRecordings(Hashtable<DateTime, Recording> recordings)
     {
         this.recordings = recordings;
     }
@@ -168,7 +153,7 @@ public class RecordingList
         {
             double min = 10000;
 
-            for (Hashtable.Entry<Date, Recording> recording : this.getRecordings().entrySet())
+            for (Hashtable.Entry<DateTime, Recording> recording : this.getRecordings().entrySet())
             {
                 double current = recording.getValue().getRange().getAvg();
 
@@ -195,7 +180,7 @@ public class RecordingList
         {
             double max = 0;
 
-            for (Hashtable.Entry<Date, Recording> recording : this.getRecordings().entrySet())
+            for (Hashtable.Entry<DateTime, Recording> recording : this.getRecordings().entrySet())
             {
                 double current = recording.getValue().getRange().getAvg();
 
@@ -219,6 +204,17 @@ public class RecordingList
     public long getBeginning()
     {
         return this.beginning;
+    }
+
+    /**
+     * get beginning as date time with time set to 00:00:00:00
+     *
+     * @return
+     */
+    public DateTime getBeginningAsDate()
+    {
+        DateTime beginning = new DateTime(this.beginning);
+        return new DateTime(beginning.getYear(), beginning.getMonthOfYear(), beginning.getDayOfMonth(), 0, 0, 0, 0);
     }
 
     public long getEnd()

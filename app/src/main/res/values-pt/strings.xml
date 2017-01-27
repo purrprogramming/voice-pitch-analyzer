@@ -9,9 +9,8 @@
 <string name="stop_recording">Parar</string>
 <!-- recording analysis -->
 <string name="title_section1">Visão geral</string>
-<string name="title_section2">@string/pitch_graph_single_recording</string>
+<string name="title_section2">Tom ao longo do Tempo</string>
 <string name="title_section3">Detalhes</string>
-<string name="pitch_graph_single_recording">Tom ao longo do Tempo</string>
 <string name="min_max_avg">
 Média Mínima: %1$sHz, Média Máxima: %2$sHz, Média: %3$sHz
 </string>
@@ -68,7 +67,8 @@ Por favor grave algo pressionando o ícone de microfone no canto superior direit
     <string name="mic_permission_explanation">In order to record your voice, you need to give Voice Pitch Analyzer permission to access this device\'s microphone.</string>
     <string name="record_deleted">Gravação excluído</string>
     <string name="mic_permission_title">Acesso ao microfone necessário</string>
-    <string name="progress">Progresso </string>
+    <string name="progress">Tom</string>
     <string name="title_activity_progress">Progresso total</string>
     <string name="title_text">Texto</string>
+    <string name="contributors">Colaboração</string>
 </resources>

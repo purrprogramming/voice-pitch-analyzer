@@ -97,10 +97,13 @@ public class RecordGraphFragment extends Fragment implements OnChartValueSelecte
         chartData.setData(pitchData);
 
         genderBarData = new BarData(xVals, GraphLayout.getOverallRange(this.getContext(), xVals.size()));
+
         // Bug with chart lib that throws exception for empty bar charts so must skip adding it on init
-        // if were coming from the live pitch graph.
+        // if we're coming from the live pitch graph.
         if (!xVals.isEmpty())
+        {
             chartData.setData(genderBarData);
+        }
 
         chart.setData(chartData);
 
@@ -118,9 +121,12 @@ public class RecordGraphFragment extends Fragment implements OnChartValueSelecte
         super.onViewCreated(view, savedInstanceState);
     }
 
-    public void addNewPitch(Entry pitch) {
+    public void addNewPitch(Entry pitch)
+    {
         if (pitchDataSet == null || getView() == null)
+        {
             return;
+        }
 
         pitchData.addXValue("" + pitch.getXIndex());
         pitchDataSet.addEntry(pitch);
@@ -129,8 +135,9 @@ public class RecordGraphFragment extends Fragment implements OnChartValueSelecte
         genderBarData.addDataSet(GraphLayout.getOverallRange(this.getContext(), pitchData.getXValCount()));
 
         CombinedChart chart = (CombinedChart) getView().findViewById(R.id.recording_chart);
-        if (pitchData.getXValCount() == 1) {
-            // If were starting fresh from live pitch graph we must initialize the bardata here since
+        if (pitchData.getXValCount() == 1)
+        {
+            // If we're starting fresh from live pitch graph we must initialize the bardata here since
             // it does not get initialized on view creation to avoid a bug with the chart library
             chartData.setData(genderBarData);
             chart.setData(chartData);
@@ -145,13 +152,16 @@ public class RecordGraphFragment extends Fragment implements OnChartValueSelecte
     public void onAttach(Activity activity)
     {
         super.onAttach(activity);
+
         try
         {
             mListener = (OnFragmentInteractionListener) activity;
-        } catch (ClassCastException e)
+        }
+
+        catch (ClassCastException e)
         {
             throw new ClassCastException(activity.toString()
-                    + " must implement OnFragmentInteractionListener");
+                                         + " must implement OnFragmentInteractionListener");
         }
     }
 

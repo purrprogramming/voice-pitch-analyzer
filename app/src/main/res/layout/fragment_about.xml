@@ -35,13 +35,13 @@
 
         <TableRow>
             <TextView
-                android:id="@+id/design"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="@string/design"
                 android:textStyle="bold"/>
 
             <TextView
+                android:id="@+id/design"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="right"
@@ -64,13 +64,13 @@
 
     <TableRow>
             <TextView
-                android:id="@+id/contributors"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="@string/programming"
                 android:textStyle="bold"/>
 
             <TextView
+                android:id="@+id/contributors"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="right"

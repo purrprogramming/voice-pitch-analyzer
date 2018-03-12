@@ -56,7 +56,7 @@
     <string name="welcome">Hey !</string>
     <string name="explanation">Pour bien l'analyser, nous avons besoin d'environ une minute d'enregistrement audio de votre voix. À cette fin, nous vous fournirons un texte d'une longueur approximative à ce délai. Bien sûr, vous êtes libre de dire autre chose aussi, tant que c'est dans votre voix naturelle.</string>
     <string name="microphone">Pour produire des résultats d'analyse significatifs, il est préférable d'utiliser un casque ou un autre microphone externe.</string>
-    <string name="results">Lorsque vous avez terminé, appuyez sur »Arrêter« pour afficher vos résultats. Sur la page de résultats, vous trouverez un graphique montrant les gammes >mâles< et >femelles< typiques (en violet), ainsi que les vôtres (en gris). Vous remarquerez que les gammes >mâle< et >femelle< se chevauchent un peu, indiquant une gamme qui peut être perçue comme étant l'un ou l'autre sexe.</string>
+    <string name="results">Lorsque vous avez terminé, appuyez sur »Arrêter« pour afficher vos résultats. Sur la page de résultats, vous trouverez un graphique montrant les gammes >masculines< et >féminines< typiques (en violet), ainsi que les vôtres (en gris). Vous remarquerez que les gammes >masculines< et >féminines< se chevauchent un peu, indiquant une gamme qui peut être perçue comme étant l'un ou l'autre sexe.</string>
     <string name="next">Suivant</string>
 
     <!-- error messages -->

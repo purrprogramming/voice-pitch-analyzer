@@ -42,6 +42,7 @@
     <string name="german">Deutsch</string>
     <string name="portuguese">Portugiesisch</string>
     <string name="italian">Italienisch</string>
+    <string name="french">Französisch</string>
     <string name="record_deleted">Aufnahme gelöscht</string>
     <string name="undo">Rückgängig</string>
     <string name="text_origin">Alle Texte stammen aus »Das Bildnis des Dorian Gray« von Oscar Wilde</string>

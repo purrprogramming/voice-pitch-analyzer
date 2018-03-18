@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- general -->
+    <string name="app_name">Analyseur de hauteur vocale</string>
+
+    <!-- recording overview -->
+    <string name="undo">Annuler</string>
+    <string name="record_deleted">Enregistrement supprimé</string>
+    <string name="empty">Veuillez enregistrer quelque chose en appuyant sur l'icône du microphone dans le coin supérieur droit.</string>
+
+    <!-- new recording activity/fragment -->
+    <string name="title_activity_recording">Nouvel enregistrement</string>
+    <string name="record">Enregistrement</string>
+    <string name="start_recording">Enregistrer</string>
+    <string name="stop_recording">Arrêter</string>
+    <string name="title_text">Texte</string>
+    <string name="realtime_graph">Graphique en temps réel</string>
+
+    <!-- recording analysis -->
+    <string name="title_section1">Vue d'ensemble</string>
+    <string name="title_section2">Hauteur dans le temps</string>
+    <string name="title_section3">Détails</string>
+    <string name="min_max_avg">Min Moy: %1$sHz, Max Moy: %2$sHz, Moy: %3$sHz</string>
+    <string name="average">Moyenne</string>
+    <string name="min_avg">Moyenne minimale</string>
+    <string name="max_avg">Moyenne maximale</string>
+    <string name="male_range">Gamme masculine</string>
+    <string name="female_range">Gamme féminine</string>
+    <string name="androgynous_range">Gamme Androgyne</string>
+    <string name="your_range">Votre gamme</string>
+    <string name="personal_range">Votre gamme sonne surtout</string>
+    <string name="male">masculine</string>
+    <string name="female">féminine</string>
+    <string name="in_between">entre</string>
+    <string name="unknown">inconnu</string>
+    <string name="pitch_max">Maximum</string>
+    <string name="pitch_min">Minimum</string>
+    <string name="pitch_max_avg">Moyenne maximale</string>
+    <string name="pitch_min_avg">Moyenne minimale</string>
+
+    <!-- about fragment -->
+    <string name="action_about">A propos</string>
+    <string name="title_activity_about">A propos de Analyseur de hauteur vocale</string>
+    <string name="programming">Programmation</string>
+    <string name="libraries">L'Analyseur de hauteur vocale utilise les bibliothèques suivantes :</string>
+    <string name="contributors">Contributeurs</string>
+    <string name="translation">Traduction</string>
+    <string name="english">Anglais</string>
+    <string name="german">Allemand</string>
+    <string name="portuguese">Portugais</string>
+    <string name="italian">Italien</string>
+    <string name="french">Français</string>
+    <string name="text_origin">Le texte provient de »Le Portrait de Dorian Gray« par Oscar Wilde</string>
+
+    <!-- start screen -->
+    <string name="welcome">Hey !</string>
+    <string name="explanation">Pour bien l'analyser, nous avons besoin d'environ une minute d'enregistrement audio de votre voix. À cette fin, nous vous fournirons un texte d'une longueur approximative à ce délai. Bien sûr, vous êtes libre de dire autre chose aussi, tant que c'est dans votre voix naturelle.</string>
+    <string name="microphone">Pour produire des résultats d'analyse significatifs, il est préférable d'utiliser un casque ou un autre microphone externe.</string>
+    <string name="results">Lorsque vous avez terminé, appuyez sur »Arrêter« pour afficher vos résultats. Sur la page de résultats, vous trouverez un graphique montrant les gammes >masculines< et >féminines< typiques (en violet), ainsi que les vôtres (en gris). Vous remarquerez que les gammes >masculines< et >féminines< se chevauchent un peu, indiquant une gamme qui peut être perçue comme étant l'un ou l'autre sexe.</string>
+    <string name="next">Suivant</string>
+
+    <!-- error messages -->
+    <string name="device_sample_rate_not_supported">Le microphone n'est pas encore pris en charge. Les développeurs ont été informés.</string>
+    <string name="device_sample_rate_not_supported_title">Microphone non pris en charge</string>
+
+    <!-- permission request -->
+    <string name="mic_permission_explanation">Pour enregistrer votre voix, vous devez autoriser l'accès au microphone de cet appareil.</string>
+    <string name="settings">Paramètres</string>
+    <string name="mic_permission_title">Accès au microphone requis</string>
+
+    <!-- progress -->
+    <string name="progress">Hauteur</string>
+    <string name="title_activity_progress">Progrès général</string>
+</resources>

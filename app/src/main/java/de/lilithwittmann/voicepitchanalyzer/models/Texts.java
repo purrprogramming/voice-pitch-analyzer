@@ -45,7 +45,7 @@ public class Texts {
     private String jsonFolder = "res/raw/";
     private String jsonData = null;
 
-    private List<String> supportedLanguages = new ArrayList<String>() {{add("de"); add("en"); add("it"); add("pt");}};
+    private List<String> supportedLanguages = new ArrayList<String>() {{add("de"); add("en"); add("it"); add("pt"); add("fr");}};
 
     String getJsonData(String country) {
         if (this.jsonData != null) {

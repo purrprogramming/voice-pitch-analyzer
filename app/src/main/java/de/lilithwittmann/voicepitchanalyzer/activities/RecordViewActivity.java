@@ -9,7 +9,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -26,7 +26,7 @@ import de.lilithwittmann.voicepitchanalyzer.models.Recording;
 import de.lilithwittmann.voicepitchanalyzer.models.database.RecordingDB;
 
 
-public class RecordViewActivity extends ActionBarActivity implements ActionBar.TabListener, RecordGraphFragment.OnFragmentInteractionListener {
+public class RecordViewActivity extends AppCompatActivity implements ActionBar.TabListener, RecordGraphFragment.OnFragmentInteractionListener {
     private static final String LOG_TAG = RecordViewActivity.class.getSimpleName();
     public static Recording currentRecord;
     /**

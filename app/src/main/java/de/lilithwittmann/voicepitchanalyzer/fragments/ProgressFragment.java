@@ -12,6 +12,7 @@ import com.github.mikephil.charting.charts.CombinedChart.DrawOrder;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.CombinedData;
+import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 
@@ -19,6 +20,7 @@ import java.util.List;
 
 import de.lilithwittmann.voicepitchanalyzer.R;
 import de.lilithwittmann.voicepitchanalyzer.models.RecordingList;
+import de.lilithwittmann.voicepitchanalyzer.utils.DateValueFormatter;
 import de.lilithwittmann.voicepitchanalyzer.utils.GraphLayout;
 
 /**
@@ -49,22 +51,24 @@ public class ProgressFragment extends Fragment
 
         if (this.recordings != null)
         {
-            List<String> dates = this.recordings.getDates();
+            CombinedData data = new CombinedData();
 
-            CombinedData data = new CombinedData(dates);
+            List<Entry> entries = this.recordings.getGraphEntries();
+            LineDataSet dataSet = new LineDataSet(entries, getResources().getString(R.string.progress));
+            LineData lineData = new LineData(dataSet);
+            BarData barData = new BarData(GraphLayout.getOverallRange(this.getContext(), entries.size()));
 
-            LineDataSet dataSet = new LineDataSet(this.recordings.getGraphEntries(), getResources().getString(R.string.progress));
-            LineData lineData = new LineData(dates, dataSet);
-            BarData barData = new BarData(dates, GraphLayout.getOverallRange(this.getContext(), dates.size()));
+            chart.getXAxis().setValueFormatter(new DateValueFormatter(this.recordings.getBeginningAsDate()));
+            chart.getXAxis().setGranularity(1f);
 
-            dataSet.setDrawCubic(true);
+            dataSet.setMode(LineDataSet.Mode.CUBIC_BEZIER);
             dataSet.enableDashedLine(10, 10, 0);
             dataSet.setLineWidth(3f);
             dataSet.setDrawValues(false);
 
             dataSet.setCircleColor(getResources().getColor(R.color.canvas_dark));
             dataSet.setColor(getResources().getColor(R.color.canvas_dark));
-            dataSet.setCircleSize(5f);
+            dataSet.setCircleRadius(5f);
 
             dataSet.setCubicIntensity(0.05f);
             dataSet.setAxisDependency(YAxis.AxisDependency.LEFT);

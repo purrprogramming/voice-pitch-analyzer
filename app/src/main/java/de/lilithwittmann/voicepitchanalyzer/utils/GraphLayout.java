@@ -3,6 +3,7 @@ package de.lilithwittmann.voicepitchanalyzer.utils;
 import android.content.Context;
 
 import com.github.mikephil.charting.charts.BarLineChartBase;
+import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
@@ -25,8 +26,8 @@ public class GraphLayout
      */
     public static BarLineChartBase FormatChart(BarLineChartBase chart)
     {
-        chart.getAxisLeft().setStartAtZero(false);
-        chart.getAxisRight().setStartAtZero(false);
+        chart.getAxisLeft().resetAxisMinimum();
+        chart.getAxisRight().resetAxisMinimum();
 
         // hide grid lines & borders
         chart.getAxisLeft().setDrawGridLines(false);
@@ -36,7 +37,9 @@ public class GraphLayout
         chart.getAxisRight().setValueFormatter(new GraphValueFormatter());
         chart.setDrawBorders(false);
 
-        chart.setDescription("");
+        Description emptyDescription = new Description();
+        emptyDescription.setText("");
+        chart.setDescription(emptyDescription);
 
         // disable all interactions except highlighting selection
         chart.setTouchEnabled(false);
@@ -47,25 +50,27 @@ public class GraphLayout
 
         chart.getData().setHighlightEnabled(true);
 
-        chart.getAxisLeft().setAxisMaxValue(PitchCalculator.maxPitch.floatValue());
-        chart.getAxisRight().setAxisMaxValue(PitchCalculator.maxPitch.floatValue());
-        chart.getAxisRight().setAxisMinValue(PitchCalculator.minPitch.floatValue());
-        chart.getAxisLeft().setAxisMinValue(PitchCalculator.minPitch.floatValue());
+        chart.getAxisLeft().setAxisMaximum(PitchCalculator.maxPitch.floatValue());
+        chart.getAxisRight().setAxisMaximum(PitchCalculator.maxPitch.floatValue());
+        chart.getAxisRight().setAxisMinimum(PitchCalculator.minPitch.floatValue());
+        chart.getAxisLeft().setAxisMinimum(PitchCalculator.minPitch.floatValue());
 
         chart.getAxisLeft().setValueFormatter(new GraphValueFormatter());
         chart.getAxisRight().setValueFormatter(new GraphValueFormatter());
         chart.setDrawBorders(false);
 
         // set min/max values etc. for axes
-        chart.getAxisLeft().setAxisMinValue(PitchCalculator.minMalePitch.floatValue());
-        chart.getAxisRight().setAxisMinValue(PitchCalculator.minMalePitch.floatValue());
+        chart.getAxisLeft().setAxisMinimum(PitchCalculator.minMalePitch.floatValue());
+        chart.getAxisRight().setAxisMinimum(PitchCalculator.minMalePitch.floatValue());
 //        chart.getAxisRight().setStartAtZero(false);
 
         chart.setHardwareAccelerationEnabled(true);
         //        chart.getLegend().setEnabled(false);
 
         Legend legend = chart.getLegend();
-        legend.setPosition(Legend.LegendPosition.BELOW_CHART_CENTER);
+        legend.setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
+        legend.setVerticalAlignment(Legend.LegendVerticalAlignment.BOTTOM);
+        legend.setOrientation(Legend.LegendOrientation.HORIZONTAL);
 
         return chart;
     }
@@ -107,11 +112,11 @@ public class GraphLayout
 
         for (int i = 0; i < amount; i++)
         {
-            result.add(new BarEntry(new float[]{
+            result.add(new BarEntry(i, new float[]{
                     PitchCalculator.minMalePitch.floatValue()*2,
                     PitchCalculator.maxMalePitch.floatValue() - PitchCalculator.minFemalePitch.floatValue(),
                     PitchCalculator.maxFemalePitch.floatValue() - PitchCalculator.maxMalePitch.floatValue(),
-                    }, i));
+                    }));
         }
 
         return result;

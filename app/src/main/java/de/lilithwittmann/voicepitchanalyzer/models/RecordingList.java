@@ -10,13 +10,12 @@ import org.joda.time.Duration;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.Hashtable;
 import java.util.List;
+import java.util.TreeMap;
 
 import de.lilithwittmann.voicepitchanalyzer.models.database.RecordingDB;
-import de.lilithwittmann.voicepitchanalyzer.utils.EntryComparator;
 
 /**
  * Created by Yuri on 30.01.16.
@@ -63,7 +62,7 @@ public class RecordingList
      */
     public List<Entry> getGraphEntries()
     {
-        List<Entry> result = new ArrayList<Entry>();
+        TreeMap<Integer, Entry> result = new TreeMap<>();
 
         Log.i("test", String.format("duration: %s", (int) new Duration(new DateTime(this.getBeginning()), new DateTime(this.getEnd())).getStandardDays()));
 
@@ -77,54 +76,19 @@ public class RecordingList
 
             // check if there are multiple entries for this date
             // and only add date if recording contains any pitch data
-            if (!this.containsIndex(result, index) && record.getValue().getRange().getAvg() > 0)
+            if (!result.containsKey(index) && record.getValue().getRange().getAvg() > 0)
             {
                 Log.i("RecordingList", String.format("beginning: %s", new DateTime(this.getBeginning()).toDateTime()));
-                result.add(new Entry((float) record.getValue().getRange().getAvg(), index));
+                result.put(index, new Entry(index, (float) record.getValue().getRange().getAvg()));
             }
         }
 
-        Collections.sort(result, new EntryComparator());
-
-        for (Entry entry : result)
+        for (TreeMap.Entry<Integer, Entry> entry : result.entrySet())
         {
-            Log.i("result", String.format("%s: %s", entry.getXIndex(), entry.getVal()));
+            Log.i("result", String.format("%s: %s", entry.getKey(), entry.getValue().getY()));
         }
 
-        return result;
-    }
-
-    /***
-     * check if Entry with given index value is already in list
-     *
-     * @param list
-     * @param index
-     * @return
-     */
-    private boolean containsIndex(List<Entry> list, int index)
-    {
-        for (Entry entry : list)
-        {
-            if (entry.getXIndex() == index)
-            {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    public List<String> getDates()
-    {
-        List<String> result = new ArrayList<String>();
-        int duration = (int) new Duration(this.getBeginningAsDate(), new DateTime(this.getEnd())).getStandardDays();
-
-        for (int i = 0; i <= duration; i++)
-        {
-            result.add(DateFormat.getDateInstance().format(this.getBeginningAsDate().plusDays(i).toDate()));
-        }
-
-        return result;
+        return new ArrayList<>(result.values());
     }
 
     public Hashtable<DateTime, Recording> getRecordings()

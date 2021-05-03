@@ -95,7 +95,7 @@ public class Recording implements Parcelable {
 
     public Entry getGraphEntry()
     {
-        return new Entry((float) this.getRange().getAvg(), (int) this.getDate().getTime());
+        return new Entry((float) this.getDate().getTime(), (float) this.getRange().getAvg());
     }
 
     @Override

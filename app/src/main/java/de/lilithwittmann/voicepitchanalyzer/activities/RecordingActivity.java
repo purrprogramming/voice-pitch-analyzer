@@ -83,7 +83,7 @@ public class RecordingActivity extends AppCompatActivity implements RecordingFra
                 .findFragmentByTag(getString(R.string.realtime_graph));
 
         if (graph != null && pitchAccepted)
-            graph.addNewPitch(new Entry(pitchInHz, calculator.getPitches().size()));
+            graph.addNewPitch(new Entry(calculator.getPitches().size(), pitchInHz));
     }
 
     @Override
@@ -107,7 +107,7 @@ public class RecordingActivity extends AppCompatActivity implements RecordingFra
         List<Double> pitches = calculator.getPitches();
         for (int i = 0; i < pitches.size(); i++) {
             Double pitchOn = pitches.get(i);
-            pitchEntries.add(new Entry(pitchOn.floatValue(), i));
+            pitchEntries.add(new Entry(i, pitchOn.floatValue()));
         }
 
         return pitchEntries;

@@ -72,7 +72,7 @@ public class PitchRange implements Parcelable {
         List<Entry> list = new ArrayList<Entry>();
 
         for (int i = 0; i < this.getPitches().size(); i++) {
-            list.add(new Entry(this.getPitches().get(i).floatValue(), i));
+            list.add(new Entry(i, this.getPitches().get(i).floatValue()));
         }
 
         return list;

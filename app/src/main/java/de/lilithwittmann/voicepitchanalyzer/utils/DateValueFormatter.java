@@ -1,14 +1,14 @@
 package de.lilithwittmann.voicepitchanalyzer.utils;
 
 import com.github.mikephil.charting.components.AxisBase;
-import com.github.mikephil.charting.formatter.IAxisValueFormatter;
+import com.github.mikephil.charting.formatter.ValueFormatter;
 
 import org.joda.time.DateTime;
 
 import java.text.DateFormat;
 import java.util.HashMap;
 
-public class DateValueFormatter implements IAxisValueFormatter
+public class DateValueFormatter extends ValueFormatter
 {
     private final DateTime beginningDate;
     private final HashMap<Integer, String> formattedCache = new HashMap<>();
@@ -19,7 +19,7 @@ public class DateValueFormatter implements IAxisValueFormatter
     }
 
     @Override
-    public String getFormattedValue(float value, AxisBase axis)
+    public String getFormattedValue(float value)
     {
         int days = (int) value;
 

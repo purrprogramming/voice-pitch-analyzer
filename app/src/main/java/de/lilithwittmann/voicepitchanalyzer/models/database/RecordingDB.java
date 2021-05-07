@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.provider.BaseColumns;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -20,6 +21,8 @@ import de.lilithwittmann.voicepitchanalyzer.models.Recording;
  */
 public class RecordingDB {
 
+    private static final String LOG_TAG = RecordingDB.class.getSimpleName();
+
     private static final String TEXT_TYPE = " TEXT";
     private static final String DOUBLE_TYPE = " REAL";
     private static final String INTEGER_TYPE = " INTEGER";
@@ -32,8 +35,8 @@ public class RecordingDB {
                     RecordingEntry.COLUMN_NAME_FILE + TEXT_TYPE + COMMA_SEP +
                     RecordingEntry.COLUMN_NAME_AVG_PITCH + DOUBLE_TYPE + COMMA_SEP +
                     RecordingEntry.COLUMN_NAME_MAX_PITCH + DOUBLE_TYPE + COMMA_SEP +
-                    RecordingEntry.COLUMN_NAME_MIN_PITCH + DOUBLE_TYPE +
-
+                    RecordingEntry.COLUMN_NAME_MIN_PITCH + DOUBLE_TYPE + COMMA_SEP +
+                    RecordingEntry.COLUMN_DEF_FILE_SIZE +
                     " );";
     private static final String SQL_CREATE_PITCH_TABLE =
             "CREATE TABLE " + PitchEntry.TABLE_NAME + " (" +
@@ -46,6 +49,8 @@ public class RecordingDB {
             "DROP TABLE IF EXISTS " + RecordingEntry.TABLE_NAME + ";";
     private static final String SQL_DELETE_PITCH_TABLE =
             "DROP TABLE IF EXISTS " + PitchEntry.TABLE_NAME + ";";
+    private static final String SQL_ALTER_TABLE = "ALTER TABLE ";
+    private static final String SQL_ADD_COLUMN = " ADD COLUMN ";
     private final Context context;
 
 
@@ -66,6 +71,7 @@ public class RecordingDB {
         values.put(RecordingEntry.COLUMN_NAME_MAX_PITCH, recording.getRange().getMax());
         values.put(RecordingEntry.COLUMN_NAME_MIN_PITCH, recording.getRange().getMin());
         values.put(RecordingEntry.COLUMN_NAME_FILE, recording.getRecording());
+        values.put(RecordingEntry.COLUMN_NAME_FILE_SIZE, recording.getRecordingFileSize());
 
         // Insert the new row, returning the primary key value of the new row
         long newRowId;
@@ -103,6 +109,7 @@ public class RecordingDB {
                 RecordingEntry.COLUMN_NAME_MIN_PITCH,
                 RecordingEntry.COLUMN_NAME_DATE,
                 RecordingEntry.COLUMN_NAME_NAME,
+                RecordingEntry.COLUMN_NAME_FILE_SIZE,
         };
 
         // How you want the results sorted in the resulting Cursor
@@ -122,6 +129,7 @@ public class RecordingDB {
             Recording recording = new Recording();
             recording.setId(c.getLong(0));
             recording.setRecording(c.getString(1));
+            recording.setRecordingFileSize(c.getLong(7));
             recording.setDate(new Date(c.getLong(5)));
             recording.setName(c.getString(6));
             PitchRange pitch = new PitchRange();
@@ -150,6 +158,7 @@ public class RecordingDB {
                 RecordingEntry.COLUMN_NAME_MIN_PITCH,
                 RecordingEntry.COLUMN_NAME_DATE,
                 RecordingEntry.COLUMN_NAME_NAME,
+                RecordingEntry.COLUMN_NAME_FILE_SIZE,
         };
 
         // How you want the results sorted in the resulting Cursor
@@ -169,6 +178,7 @@ public class RecordingDB {
         Recording recording = new Recording();
         recording.setId(c.getLong(0));
         recording.setRecording(c.getString(1));
+        recording.setRecordingFileSize(c.getLong(7));
         recording.setDate(new Date(c.getLong(5)));
         recording.setName(c.getString(6));
         PitchRange pitch = new PitchRange();
@@ -241,6 +251,8 @@ public class RecordingDB {
         public static final String COLUMN_NAME_MIN_PITCH = "min_pitch";
         public static final String COLUMN_NAME_MAX_PITCH = "max_pitch";
         public static final String COLUMN_NAME_FILE = "file";
+        public static final String COLUMN_NAME_FILE_SIZE = "file_size";
+        public static final String COLUMN_DEF_FILE_SIZE = COLUMN_NAME_FILE_SIZE + INTEGER_TYPE;
     }
 
     public static abstract class PitchEntry implements BaseColumns {
@@ -251,8 +263,11 @@ public class RecordingDB {
     }
 
     public class RecordingDbHelper extends SQLiteOpenHelper {
+        private static final int NO_MIGRATE_VERSION = 3;
+        private static final int ADD_FILE_SIZE_VERSION = 5;
+
         // If you change the database schema, you must increment the database version.
-        public static final int DATABASE_VERSION = 4;
+        public static final int DATABASE_VERSION = 5;
         public static final String DATABASE_NAME = "Recording.db";
 
         public RecordingDbHelper(Context context) {
@@ -265,15 +280,39 @@ public class RecordingDB {
         }
 
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-            // This database is only a cache for online data, so its upgrade policy is
-            // to simply to discard the data and start over
-            db.execSQL(SQL_DELETE_RECORDING_TABLE);
-            db.execSQL(SQL_DELETE_PITCH_TABLE);
-            onCreate(db);
+            if (oldVersion <= NO_MIGRATE_VERSION) {
+                Log.i(LOG_TAG, "Deleting old database version " + oldVersion);
+                recreateDatabase(db);
+                return;
+            }
+
+            Log.i(LOG_TAG, "Upgrading database from version " + oldVersion + " to " + newVersion);
+            long startTime = System.currentTimeMillis();
+
+            db.beginTransaction();
+
+            try {
+                if (oldVersion < ADD_FILE_SIZE_VERSION && newVersion >= ADD_FILE_SIZE_VERSION) {
+                    db.execSQL(SQL_ALTER_TABLE + RecordingEntry.TABLE_NAME + SQL_ADD_COLUMN + RecordingEntry.COLUMN_DEF_FILE_SIZE);
+                }
+                db.setTransactionSuccessful();
+            } finally {
+                db.endTransaction();
+            }
+
+            long duration = System.currentTimeMillis() - startTime;
+            Log.i(LOG_TAG, "Database upgrade from version " + oldVersion + " to " + newVersion + " finished in " + duration + "ms");
         }
 
         public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-            onUpgrade(db, oldVersion, newVersion);
+            Log.w(LOG_TAG, "Cannot downgrade database from version " + oldVersion + " to " + newVersion);
+            recreateDatabase(db);
+        }
+
+        private void recreateDatabase(SQLiteDatabase db) {
+            db.execSQL(SQL_DELETE_RECORDING_TABLE);
+            db.execSQL(SQL_DELETE_PITCH_TABLE);
+            onCreate(db);
         }
     }
 

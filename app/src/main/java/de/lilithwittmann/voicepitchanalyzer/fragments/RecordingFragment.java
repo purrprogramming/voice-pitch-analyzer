@@ -3,7 +3,6 @@ package de.lilithwittmann.voicepitchanalyzer.fragments;
 import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -18,10 +17,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.RandomAccessFile;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Optional;
 import java.util.UUID;
 
 import be.tarsos.dsp.AudioDispatcher;
@@ -34,10 +36,10 @@ import be.tarsos.dsp.pitch.PitchProcessor;
 import de.lilithwittmann.voicepitchanalyzer.R;
 import de.lilithwittmann.voicepitchanalyzer.models.PitchRange;
 import de.lilithwittmann.voicepitchanalyzer.models.Recording;
-import de.lilithwittmann.voicepitchanalyzer.models.Texts;
 import de.lilithwittmann.voicepitchanalyzer.models.database.RecordingDB;
-import de.lilithwittmann.voicepitchanalyzer.utils.AudioRecorder;
+import de.lilithwittmann.voicepitchanalyzer.utils.CountingWriterProcessor;
 import de.lilithwittmann.voicepitchanalyzer.utils.PitchCalculator;
+import de.lilithwittmann.voicepitchanalyzer.utils.RecordingPaths;
 import de.lilithwittmann.voicepitchanalyzer.utils.SampleRateCalculator;
 
 /**
@@ -51,9 +53,9 @@ public class RecordingFragment extends Fragment
     private boolean isRecording = false;
     private Thread recordThread;
     private AudioDispatcher dispatcher;
+    private CountingWriterProcessor writer;
     private int sampleRate;
     private int bufferRate = 4096;
-    private AudioRecorder recorder;
     private String recordingFile;
     private static final int MY_PERMISSIONS_REQUEST_RECORD_AUDIO = 235;
     private static final int MY_PERMISSIONS_REQUEST_MODIFY_AUDIO_SETTINGS = 183;
@@ -98,8 +100,18 @@ public class RecordingFragment extends Fragment
                         ((Button) view.findViewById(R.id.record_button)).setText(getResources().getString(R.string.start_recording));
 
                         calculator.getPitches().clear();
-                        // TODO: delete file
-                        // new File(recordingFile).delete();
+                        Optional<Path> recordingPath = Optional.ofNullable(recordingFile)
+                                .map(file -> RecordingPaths.getUnfinishedRecordingPath(getContext(), file));
+                        if (recordingPath.isPresent())
+                        {
+                            try
+                            {
+                                Files.delete(recordingPath.get());
+                            } catch (IOException ex)
+                            {
+                                Log.i(LOG_TAG, "error deleting unfinished recording file " + recordingPath.get() + ": " + ex);
+                            }
+                        }
                     }
                 }
 
@@ -121,6 +133,29 @@ public class RecordingFragment extends Fragment
 
                         //Log.d("stream state", String.valueOf(recorder.getRecording().getState()));
 
+                        Optional<Path> unfinishedRecordingPath = Optional.ofNullable(recordingFile)
+                                .map(file -> RecordingPaths.getUnfinishedRecordingPath(getContext(), file));
+                        Optional<Path> recordingPath = Optional.ofNullable(recordingFile)
+                                .map(file -> RecordingPaths.getRecordingPath(getContext(), file));
+                        if (unfinishedRecordingPath.isPresent() && recordingPath.isPresent())
+                        {
+                            try
+                            {
+                                Files.createDirectories(recordingPath.get().getParent());
+                                Files.move(unfinishedRecordingPath.get(), recordingPath.get());
+                            } catch (IOException ex)
+                            {
+                                Log.w(LOG_TAG, "error moving unfinished recording " + unfinishedRecordingPath.get() + " to " +
+                                      recordingPath.get() + ": " + ex);
+                                recordingFile = null;
+                            }
+                        }
+                        else if (recordingFile != null)
+                        {
+                            Log.w(LOG_TAG, "could not determine recording paths to move unfinished recording");
+                            recordingFile = null;
+                        }
+
                         PitchRange range = new PitchRange();
                         range.setPitches(calculator.getPitches());
                         range.setMin(calculator.calculateMinAverage());
@@ -129,7 +164,14 @@ public class RecordingFragment extends Fragment
 
                         Recording currentRecord = new Recording(new Date());
                         currentRecord.setRange(range);
-                        currentRecord.setRecording(recordingFile);
+                        if (recordingFile != null)
+                        {
+                            currentRecord.setRecording(recordingFile);
+                            if (writer != null)
+                            {
+                                currentRecord.setRecordingFileSize(writer.getFileSize());
+                            }
+                        }
 
                         RecordingDB recordingDB = new RecordingDB(getActivity());
                         currentRecord = recordingDB.saveRecording(currentRecord);
@@ -403,19 +445,36 @@ public class RecordingFragment extends Fragment
             };
 
             AudioProcessor p = new PitchProcessor(PitchProcessor.PitchEstimationAlgorithm.FFT_YIN, this.sampleRate, this.bufferRate, pdh);
-            FileOutputStream fos = null;
-            this.recordingFile = UUID.randomUUID().toString() + ".pcm";
-            try
+            String recordingFile = UUID.randomUUID().toString() + ".wav";
+            Path recordingPath = RecordingPaths.getUnfinishedRecordingPath(getActivity(), recordingFile);
+            RandomAccessFile openRecordingFile = null;
+            if (recordingPath != null)
             {
-                fos = getActivity().openFileOutput(this.recordingFile, Context.MODE_PRIVATE);
-            } catch (FileNotFoundException e)
+                try
+                {
+                    Files.createDirectories(recordingPath.getParent());
+                    openRecordingFile = new RandomAccessFile(recordingPath.toFile(), "rw");
+                } catch (IOException ex)
+                {
+                    Log.w(LOG_TAG, "error opening file for recording " + recordingPath + ": " + ex);
+                }
+            }
+            else
             {
-                e.printStackTrace();
+                Log.w(LOG_TAG, "could not determine recording path");
             }
 
-            //this.recorder = new AudioRecorder(this.sampleRate, this.bufferRate, fos);
             dispatcher.addAudioProcessor(p);
-            //dispatcher.addAudioProcessor(recorder);
+
+            CountingWriterProcessor writer = null;
+            if (openRecordingFile != null)
+            {
+                writer = new CountingWriterProcessor(dispatcher.getFormat(), openRecordingFile);
+                dispatcher.addAudioProcessor(writer);
+            }
+
+            this.recordingFile = Optional.ofNullable(writer).map(_f -> recordingFile).get();
+            this.writer = writer;
             this.recordThread = new Thread(dispatcher, "Audio Dispatcher");
             this.recordThread.start();
 

@@ -89,4 +89,6 @@
     <!-- progress -->
     <string name="progress">Pitch</string>
     <string name="title_activity_progress">Overall Progress</string>
+    <string name="recording">Recording</string>
+    <string name="none">None</string>
 </resources>

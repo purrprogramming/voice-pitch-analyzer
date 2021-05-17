@@ -94,7 +94,15 @@ public class RecordingDB {
         return recording;
     }
 
+    public List<Recording> getRecordingsWithFiles() {
+        return getRecordings(RecordingEntry.COLUMN_NAME_FILE + " IS NOT NULL");
+    }
+
     public List<Recording> getRecordings() {
+        return getRecordings(null);
+    }
+
+    private List<Recording> getRecordings(String whereClause) {
         List<Recording> recordings = new ArrayList<Recording>();
         RecordingDbHelper mDbHelper = new RecordingDbHelper(this.context);
         SQLiteDatabase db = mDbHelper.getReadableDatabase();
@@ -118,7 +126,7 @@ public class RecordingDB {
         Cursor c = db.query(
                 RecordingEntry.TABLE_NAME,  // The table to query
                 projection,                               // The columns to return
-                null,                                // The columns for the WHERE clause
+                whereClause,                              // The columns for the WHERE clause
                 null,                            // The values for the WHERE clause
                 null,                                     // don't group the rows
                 null,                                     // don't filter by row groups
@@ -241,6 +249,21 @@ public class RecordingDB {
         }
 
         return pitches;
+    }
+
+    public void updateRecordingFilename(long id, String filename) {
+        ContentValues updates = new ContentValues();
+        updates.put(RecordingEntry.COLUMN_NAME_FILE, filename);
+        updateRecording(id, updates);
+    }
+
+    public void updateRecording(long id, ContentValues updates) {
+        RecordingDbHelper dbHelper = new RecordingDbHelper(this.context);
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+        String whereClause = RecordingEntry._ID + " LIKE ?";
+        String[] whereValues = { String.valueOf(id) };
+        db.update(RecordingEntry.TABLE_NAME, updates, whereClause, whereValues);
     }
 
     public static abstract class RecordingEntry implements BaseColumns {

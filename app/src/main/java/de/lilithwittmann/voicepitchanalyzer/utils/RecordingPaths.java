@@ -6,12 +6,12 @@ import java.nio.file.Path;
 import java.util.Optional;
 
 public class RecordingPaths {
-    public static String RECORDING_DIR = "recordings";
-    public static String NEW_RECORDING_DIR = "unfinished_recordings";
+    private static String RECORDING_DIR = "recordings";
+    private static String UNFINISHED_RECORDING_DIR = "unfinished_recordings";
 
     public static Path getUnfinishedRecordingsDirectoryPath(Context context) {
         return Optional.ofNullable(context.getFilesDir())
-                .map(dir -> dir.toPath().resolve(NEW_RECORDING_DIR))
+                .map(dir -> dir.toPath().resolve(UNFINISHED_RECORDING_DIR))
                 .orElse(null);
     }
 

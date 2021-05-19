@@ -11,7 +11,9 @@ import java.nio.file.Path;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import de.lilithwittmann.voicepitchanalyzer.models.Recording;
 import de.lilithwittmann.voicepitchanalyzer.models.database.RecordingDB;
@@ -61,6 +63,14 @@ public class RecordingCleaner implements Runnable {
     }
 
     public static void cleanRecordings(Context context) {
+        HashSet<String> remainingFiles;
+        try {
+            remainingFiles = getRecordingFiles(context);
+        } catch (IOException ex) {
+            Log.w(LOG_TAG, "error listing recordings directory: " + ex);
+            remainingFiles = null;
+        }
+
         RecordingDB db = new RecordingDB(context);
 
         Date newestDeleteDate = Date.from(Instant.now().minus(Duration.ofDays(MIN_RECORDING_DAYS)));
@@ -72,6 +82,9 @@ public class RecordingCleaner implements Runnable {
         for (Recording recording : db.getRecordingsWithFiles()) {
             runningCount += 1;
             runningSize += recording.getRecordingFileSize();
+            if (remainingFiles != null && recording.getRecording() != null) {
+                remainingFiles.remove(recording.getRecording());
+            }
             if (recording.getDate().before(newestDeleteDate)) {
                 oldCount += 1;
                 if (runningSize > MAX_RECORDINGS_SIZE) {
@@ -88,6 +101,34 @@ public class RecordingCleaner implements Runnable {
 
         Log.i(LOG_TAG, "deleted " + deleteCount + " of " + oldCount + " old recording files (of " + runningCount + " total) freeing " + deletedSize
               + " of " + runningSize + " bytes");
+
+        long deletedOrphanCount = 0;
+        for (String file : Optional.ofNullable(remainingFiles).orElseGet(HashSet::new)) {
+            Path path = RecordingPaths.getRecordingPath(context, file);
+            if (path != null) {
+                try {
+                    Files.delete(path);
+                    deletedOrphanCount += 1;
+                } catch (IOException ex) {
+                    Log.w(LOG_TAG, "failed to delete orphaned recording file " + path + ": " + ex);
+                }
+            } else {
+                Log.w(LOG_TAG, "could not determine path for orphaned recording file " + file);
+            }
+        }
+
+        Log.i(LOG_TAG, "deleted " + deletedOrphanCount + " orphaned recording files");
+    }
+
+    private static HashSet<String> getRecordingFiles(Context context) throws IOException {
+        Path path = RecordingPaths.getRecordingsDirectoryPath(context);
+        if (path == null) {
+            Log.w(LOG_TAG, "could not determine recordings path");
+            return null;
+        }
+        return Files.list(path)
+                .map(filePath -> filePath.getFileName().toString())
+                .collect(Collectors.toCollection(HashSet::new));
     }
 
     private static DeleteResult deleteRecording(Context context, RecordingDB db, Recording recording) {

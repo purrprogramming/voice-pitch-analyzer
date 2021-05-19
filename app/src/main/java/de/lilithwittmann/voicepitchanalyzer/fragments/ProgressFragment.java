@@ -54,12 +54,20 @@ public class ProgressFragment extends Fragment
             CombinedData data = new CombinedData();
 
             List<Entry> entries = this.recordings.getGraphEntries();
+            float lastEntryX = 0.0f;
+            if (entries.size() != 0)
+            {
+                lastEntryX = entries.get(entries.size() - 1).getX();
+            }
+
             LineDataSet dataSet = new LineDataSet(entries, getResources().getString(R.string.progress));
             LineData lineData = new LineData(dataSet);
-            BarData barData = new BarData(GraphLayout.getOverallRange(this.getContext(), entries.size()));
+            BarData barData = new BarData(GraphLayout.getOverallRange(this.getContext(), ((int) lastEntryX) + 1));
 
             chart.getXAxis().setValueFormatter(new DateValueFormatter(this.recordings.getBeginningAsDate()));
             chart.getXAxis().setGranularity(1f);
+            chart.getXAxis().setAxisMinimum(-0.5f);
+            chart.getXAxis().setAxisMaximum(lastEntryX + 0.5f);
 
             dataSet.setMode(LineDataSet.Mode.CUBIC_BEZIER);
             dataSet.enableDashedLine(10, 10, 0);

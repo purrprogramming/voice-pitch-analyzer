@@ -102,6 +102,11 @@ public class RecordGraphFragment extends Fragment implements OnChartValueSelecte
 
         chart.setData(chartData);
 
+        chart.getXAxis().setDrawLabels(false);
+        chart.getXAxis().setGranularity(1.0f);
+        chart.getXAxis().setAxisMinimum(-0.5f);
+        chart.getXAxis().setAxisMaximum(pitchDataSet.getEntryCount() - 0.5f);
+
         chart.setDrawValueAboveBar(false);
         chart.setDrawOrder(new CombinedChart.DrawOrder[]{
                 CombinedChart.DrawOrder.BAR,

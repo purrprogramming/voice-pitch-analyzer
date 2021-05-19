@@ -23,9 +23,6 @@ public class RecordingDB {
 
     private static final String LOG_TAG = RecordingDB.class.getSimpleName();
 
-    private static final String TEXT_TYPE = " TEXT";
-    private static final String DOUBLE_TYPE = " REAL";
-    private static final String INTEGER_TYPE = " INTEGER";
     private static final String COMMA_SEP = ",";
     private static final String SQL_CREATE_RECORDING_TABLE =
             "CREATE TABLE " + RecordingEntry.TABLE_NAME + " (" +
@@ -268,20 +265,20 @@ public class RecordingDB {
 
     public static abstract class RecordingEntry implements BaseColumns {
         public static final String TABLE_NAME = "recording";
-        public static final Column COLUMN_NAME = new Column("name", TEXT_TYPE);
-        public static final Column COLUMN_DATE = new Column("date", DOUBLE_TYPE);
-        public static final Column COLUMN_AVG_PITCH = new Column("avg_pitch", DOUBLE_TYPE);
-        public static final Column COLUMN_MIN_PITCH = new Column("min_pitch", DOUBLE_TYPE);
-        public static final Column COLUMN_MAX_PITCH = new Column("max_pitch", DOUBLE_TYPE);
-        public static final Column COLUMN_FILE = new Column("file", TEXT_TYPE);
-        public static final Column COLUMN_FILE_SIZE = new Column("file_size", INTEGER_TYPE);
+        public static final Column COLUMN_NAME = new Column("name", ColumnType.TEXT);
+        public static final Column COLUMN_DATE = new Column("date", ColumnType.DOUBLE);
+        public static final Column COLUMN_AVG_PITCH = new Column("avg_pitch", ColumnType.DOUBLE);
+        public static final Column COLUMN_MIN_PITCH = new Column("min_pitch", ColumnType.DOUBLE);
+        public static final Column COLUMN_MAX_PITCH = new Column("max_pitch", ColumnType.DOUBLE);
+        public static final Column COLUMN_FILE = new Column("file", ColumnType.TEXT);
+        public static final Column COLUMN_FILE_SIZE = new Column("file_size", ColumnType.INTEGER);
     }
 
     public static abstract class PitchEntry implements BaseColumns {
         public static final String TABLE_NAME = "pitch";
-        public static final Column COLUMN_PITCH = new Column("p", DOUBLE_TYPE);
-        public static final Column COLUMN_OFFSET = new Column("offset", DOUBLE_TYPE);
-        public static final Column COLUMN_RECORDING_ID = new Column("recording_id", INTEGER_TYPE);
+        public static final Column COLUMN_PITCH = new Column("p", ColumnType.DOUBLE);
+        public static final Column COLUMN_OFFSET = new Column("offset", ColumnType.DOUBLE);
+        public static final Column COLUMN_RECORDING_ID = new Column("recording_id", ColumnType.INTEGER);
     }
 
     public class RecordingDbHelper extends SQLiteOpenHelper {
@@ -341,9 +338,9 @@ public class RecordingDB {
 
     private static class Column {
         private final String name;
-        private final String type;
+        private final ColumnType type;
 
-        private Column(String name, String type) {
+        private Column(String name, ColumnType type) {
             this.name = name;
             this.type = type;
         }
@@ -352,12 +349,22 @@ public class RecordingDB {
             return name;
         }
 
-        public String getType() {
+        public ColumnType getType() {
             return type;
         }
 
         public String getDefinition() {
-            return name + type;
+            return name + " " + type.toSql();
+        }
+    }
+
+    private enum ColumnType {
+        TEXT,
+        DOUBLE,
+        INTEGER;
+
+        public String toSql() {
+            return this.name();
         }
     }
 

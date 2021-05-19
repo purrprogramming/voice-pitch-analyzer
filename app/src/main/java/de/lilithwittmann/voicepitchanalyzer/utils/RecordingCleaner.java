@@ -11,6 +11,7 @@ import java.nio.file.Path;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Date;
+import java.util.Optional;
 
 import de.lilithwittmann.voicepitchanalyzer.models.Recording;
 import de.lilithwittmann.voicepitchanalyzer.models.database.RecordingDB;
@@ -90,19 +91,21 @@ public class RecordingCleaner implements Runnable {
     }
 
     private static DeleteResult deleteRecording(Context context, RecordingDB db, Recording recording) {
-        Path path = RecordingPaths.getRecordingPath(context, recording.getRecording());
-        if (path == null) {
+        Optional<Path> path = Optional.ofNullable(recording.getRecording())
+                .map(name -> RecordingPaths.getRecordingPath(context, name));
+        if (!path.isPresent()) {
+            Log.w(LOG_TAG, "could not determine path for recording file " + recording.getRecording());
             return DeleteResult.ERROR;
         }
         DeleteResult result;
         try {
-            Files.delete(path);
+            Files.delete(path.get());
             result = DeleteResult.OK;
         } catch (NoSuchFileException ex) {
-            Log.w(LOG_TAG, "recording file " + path + " missing");
+            Log.w(LOG_TAG, "recording file " + path.get() + " missing");
             result = DeleteResult.MISSING;
         } catch (IOException ex) {
-            Log.w(LOG_TAG, "error deleting recording file " + path + ": ", ex);
+            Log.w(LOG_TAG, "error deleting recording file " + path.get() + ": ", ex);
             return DeleteResult.ERROR;
         }
         db.updateRecordingFilename(recording.getId(), null);

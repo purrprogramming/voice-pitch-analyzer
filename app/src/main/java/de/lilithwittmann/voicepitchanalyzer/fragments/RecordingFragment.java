@@ -102,6 +102,7 @@ public class RecordingFragment extends Fragment
                         calculator.getPitches().clear();
                         Optional<Path> recordingPath = Optional.ofNullable(recordingFile)
                                 .map(file -> RecordingPaths.getUnfinishedRecordingPath(getContext(), file));
+                        // assumption: recordingFile is non-null iff we are presently recording to disk
                         if (recordingPath.isPresent())
                         {
                             try
@@ -164,13 +165,15 @@ public class RecordingFragment extends Fragment
 
                         Recording currentRecord = new Recording(new Date());
                         currentRecord.setRange(range);
-                        if (recordingFile != null)
+                        // assumption: recordingFile and writer are both non-null iff we recorded to disk
+                        if (recordingFile != null && writer != null)
                         {
                             currentRecord.setRecording(recordingFile);
-                            if (writer != null)
-                            {
-                                currentRecord.setRecordingFileSize(writer.getFileSize());
-                            }
+                            currentRecord.setRecordingFileSize(writer.getFileSize());
+                        }
+                        else
+                        {
+                            Log.w(LOG_TAG, "recording was not written to persistent storage");
                         }
 
                         RecordingDB recordingDB = new RecordingDB(getActivity());

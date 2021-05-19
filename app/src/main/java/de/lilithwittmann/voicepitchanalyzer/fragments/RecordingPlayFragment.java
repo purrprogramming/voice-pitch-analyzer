@@ -23,6 +23,7 @@ import java.util.Optional;
 
 import de.lilithwittmann.voicepitchanalyzer.R;
 import de.lilithwittmann.voicepitchanalyzer.activities.RecordViewActivity;
+import de.lilithwittmann.voicepitchanalyzer.models.Recording;
 import de.lilithwittmann.voicepitchanalyzer.utils.PitchCalculator;
 import de.lilithwittmann.voicepitchanalyzer.utils.RecordingPaths;
 
@@ -195,9 +196,9 @@ public class RecordingPlayFragment extends Fragment
 
     private MediaItem getRecordingMediaItem()
     {
-        String recordingFilename = RecordViewActivity.currentRecord.getRecording();
-        Optional<Path> recordingPath = Optional.ofNullable(recordingFilename)
-                .map(name -> RecordingPaths.getRecordingPath(getActivity(), name));
+        Optional<Recording> recording = Optional.ofNullable(RecordViewActivity.currentRecord);
+        Optional<String> recordingFilename = recording.map(Recording::getRecording);
+        Optional<Path> recordingPath = recordingFilename.map(name -> RecordingPaths.getRecordingPath(getActivity(), name));
         if (!recordingPath.isPresent() || !Files.exists(recordingPath.get()))
         {
             return null;

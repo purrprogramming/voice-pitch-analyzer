@@ -12,24 +12,24 @@ public class RecordingPaths {
     public static Path getUnfinishedRecordingsDirectoryPath(Context context) {
         return Optional.ofNullable(context.getFilesDir())
                 .map(dir -> dir.toPath().resolve(NEW_RECORDING_DIR))
-                .get();
+                .orElse(null);
     }
 
     public static Path getUnfinishedRecordingPath(Context context, String name) {
         return Optional.ofNullable(getUnfinishedRecordingsDirectoryPath(context))
                 .map(dir -> dir.resolve(name))
-                .get();
+                .orElse(null);
     }
 
     public static Path getRecordingsDirectoryPath(Context context) {
         return Optional.ofNullable(context.getFilesDir())
                 .map(dir -> dir.toPath().resolve(RECORDING_DIR))
-                .get();
+                .orElse(null);
     }
 
     public static Path getRecordingPath(Context context, String name) {
         return Optional.ofNullable(getRecordingsDirectoryPath(context))
                 .map(dir -> dir.resolve(name))
-                .get();
+                .orElse(null);
     }
 }

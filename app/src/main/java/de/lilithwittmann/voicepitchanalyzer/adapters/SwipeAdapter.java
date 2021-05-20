@@ -11,6 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.List;
 
 import de.lilithwittmann.voicepitchanalyzer.R;
@@ -18,6 +21,7 @@ import de.lilithwittmann.voicepitchanalyzer.activities.RecordingListActivity;
 import de.lilithwittmann.voicepitchanalyzer.models.PitchRange;
 import de.lilithwittmann.voicepitchanalyzer.models.Recording;
 import de.lilithwittmann.voicepitchanalyzer.models.database.RecordingDB;
+import de.lilithwittmann.voicepitchanalyzer.utils.RecordingPaths;
 
 /**
  * Created by Yuri on 22-09-15
@@ -25,6 +29,8 @@ import de.lilithwittmann.voicepitchanalyzer.models.database.RecordingDB;
 
 public class SwipeAdapter extends RecyclerView.Adapter<SwipeAdapter.SwipeViewHolder>
 {
+    private static final String LOG_TAG = SwipeAdapter.class.getSimpleName();
+
     private static List<Recording> recordings;
     private RecordingListActivity activity;
     private Context context;
@@ -132,8 +138,7 @@ public class SwipeAdapter extends RecyclerView.Adapter<SwipeAdapter.SwipeViewHol
                     {
                         if (event != Snackbar.Callback.DISMISS_EVENT_ACTION)
                         {
-                            RecordingDB db = new RecordingDB(activity);
-                            db.deleteRecording(deletedRecord.getId());
+                            deleteRecording(activity, deletedRecord);
                         }
                         //            switch (event)
                         //            {
@@ -147,6 +152,32 @@ public class SwipeAdapter extends RecyclerView.Adapter<SwipeAdapter.SwipeViewHol
                     }
                 })
                 .show();
+    }
+
+    private static void deleteRecording(Context context, Recording recording)
+    {
+        RecordingDB db = new RecordingDB(context);
+        db.deleteRecording(recording.getId());
+
+        if (recording.getRecording() != null)
+        {
+            // on deletion failure, this file will eventually be cleaned up by RecordingCleaner
+            Path recordingPath = RecordingPaths.getRecordingPath(context, recording.getRecording());
+            if (recordingPath != null)
+            {
+                try
+                {
+                    Files.delete(recordingPath);
+                } catch (IOException ex)
+                {
+                    Log.w(LOG_TAG, "error deleting recording " + recordingPath + ": " + ex);
+                }
+            }
+            else
+            {
+                Log.w(LOG_TAG, "could not determine path to delete recording " + recording.getRecording());
+            }
+        }
     }
 
     //    public void onItemMove(int fromPosition, int toPosition) {

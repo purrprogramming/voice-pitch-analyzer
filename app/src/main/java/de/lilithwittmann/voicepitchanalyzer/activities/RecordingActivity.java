@@ -83,7 +83,7 @@ public class RecordingActivity extends AppCompatActivity implements RecordingFra
                 .findFragmentByTag(getString(R.string.realtime_graph));
 
         if (graph != null && pitchAccepted)
-            graph.addNewPitch(new Entry(calculator.getPitches().size(), pitchInHz));
+            graph.addNewPitch(new Entry(calculator.getPitches().size() - 1, pitchInHz));
     }
 
     @Override

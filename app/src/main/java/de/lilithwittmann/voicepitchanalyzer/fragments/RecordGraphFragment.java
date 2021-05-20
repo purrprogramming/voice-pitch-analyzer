@@ -105,7 +105,7 @@ public class RecordGraphFragment extends Fragment implements OnChartValueSelecte
         chart.getXAxis().setDrawLabels(false);
         chart.getXAxis().setGranularity(1.0f);
         chart.getXAxis().setAxisMinimum(-0.5f);
-        chart.getXAxis().setAxisMaximum(pitchDataSet.getEntryCount() - 0.5f);
+        chart.getXAxis().setAxisMaximum(Math.max(pitchDataSet.getEntryCount(), 1) - 0.5f);
 
         chart.setDrawValueAboveBar(false);
         chart.setDrawOrder(new CombinedChart.DrawOrder[]{
@@ -131,6 +131,8 @@ public class RecordGraphFragment extends Fragment implements OnChartValueSelecte
         genderBarData.addDataSet(GraphLayout.getOverallRange(this.getContext(), pitchDataSet.getEntryCount()));
 
         CombinedChart chart = (CombinedChart) getView().findViewById(R.id.recording_chart);
+        chart.getXAxis().setAxisMinimum(-0.5f);
+        chart.getXAxis().setAxisMaximum(pitchDataSet.getEntryCount() - 0.5f);
         chartData.notifyDataChanged();
         chart.notifyDataSetChanged();
         chart.invalidate();

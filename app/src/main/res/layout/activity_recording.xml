@@ -7,7 +7,7 @@
               tools:context="de.lilithwittmann.voicepitchanalyzer.activities.RecordingActivity"
               tools:ignore="MergeRootFrame" android:weightSum="1">
 
-    <android.support.v4.app.FragmentTabHost
+    <androidx.fragment.app.FragmentTabHost
             android:id="@+id/tabhost"
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -39,7 +39,7 @@
                     android:layout_weight="1"/>
 
         </LinearLayout>
-    </android.support.v4.app.FragmentTabHost>
+    </androidx.fragment.app.FragmentTabHost>
 
     <fragment android:layout_width="match_parent"
               android:layout_height="50dp"

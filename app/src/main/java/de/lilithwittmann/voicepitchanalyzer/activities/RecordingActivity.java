@@ -5,8 +5,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.PersistableBundle;
-import android.support.v4.app.FragmentTabHost;
-import android.support.v7.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTabHost;
+import androidx.appcompat.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TabHost;
@@ -83,7 +83,7 @@ public class RecordingActivity extends AppCompatActivity implements RecordingFra
                 .findFragmentByTag(getString(R.string.realtime_graph));
 
         if (graph != null && pitchAccepted)
-            graph.addNewPitch(new Entry(pitchInHz, calculator.getPitches().size()));
+            graph.addNewPitch(new Entry(calculator.getPitches().size() - 1, pitchInHz));
     }
 
     @Override
@@ -107,7 +107,7 @@ public class RecordingActivity extends AppCompatActivity implements RecordingFra
         List<Double> pitches = calculator.getPitches();
         for (int i = 0; i < pitches.size(); i++) {
             Double pitchOn = pitches.get(i);
-            pitchEntries.add(new Entry(pitchOn.floatValue(), i));
+            pitchEntries.add(new Entry(i, pitchOn.floatValue()));
         }
 
         return pitchEntries;

@@ -2,7 +2,7 @@ package de.lilithwittmann.voicepitchanalyzer.fragments;
 
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +12,7 @@ import com.github.mikephil.charting.charts.CombinedChart.DrawOrder;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.CombinedData;
+import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 
@@ -19,6 +20,7 @@ import java.util.List;
 
 import de.lilithwittmann.voicepitchanalyzer.R;
 import de.lilithwittmann.voicepitchanalyzer.models.RecordingList;
+import de.lilithwittmann.voicepitchanalyzer.utils.DateValueFormatter;
 import de.lilithwittmann.voicepitchanalyzer.utils.GraphLayout;
 
 /**
@@ -49,22 +51,32 @@ public class ProgressFragment extends Fragment
 
         if (this.recordings != null)
         {
-            List<String> dates = this.recordings.getDates();
+            CombinedData data = new CombinedData();
 
-            CombinedData data = new CombinedData(dates);
+            List<Entry> entries = this.recordings.getGraphEntries();
+            float lastEntryX = 0.0f;
+            if (entries.size() != 0)
+            {
+                lastEntryX = entries.get(entries.size() - 1).getX();
+            }
 
-            LineDataSet dataSet = new LineDataSet(this.recordings.getGraphEntries(), getResources().getString(R.string.progress));
-            LineData lineData = new LineData(dates, dataSet);
-            BarData barData = new BarData(dates, GraphLayout.getOverallRange(this.getContext(), dates.size()));
+            LineDataSet dataSet = new LineDataSet(entries, getResources().getString(R.string.progress));
+            LineData lineData = new LineData(dataSet);
+            BarData barData = new BarData(GraphLayout.getOverallRange(this.getContext(), ((int) lastEntryX) + 1));
 
-            dataSet.setDrawCubic(true);
+            chart.getXAxis().setValueFormatter(new DateValueFormatter(this.recordings.getBeginningAsDate()));
+            chart.getXAxis().setGranularity(1f);
+            chart.getXAxis().setAxisMinimum(-0.5f);
+            chart.getXAxis().setAxisMaximum(lastEntryX + 0.5f);
+
+            dataSet.setMode(LineDataSet.Mode.CUBIC_BEZIER);
             dataSet.enableDashedLine(10, 10, 0);
             dataSet.setLineWidth(3f);
             dataSet.setDrawValues(false);
 
             dataSet.setCircleColor(getResources().getColor(R.color.canvas_dark));
             dataSet.setColor(getResources().getColor(R.color.canvas_dark));
-            dataSet.setCircleSize(5f);
+            dataSet.setCircleRadius(5f);
 
             dataSet.setCubicIntensity(0.05f);
             dataSet.setAxisDependency(YAxis.AxisDependency.LEFT);

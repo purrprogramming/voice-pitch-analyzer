@@ -24,6 +24,7 @@ public class Recording implements Parcelable {
         }
     };
     private String recording;
+    private long recordingFileSize;
     private long id = -1;
     private Date date;
     private PitchRange range;
@@ -93,9 +94,17 @@ public class Recording implements Parcelable {
         this.recording = recording;
     }
 
+    public long getRecordingFileSize() {
+        return recordingFileSize;
+    }
+
+    public void setRecordingFileSize(long recordingFileSize) {
+        this.recordingFileSize = recordingFileSize;
+    }
+
     public Entry getGraphEntry()
     {
-        return new Entry((float) this.getRange().getAvg(), (int) this.getDate().getTime());
+        return new Entry((float) this.getDate().getTime(), (float) this.getRange().getAvg());
     }
 
     @Override

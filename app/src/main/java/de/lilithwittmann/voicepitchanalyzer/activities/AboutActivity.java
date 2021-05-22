@@ -2,14 +2,14 @@ package de.lilithwittmann.voicepitchanalyzer.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import de.lilithwittmann.voicepitchanalyzer.R;
 
-public class AboutActivity extends ActionBarActivity
+public class AboutActivity extends AppCompatActivity
 {
     private static final String LOG_TAG = AboutActivity.class.getSimpleName();
 

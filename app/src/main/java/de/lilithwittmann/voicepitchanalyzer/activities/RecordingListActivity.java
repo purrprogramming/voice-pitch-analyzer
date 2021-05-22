@@ -9,13 +9,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.crashlytics.android.Crashlytics;
-
 import de.lilithwittmann.voicepitchanalyzer.R;
 import de.lilithwittmann.voicepitchanalyzer.fragments.RecordingListFragment;
 import de.lilithwittmann.voicepitchanalyzer.fragments.WelcomeFragment;
 import de.lilithwittmann.voicepitchanalyzer.models.Recording;
-import io.fabric.sdk.android.Fabric;
 
 
 public class RecordingListActivity extends AppCompatActivity implements RecordingListFragment.OnFragmentInteractionListener {
@@ -24,7 +21,6 @@ public class RecordingListActivity extends AppCompatActivity implements Recordin
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Fabric.with(this, new Crashlytics());
         setContentView(R.layout.activity_recording_list);
 
         if (savedInstanceState == null) {

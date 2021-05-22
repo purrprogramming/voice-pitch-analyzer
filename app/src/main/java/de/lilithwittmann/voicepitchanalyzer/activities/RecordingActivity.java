@@ -6,13 +6,12 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.v4.app.FragmentTabHost;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TabHost;
 import android.widget.TextView;
 
-import com.crashlytics.android.Crashlytics;
 import com.github.mikephil.charting.data.Entry;
 
 import java.util.LinkedList;
@@ -24,13 +23,12 @@ import de.lilithwittmann.voicepitchanalyzer.fragments.RecordGraphFragment;
 import de.lilithwittmann.voicepitchanalyzer.fragments.RecordingFragment;
 import de.lilithwittmann.voicepitchanalyzer.models.Recording;
 import de.lilithwittmann.voicepitchanalyzer.utils.PitchCalculator;
-import io.fabric.sdk.android.Fabric;
 
 /***
  * activity containing RecordingFragment with which a new record can be made
  */
 
-public class RecordingActivity extends ActionBarActivity implements RecordingFragment.OnFragmentInteractionListener, RecordGraphFragment.OnFragmentInteractionListener
+public class RecordingActivity extends AppCompatActivity implements RecordingFragment.OnFragmentInteractionListener, RecordGraphFragment.OnFragmentInteractionListener
 {
     private static final String LOG_TAG = RecordingActivity.class.getSimpleName();
     private FragmentTabHost tabHost;
@@ -40,7 +38,6 @@ public class RecordingActivity extends ActionBarActivity implements RecordingFra
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        Fabric.with(this, new Crashlytics());
         setContentView(R.layout.activity_recording);
 
         tabHost = (FragmentTabHost)findViewById(R.id.tabhost);

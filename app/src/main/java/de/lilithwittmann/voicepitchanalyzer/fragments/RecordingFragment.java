@@ -18,8 +18,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.crashlytics.android.Crashlytics;
-
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
@@ -180,7 +178,6 @@ public class RecordingFragment extends Fragment
     private void setSampleRate()
     {
         this.sampleRate = SampleRateCalculator.getMaxSupportedSampleRate();
-        Crashlytics.log(Log.DEBUG, "usedSampleRate", String.valueOf(this.sampleRate));
         Log.d("sample rate", String.valueOf(this.sampleRate));
     }
 
@@ -264,14 +261,12 @@ public class RecordingFragment extends Fragment
                     // if recording permission was granted, also request permission to modify audio settings
                     this.requestModifyAudioSettingsPermission();
                     Log.i(LOG_TAG, "permission granted");
-                    Crashlytics.log(Log.DEBUG, "recordingPermission", "true");
                 }
 
                 else
                 {
                     // disable "record" button if recording permission was denied
                     Log.i(LOG_TAG, "permission denied");
-                    Crashlytics.log(Log.DEBUG, "recordingPermission", "false");
                     this.disableRecordButton();
 
                     // show explanation why mic permission is needed
@@ -365,12 +360,10 @@ public class RecordingFragment extends Fragment
                             this.dispatcher = AudioDispatcherFactory.fromDefaultMicrophone(testSampleRate, this.bufferRate, 0);
                         } catch (Exception exception_)
                         {
-                            Crashlytics.log(Log.DEBUG, "samplerate !supported", String.valueOf(testSampleRate));
                         }
 
                         if (this.dispatcher != null)
                         {
-                            Crashlytics.log(Log.DEBUG, "support only samplerate", String.valueOf(testSampleRate));
                             break;
                         }
                     }

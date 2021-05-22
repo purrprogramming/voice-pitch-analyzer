@@ -7,9 +7,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.provider.BaseColumns;
 
-import com.crashlytics.android.answers.Answers;
-import com.crashlytics.android.answers.CustomEvent;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -57,12 +54,6 @@ public class RecordingDB {
     }
 
     public Recording saveRecording(Recording recording) {
-        //log recordings for statistics
-        Answers.getInstance().logCustom(new CustomEvent("RecordingSaved")
-                .putCustomAttribute("average", recording.getRange().getAvg())
-                .putCustomAttribute("max", recording.getRange().getMax())
-                .putCustomAttribute("min", recording.getRange().getMin()));
-
         // Gets the data repository in write mode
         RecordingDbHelper mDbHelper = new RecordingDbHelper(this.context);
         SQLiteDatabase db = mDbHelper.getWritableDatabase();

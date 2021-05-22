@@ -9,11 +9,10 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.crashlytics.android.Crashlytics;
 
 import java.util.List;
 import java.util.Locale;
@@ -25,10 +24,9 @@ import de.lilithwittmann.voicepitchanalyzer.fragments.RecordingOverviewFragment;
 import de.lilithwittmann.voicepitchanalyzer.fragments.RecordingPlayFragment;
 import de.lilithwittmann.voicepitchanalyzer.models.Recording;
 import de.lilithwittmann.voicepitchanalyzer.models.database.RecordingDB;
-import io.fabric.sdk.android.Fabric;
 
 
-public class RecordViewActivity extends ActionBarActivity implements ActionBar.TabListener, RecordGraphFragment.OnFragmentInteractionListener {
+public class RecordViewActivity extends AppCompatActivity implements ActionBar.TabListener, RecordGraphFragment.OnFragmentInteractionListener {
     private static final String LOG_TAG = RecordViewActivity.class.getSimpleName();
     public static Recording currentRecord;
     /**
@@ -48,7 +46,6 @@ public class RecordViewActivity extends ActionBarActivity implements ActionBar.T
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Fabric.with(this, new Crashlytics());
         setContentView(R.layout.activity_record_view);
         final ActionBar actionBar = getSupportActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);

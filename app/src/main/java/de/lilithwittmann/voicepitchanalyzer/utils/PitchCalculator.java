@@ -8,8 +8,7 @@ import java.util.List;
  * Created by Lilith on 04/07/15.
  */
 public class PitchCalculator {
-    // Yes the range is very large - test it and maybe change to something like 85-255
-    public static Double minPitch = 65.0;
+    public static Double minPitch = 60.0;
     public static Double maxPitch = 300.0;
     public static Double minFemalePitch = 165.0;
     public static Double maxFemalePitch = 255.0;

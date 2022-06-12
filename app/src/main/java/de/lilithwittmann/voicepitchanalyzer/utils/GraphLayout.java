@@ -1,6 +1,7 @@
 package de.lilithwittmann.voicepitchanalyzer.utils;
 
 import android.content.Context;
+import android.graphics.Color;
 
 import com.github.mikephil.charting.charts.BarLineChartBase;
 import com.github.mikephil.charting.components.Description;
@@ -59,13 +60,7 @@ public class GraphLayout
         chart.getAxisRight().setValueFormatter(new GraphValueFormatter());
         chart.setDrawBorders(false);
 
-        // set min/max values etc. for axes
-        chart.getAxisLeft().setAxisMinimum(PitchCalculator.minMalePitch.floatValue());
-        chart.getAxisRight().setAxisMinimum(PitchCalculator.minMalePitch.floatValue());
-//        chart.getAxisRight().setStartAtZero(false);
-
         chart.setHardwareAccelerationEnabled(true);
-        //        chart.getLegend().setEnabled(false);
 
         Legend legend = chart.getLegend();
         legend.setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
@@ -82,16 +77,17 @@ public class GraphLayout
      * @param amount amount of entries needed
      * @return bar data to add to chart
      */
-    public static BarDataSet getOverallRange(Context context, int amount)
-    {
+    public static BarDataSet getOverallRange(Context context, int amount) {
         BarDataSet set = new BarDataSet(GraphLayout.getRangeEntries(amount), "");
         set.setDrawValues(false);
-        set.setColors(new int[]{context.getResources().getColor(R.color.male_range),
-                                context.getResources().getColor(R.color.androgynous_range),
-                                context.getResources().getColor(R.color.female_range)});
-        set.setStackLabels(new String[]{context.getResources().getString(R.string.male_range),
-                                        context.getResources().getString(R.string.androgynous_range),
-                                        context.getResources().getString(R.string.female_range)
+        set.setColors(Color.TRANSPARENT,
+                context.getResources().getColor(R.color.male_range),
+                context.getResources().getColor(R.color.androgynous_range),
+                context.getResources().getColor(R.color.female_range));
+        set.setStackLabels(new String[]{null,
+                context.getResources().getString(R.string.male_range),
+                context.getResources().getString(R.string.androgynous_range),
+                context.getResources().getString(R.string.female_range)
         });
 
         //        List<BarDataSet> setList = new ArrayList<BarDataSet>();
@@ -113,10 +109,11 @@ public class GraphLayout
         for (int i = 0; i < amount; i++)
         {
             result.add(new BarEntry(i, new float[]{
-                    PitchCalculator.minMalePitch.floatValue()*2,
+                    PitchCalculator.minMalePitch.floatValue(),
+                    PitchCalculator.minFemalePitch.floatValue() - PitchCalculator.minMalePitch.floatValue(),
                     PitchCalculator.maxMalePitch.floatValue() - PitchCalculator.minFemalePitch.floatValue(),
                     PitchCalculator.maxFemalePitch.floatValue() - PitchCalculator.maxMalePitch.floatValue(),
-                    }));
+            }));
         }
 
         return result;

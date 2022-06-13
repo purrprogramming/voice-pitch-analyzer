@@ -48,7 +48,7 @@
     <string name="contributors">Bijdragers</string>
     <string name="realtime_graph">Real-Time Grafiek</string>
     <string name="title_activity_progress">Algemene Voortgang</string>
-    <string name="title_section2">Toonhoogtevoortgang</string>
+    <string name="title_section2">Toonhoogte/tijd</string>
     <string name="programming">Programmeren</string>
     <string name="results">Druk wanneer je klaar bent op \"stop\" om je resultaten te zien. Op de resultatenpagina vind je een grafiek die de typische mannelijke en vrouwelijke toonhoogtebereiken tonen (in violettinten), alsmede je eigen toonbereik (in het grijs). De mannelijke en vrouwelijke toonhoogtebereiken overlappen elkaar deels; toonhoogtes in dit deel kunnen zowel mannelijk als vrouwelijk klinken.</string>
     <string name="explanation">Voor een goede analyse is er een stemopname van minstens één minuut nodig. Daarom wordt er een voorleestekst getoond die ongeveer zo lang duurt. Je kunt er ook voor kiezen om iets anders in te spreken, zolang het in je natuurlijke stem is.</string>

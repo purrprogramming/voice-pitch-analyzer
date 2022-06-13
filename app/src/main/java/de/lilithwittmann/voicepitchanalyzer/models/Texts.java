@@ -14,8 +14,9 @@ import java.io.Reader;
 import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
 import java.io.Writer;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Created by lilith on 7/5/15.
@@ -45,14 +46,15 @@ public class Texts {
     private String jsonFolder = "res/raw/";
     private String jsonData = null;
 
-    private List<String> supportedLanguages = new ArrayList<String>() {{add("de"); add("en"); add("it"); add("pt");}};
+    private final List<String> supportedLanguages = Stream.of("de", "en", "it", "pt", "nl")
+            .collect(Collectors.toList());
 
     String getJsonData(String country) {
         if (this.jsonData != null) {
             return jsonData;
         } else {
             try {
-                this.jsonData = this.readJsonNFile(this.jsonFolder+country+".json");
+                this.jsonData = this.readJsonNFile(this.jsonFolder + country + ".json");
             } catch (IOException e) {
                 e.printStackTrace();
             }

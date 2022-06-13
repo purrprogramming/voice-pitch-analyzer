@@ -53,4 +53,5 @@
     <string name="title_activity_progress">Stimmverlauf</string>
     <string name="realtime_graph">Echtzeitverlauf</string>
     <string name="contributors">Mitwirkende</string>
+    <string name="dutch">Niederländisch</string>
 </resources>

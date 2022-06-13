@@ -51,22 +51,24 @@
     <string name="about" translatable="false">Purr Programming</string>
     <string name="programming">Programming</string>
     <string name="design" translatable="false">Design</string>
-    <string name="programming_persons" translatable="false"><a href="http://twitter.com/LilithWittmann">Lilith Wittmann</a> &amp; <a href="https://github.com/puerile">Yuri Ichijō</a></string>
+    <string name="programming_persons" translatable="false"><a href="https://twitter.com/LilithWittmann">Lilith Wittmann</a> &amp; <a href="https://github.com/puerile">Yuri Ichijō</a></string>
     <string name="design_persons" translatable="false"><a href="https://github.com/puerile">Yuri Ichijō</a></string>
     <string name="libraries">Voice Pitch Analyzer uses the following libraries:</string>
     <string name="mpandroidchart" translatable="false">MPAndroidChart</string>
-    <string name="apache_licence" translatable="false"><a href="http://www.apache.org/licenses/LICENSE-2.0">Apache 2.0</a></string>
+    <string name="apache_licence" translatable="false"><a href="https://www.apache.org/licenses/LICENSE-2.0">Apache 2.0</a></string>
     <string name="tarsos_dsp" translatable="false">TarsosDSP</string>
-    <string name="gpl" translatable="false"><a href="http://www.gnu.org/licenses/gpl-3.0.en.html">GPL 3.0</a></string>
+    <string name="gpl" translatable="false"><a href="https://www.gnu.org/licenses/gpl-3.0.en.html">GPL 3.0</a></string>
     <string name="jodatime" translatable="false">Joda Time</string>
     <string name="contributors">Contributors</string>
-    <string name="mabboud" translatable="false"><a href="https://github.com/m-abboud">Maddie Abboud</a></string>
+    <string name="programming_contributors" translatable="false"><a href="https://github.com/m-abboud">Maddie Abboud</a>, <a href="https://github.com/jessa0">Jessa</a></string>
     <string name="translation">Translation</string>
     <string name="english">English</string>
     <string name="german">German</string>
     <string name="portuguese">Portuguese</string>
     <string name="italian">Italian</string>
+    <string name="dutch">Dutch</string>
     <string name="aurora_viana" translatable="false">Aurora Viana</string>
+    <string name="joelle_van_essen" translatable="false"><a href="https://github.com/JoCodesThings">Joëlle van Essen</a></string>
     <string name="text_origin">All texts from »The Picture of Dorian Gray« by Oscar Wilde</string>
     <string name="github" translatable="false"><a href="https://github.com/purrprogramming/voice-pitch-analyzer">GitHub</a></string>
 

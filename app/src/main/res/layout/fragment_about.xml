@@ -34,18 +34,19 @@
         </TableRow>
 
         <TableRow>
-            <TextView
-                android:id="@+id/design"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="@string/design"
-                android:textStyle="bold"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:text="@string/design"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/design"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
                 android:gravity="right"
-                android:text="@string/design_persons"/>
+                android:text="@string/design_persons" />
         </TableRow>
     </TableLayout>
 
@@ -62,19 +63,20 @@
         android:layout_marginTop="10dp"
         android:stretchColumns="1">
 
-    <TableRow>
-            <TextView
-                android:id="@+id/contributors"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="@string/programming"
-                android:textStyle="bold"/>
+        <TableRow>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:text="@string/programming"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/contributors"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
                 android:gravity="right"
-                android:text="@string/mabboud"/>
+                android:text="@string/programming_contributors" />
         </TableRow>
     </TableLayout>
 
@@ -91,13 +93,48 @@
         android:layout_marginTop="10dp"
         android:stretchColumns="1">
 
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/dutch"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/translation_dutch"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="right"
+                android:text="@string/joelle_van_essen" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/italian"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="right"
+                android:text="@string/aurora_viana" />
+        </TableRow>
+
         <TableRow>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="@string/portuguese"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -106,20 +143,6 @@
                 android:text="@string/aurora_viana"/>
         </TableRow>
 
-        <TableRow>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="@string/italian"
-                android:textStyle="bold"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="right"
-                android:text="@string/aurora_viana"/>
-        </TableRow>
     </TableLayout>
 
     <TextView

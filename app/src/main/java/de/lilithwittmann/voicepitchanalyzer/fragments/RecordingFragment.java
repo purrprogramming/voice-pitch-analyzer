@@ -9,13 +9,17 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
-import androidx.fragment.app.Fragment;
-import androidx.core.content.ContextCompat;
+import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
 
 import java.io.IOException;
 import java.io.RandomAccessFile;
@@ -24,6 +28,8 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Optional;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.UUID;
 
 import be.tarsos.dsp.AudioDispatcher;
@@ -81,31 +87,25 @@ public class RecordingFragment extends Fragment
     }
 
     @Override
-    public void onViewCreated(final View view, Bundle savedInstanceState)
-    {
+    public void onViewCreated(@NonNull final View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         this.requestRecordingPermission();
 
         Button cancelButton = (Button) view.findViewById(R.id.cancel_button);
-        cancelButton.setOnClickListener(new View.OnClickListener()
-        {
+        cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
             {
-                if (isRecording)
-                {
-                    if (stopRecording())
-                    {
-                        ((Button) view.findViewById(R.id.record_button)).setText(getResources().getString(R.string.start_recording));
+                if (isRecording && stopRecording()) {
+                    ((Button) view.findViewById(R.id.record_button)).setText(getResources().getString(R.string.start_recording));
 
-                        calculator.getPitches().clear();
-                        Optional<Path> recordingPath = Optional.ofNullable(recordingFile)
-                                .map(file -> RecordingPaths.getUnfinishedRecordingPath(getContext(), file));
-                        // assumption: recordingFile is non-null iff we are presently recording to disk
-                        if (recordingPath.isPresent())
-                        {
-                            try
+                    calculator.getPitches().clear();
+                    Optional<Path> recordingPath = Optional.ofNullable(recordingFile)
+                            .map(file -> RecordingPaths.getUnfinishedRecordingPath(getContext(), file));
+                    // assumption: recordingFile is non-null iff we are presently recording to disk
+                    if (recordingPath.isPresent()) {
+                        try
                             {
                                 Files.delete(recordingPath.get());
                             } catch (IOException ex)
@@ -113,7 +113,6 @@ public class RecordingFragment extends Fragment
                                 Log.i(LOG_TAG, "error deleting unfinished recording file " + recordingPath.get() + ": " + ex);
                             }
                         }
-                    }
                 }
 
                 mListener.onCancel();
@@ -181,33 +180,23 @@ public class RecordingFragment extends Fragment
 
                         v.setVisibility(View.INVISIBLE);
 
-                        if (mListener != null)
-                        {
+                        if (mListener != null) {
                             mListener.onRecordFinished(currentRecord.getId());
                         }
                     }
-                }
-
-                else
-                {
-                    if (recordPitch())
-                    {
-                        ((Button) v).setText(getResources().getString(R.string.stop_recording));
-                    }
+                } else if (recordPitch()) {
+                    runTimer((Button) v);
                 }
             }
         });
     }
 
     @Override
-    public void onAttach(Activity activity)
-    {
+    public void onAttach(@NonNull Activity activity) {
         super.onAttach(activity);
-        try
-        {
+        try {
             mListener = (OnFragmentInteractionListener) activity;
-        } catch (ClassCastException e)
-        {
+        } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
                     + " must implement OnFragmentInteractionListener");
         }
@@ -365,8 +354,6 @@ public class RecordingFragment extends Fragment
                     // disable "record" button if modify audio settings permission was denied
                     this.disableRecordButton();
                 }
-
-                return;
             }
         }
     }
@@ -481,14 +468,7 @@ public class RecordingFragment extends Fragment
             this.recordThread = new Thread(dispatcher, "Audio Dispatcher");
             this.recordThread.start();
 
-            if (this.recordThread.isAlive())
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return this.recordThread.isAlive();
         }
 
         return false;
@@ -523,13 +503,30 @@ public class RecordingFragment extends Fragment
         {
             Log.i(LOG_TAG, "still recording");
             return false;
-        }
-        else
-        {
+        } else {
             this.isRecording = false;
             Log.i(LOG_TAG, "not recording");
             return true;
         }
+    }
+
+    private void runTimer(TextView view) {
+        long start = System.currentTimeMillis();
+        Runnable runnable = () -> view.setText(String.format("%s (%s)",
+                getResources().getText(R.string.stop_recording),
+                DateUtils.formatElapsedTime((System.currentTimeMillis() - start) / 1000)));
+        TimerTask timerTask = new TimerTask() {
+            @Override
+            public void run() {
+                if (!isRecording) {
+                    this.cancel();
+                    return;
+                }
+                RecordingFragment.this.getActivity().runOnUiThread(runnable);
+            }
+        };
+        Timer timer = new Timer();
+        timer.schedule(timerTask, 0, 50);
     }
 
     /**
@@ -538,8 +535,7 @@ public class RecordingFragment extends Fragment
      * to the activity and potentially other fragments contained in that
      * activity.
      */
-    public interface OnFragmentInteractionListener
-    {
+    public interface OnFragmentInteractionListener {
         void onPitchDetected(float pitchInHz);
 
         void onRecordFinished(long recordID);

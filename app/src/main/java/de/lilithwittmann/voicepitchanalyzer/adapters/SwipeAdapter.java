@@ -3,13 +3,15 @@ package de.lilithwittmann.voicepitchanalyzer.adapters;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.os.Build;
-import com.google.android.material.snackbar.Snackbar;
-import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -30,6 +32,7 @@ import de.lilithwittmann.voicepitchanalyzer.utils.RecordingPaths;
 public class SwipeAdapter extends RecyclerView.Adapter<SwipeAdapter.SwipeViewHolder>
 {
     private static final String LOG_TAG = SwipeAdapter.class.getSimpleName();
+    private static final int SNACKBAR_DURATION = 7500;
 
     private static List<Recording> recordings;
     private RecordingListActivity activity;
@@ -128,7 +131,7 @@ public class SwipeAdapter extends RecyclerView.Adapter<SwipeAdapter.SwipeViewHol
         };
 
         Snackbar
-                .make(coordinatorLayoutView, R.string.record_deleted, Snackbar.LENGTH_LONG)
+                .make(coordinatorLayoutView, R.string.record_deleted, SNACKBAR_DURATION)
                 .setAction(R.string.undo, clickListener)
                 .setActionTextColor(this.activity.getResources().getColor(R.color.canvas_light))
                 .setCallback(new Snackbar.Callback()
